@@ -1,0 +1,23 @@
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\openglcsharp.exe.config
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\openglcsharp.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\openglcsharp.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\OpenGL.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Tao.FreeGlut.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Debug\openglcsharp.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Debug\openglcsharp.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Shaders\FragmentShader.glsl
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Shaders\VertexShader.glsl
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Debug\openglcsharp.csprojResolveAssemblyReference.cache
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Python Scripts\Test.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\IronPython.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\IronPython.Modules.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Dynamic.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Scripting.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\IronPython.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\IronPython.Modules.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Dynamic.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Scripting.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Debug\whateverengine.exe.config

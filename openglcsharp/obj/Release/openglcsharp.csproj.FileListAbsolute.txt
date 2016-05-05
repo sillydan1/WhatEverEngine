@@ -1,0 +1,7 @@
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.exe.config
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\OpenGL.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Tao.FreeGlut.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\openglcsharp.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\openglcsharp.pdb
