@@ -8,6 +8,22 @@ trans=Transform()
 rot=Vector3()
 deltaTime=0.0
 
+#class specificly for handling the mouse look controls
+class MouseLookClass:
+    def MouseLook(self):
+        global trans
+        lookSpeed = 0.002
+    
+        if(Input.IsMouseRightButtonDown is True):
+            yaw = (Input.PrevX - Input.CurX) * lookSpeed
+            trans.Yaw(yaw)
+        
+            pitch = (Input.PrevY - Input.CurY) * lookSpeed
+            trans.Pitch(pitch)
+
+# script specific vars
+msLook=MouseLookClass()
+
 def Update():
     speed = 50.0
     translation = Vector3(0.0, 0.0, 0.0)    
@@ -32,18 +48,5 @@ def Update():
 
     trans.MoveRelative(translation)
 
-    #MouseLook
-    MouseLook()    
-
-def MouseLook():
-    global trans
-    lookSpeed = 0.002
-    
-    if(Input.IsMouseRightButtonDown is True):
-        yaw = (Input.PrevX - Input.CurX) * lookSpeed
-        trans.Yaw(yaw)
-        
-        pitch = (Input.PrevY - Input.CurY) * lookSpeed
-        trans.Pitch(pitch)
-        
-    
+    #use the MouseLooker class
+    msLook.MouseLook()    

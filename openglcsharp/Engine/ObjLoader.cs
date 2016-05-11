@@ -8,12 +8,63 @@ using OpenGL;
 
 namespace openglcsharp.Engine
 {
+    /// <summary>
+    /// A quite useless attempt at a Cacher... You should really take a look at this shit, because it sucks ass
+    /// 
+    /// Loading should probably be done in a seperate thread...
+    /// </summary>
+    public static class ObjCacher
+    {
+        private static List<ObjLoader> alreadyLoadedObjects = new List<ObjLoader>();
+
+        public static void CacheOBJ(ObjLoader obj)
+        {
+            if(!alreadyLoadedObjects.Contains(obj))
+                alreadyLoadedObjects.Add(obj);
+        }
+        public static ObjLoader SafeGetNewObjLoader(string fileName, ShaderProgram prog)
+        {
+            if(alreadyLoadedObjects.Count > 0)
+            {
+                foreach (ObjLoader objL in alreadyLoadedObjects)
+                {
+                    if(objL.FileName == fileName)
+                    {
+                        //This means that is file has already been cached!
+                        //Return this file instead of wasting resources!
+                        return objL;
+                    }
+                }
+                //We did not have the object loader cached. Let's create a new one.
+                ObjLoader nobjl = new ObjLoader(fileName, prog);
+                CacheOBJ(nobjl);
+                return nobjl;
+            }
+            else
+            {
+                //The very first one.
+                ObjLoader nobj = new ObjLoader(fileName, prog);
+                CacheOBJ(nobj);
+                return alreadyLoadedObjects[0];
+            }
+        }
+    }
+
     public class ObjLoader : IDisposable
     {
         private List<ObjObject> objects = new List<ObjObject>();
         private Dictionary<string, ObjMaterial> materials = new Dictionary<string, ObjMaterial>();
 
         public ShaderProgram defaultProgram;
+
+        private string fileName;
+        public string FileName
+        {
+            get
+            {
+                return fileName;
+            }
+        }
 
         public List<ObjObject> Objects
         {
@@ -25,6 +76,7 @@ namespace openglcsharp.Engine
 
         public ObjLoader(string filename, ShaderProgram program)
         {
+            this.fileName = filename;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             this.defaultProgram = program;
 
@@ -150,6 +202,11 @@ namespace openglcsharp.Engine
 
             for (int i = 0; i < objects.Count; i++)
             {
+                if(objects[i].Material == null)
+                {
+                    objects[i].Material = new ObjMaterial(Program.ShaderProg);
+                }
+
                 if (objects[i].Material.Transparency != 1f) transparentObjects.Add(objects[i]);
                 else objects[i].Draw();
             }

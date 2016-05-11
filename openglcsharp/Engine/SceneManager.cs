@@ -44,6 +44,8 @@ namespace openglcsharp.Engine
                 {
                     if (sceneObjects.Contains(obj))
                         sceneObjects.Remove(obj);
+
+                    //obj.Dispose();
                 }
                 deleteList.Clear();
             }

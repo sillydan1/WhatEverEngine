@@ -20,7 +20,6 @@ def Start():
     rot = Vector3(0.0, 90.0, 0.0)
 
 def Update():
-    speed = 50.0
     global rot
     global pos
     global deltaTime

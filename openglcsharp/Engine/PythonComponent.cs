@@ -35,14 +35,8 @@ namespace openglcsharp.Engine
             try
             {
                 br = myScope.GetVariable(whatMethod) != null;
+            } catch { }
 
-                if (!br)
-                    Program.LogError("WARNING: Method '" + whatMethod + "' does not exist in: '" + myScriptFileName + "'. Are you missing a definition of '" + whatMethod + "'?\nYou can ignore this message if you don't need the method.");
-            }
-            catch
-            {
-                Program.LogError("WARNING: Method '" + whatMethod + "' does not exist in: '" + myScriptFileName + "'. Are you missing a definition of '" + whatMethod + "'?\nYou can ignore this message if you don't need the method.");
-            }
             hasMethods.Add(whatMethod, br);
             return br;
         }
@@ -59,11 +53,7 @@ namespace openglcsharp.Engine
                 T eh = myScope.GetVariable<T>(variableName);
                 if (!br)
                     Program.LogError("Error getting variable '" + variableName + "' on Python script: '" + myScriptFileName + "' Are you missing a definition of '" + variableName + "'?");
-            }
-            catch (Exception e)
-            {
-                Program.LogError("Error getting variable '" + variableName + "' on Python script: '" + myScriptFileName + "' Are you missing a definition of '" + variableName + "'?");
-            }
+            } catch { }
             hasFields.Add(variableName, br);
             return br;
         }
@@ -73,7 +63,8 @@ namespace openglcsharp.Engine
             pyngine = Python.CreateRuntime();
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(openglcsharp.Engine.Input)));
-
+            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(System.Random)));
+            
             if (myScriptFileName != "")
             {
                 try
@@ -87,7 +78,7 @@ namespace openglcsharp.Engine
                         dirty = false;
                         return;
                     }
-                    Program.LogError("Loading Pythonscript failed: " + myScriptFileName + " CAUSE: \n" + e.Message);
+                    Program.LogError("Loading Pythonscript failed: " + myScriptFileName + " CAUSE: \n" + e.Message + "\n");
                 }
                 if (HasMethod("Start"))
                     myScope.Start();

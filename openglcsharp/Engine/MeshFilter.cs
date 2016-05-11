@@ -22,8 +22,16 @@ namespace openglcsharp.Engine
         }
         public MeshFilter(string fileName)
         {
-            MeshFilter.allLoadedOBJs.Add(new ObjLoader(fileName, Program.ShaderProg));
+            MeshFilter.allLoadedOBJs.Add(ObjCacher.SafeGetNewObjLoader(fileName, Program.ShaderProg));
             myMeshIndex = allLoadedOBJs.Count - 1;
+        }
+
+        public void Dispose()
+        {
+            foreach (ObjLoader item in allLoadedOBJs)
+            {
+                item.Dispose();
+            }
         }
     }
 }

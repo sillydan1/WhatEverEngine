@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace openglcsharp.Engine
 {
-    public class GameObject
+    public class GameObject : IDisposable
     {
         private Transform transform;
         private List<GameComponent> myComponents = new List<GameComponent>();
@@ -19,10 +19,12 @@ namespace openglcsharp.Engine
         public GameObject()
         {
             transform = new Transform();
+            transform.AddToGameObject(this);
         }
         public GameObject(Transform transform)
         {
             this.transform = transform;
+            transform.AddToGameObject(this);
         }
         //Called once per frame
         public void Update()
@@ -70,6 +72,18 @@ namespace openglcsharp.Engine
             }
             else
                 Program.LogError("RemoveGameComponent FAILED: You tried to remove a component that is not attached to this GameObject.");
+        }
+        public void Dispose()
+        {
+            foreach (GameComponent item in myComponents)
+            {
+                if(item is Renderer)
+                {
+                    //Dispose of the render data
+                    (item as Renderer).Dispose();
+                    return;
+                }
+            }
         }
     }
 }

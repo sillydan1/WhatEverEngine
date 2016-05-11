@@ -1,7 +1,28 @@
-F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.exe.config
-F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.exe
-F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\openglcsharp.pdb
 F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\OpenGL.dll
 F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Tao.FreeGlut.dll
-F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\openglcsharp.exe
-F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\openglcsharp.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\whateverengine.exe.config
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\CameraControlScript.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\DatabaseBullshit.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\GunSpawnerScript.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\KillGunScript.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\Test.py
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Shaders\FragmentShader.glsl
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Shaders\VertexShader.glsl
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\whateverengine.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\whateverengine.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.Modules.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.SQLite.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Dynamic.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Scripting.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Scripting.Metadata.dll
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.Modules.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\IronPython.SQLite.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Dynamic.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Scripting.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Microsoft.Scripting.Metadata.xml
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\whateverengine.exe
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\whateverengine.pdb
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\obj\Release\openglcsharp.csprojResolveAssemblyReference.cache
+F:\Documents\Skole\Python\openglcsharp\openglcsharp\bin\Release\Python Scripts\Blank_Code_Go_Nuts.py

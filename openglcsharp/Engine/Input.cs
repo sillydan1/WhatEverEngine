@@ -127,9 +127,12 @@ namespace openglcsharp.Engine
             prevX = CurX;
             prevY = CurY;
 
-            for (byte i = 0; i < byte.MaxValue; i++)
+            if (keyboardKeyIsUp != null)
             {
-                keyboardKeyIsUp[((char)i).ToString()] = false;
+                for (byte i = 0; i < byte.MaxValue; i++)
+                {
+                    keyboardKeyIsUp[((char)i).ToString()] = false;
+                }
             }
         }
         public static void OnKeyboardDown(byte key, int x, int y)

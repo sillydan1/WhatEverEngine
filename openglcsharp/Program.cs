@@ -46,7 +46,7 @@ namespace openglcsharp
             Glut.glutInit();
             Glut.glutInitDisplayMode(Glut.GLUT_DOUBLE | Glut.GLUT_DEPTH | Glut.GLUT_ALPHA | Glut.GLUT_STENCIL | Glut.GLUT_MULTISAMPLE);
             Glut.glutInitWindowSize(width, height);
-            Glut.glutCreateWindow("OpenGL Tutorial");
+            Glut.glutCreateWindow("Whatever Engine");
 
             // provide the Glut callbacks that are necessary for running this tutorial
             Glut.glutIdleFunc(OnRenderFrame);
@@ -85,18 +85,29 @@ namespace openglcsharp
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            GameObject newGobject = new GameObject(new Transform(new Vector3(0, 0, 0), Quaternion.Identity));
-            newGobject.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            GameObject newGobject = new GameObject();
+            newGobject.AddGameComponent(new Renderer(@"data\box.obj"));
             newGobject.AddGameComponent(new PythonComponent(@"Python Scripts\Test.py"));
 
-            GameObject cameraGameObject = new GameObject(new Transform(new Vector3(0, 0, 0), Quaternion.Identity));
+            GameObject cameraGameObject = new GameObject();
             cameraGameObject.AddGameComponent(new CameraComponent());
             cameraGameObject.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
-            sceneMan.Instantiate(newGobject);
+            GameObject gunSpawner = new GameObject();
+            gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\GunSpawnerScript.py"));
+
+            GameObject dbHandler = new GameObject();
+            gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\DatabaseBullshit.py"));
+
+            GameObject demoObject = new GameObject();
+            demoObject.AddGameComponent(new PythonComponent(@"Python Scripts\Blank_Code_Go_Nuts.py"));
+
             sceneMan.Instantiate(cameraGameObject);
+            sceneMan.Instantiate(newGobject);
+            sceneMan.Instantiate(gunSpawner);
+            sceneMan.Instantiate(dbHandler);
             sceneMan.CheckAddList();
-            sceneMan.Start();
+            //sceneMan.Start();
         }
 
         public static void Instantiate(GameObject newGobject)
