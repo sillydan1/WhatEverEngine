@@ -45,6 +45,7 @@ namespace openglcsharp.Engine
                     if (sceneObjects.Contains(obj))
                         sceneObjects.Remove(obj);
 
+                    //Memory leak, but what the heck
                     //obj.Dispose();
                 }
                 deleteList.Clear();

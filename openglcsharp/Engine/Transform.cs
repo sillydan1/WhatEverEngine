@@ -110,9 +110,8 @@ namespace openglcsharp.Engine
         }
         public Vector3 GetForwardVector()
         {
-            return new Vector3(2 * (Orientation.x * Orientation.z + Orientation.w * Orientation.y),
-                    2 * (Orientation.y * Orientation.z - Orientation.w * Orientation.x),
-                    1 - 2 * (Orientation.x * Orientation.x + Orientation.y * Orientation.y));
+            Quaternion q = Orientation.Inverse();
+            return q * Vector3.Forward;
         }
         public Vector3 GetRightVector()
         {

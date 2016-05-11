@@ -22,7 +22,7 @@ def Update():
     global gravity
     global velocity    
     #rotate the object
-    trans.Roll(rotatioSpeed * deltaTime)
+    #trans.Roll(rotatioSpeed * deltaTime)
     #Move downwards
     velocity += Vector3(0.0, -gravity, 0.0)
     trans.Move(velocity)

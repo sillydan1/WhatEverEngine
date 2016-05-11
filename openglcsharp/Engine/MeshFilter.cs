@@ -5,8 +5,6 @@ namespace openglcsharp.Engine
 {
     public class MeshFilter
     {
-        public static List<ObjLoader> allLoadedOBJs = new List<ObjLoader>();
-
         private int myMeshIndex;
         public int GetMeshIndex
         {
@@ -22,16 +20,12 @@ namespace openglcsharp.Engine
         }
         public MeshFilter(string fileName)
         {
-            MeshFilter.allLoadedOBJs.Add(ObjCacher.SafeGetNewObjLoader(fileName, Program.ShaderProg));
-            myMeshIndex = allLoadedOBJs.Count - 1;
+            myMeshIndex = ObjCacher.SafeGetNewObjLoader(fileName, Program.ShaderProg);
         }
 
         public void Dispose()
         {
-            foreach (ObjLoader item in allLoadedOBJs)
-            {
-                item.Dispose();
-            }
+            //Ech..
         }
     }
 }

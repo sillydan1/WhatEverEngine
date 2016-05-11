@@ -21,15 +21,15 @@ namespace openglcsharp.Engine
             if(meshFilter.GetMeshIndex != -1)
             {
                 Matrix4 modelMatrix = owner.Transform.Orientation.Matrix4 * Matrix4.CreateTranslation(owner.Transform.Position);
-                if (MeshFilter.allLoadedOBJs[meshFilter.GetMeshIndex].Objects[0].Material != null)
+                if (ObjCacher.AlreadyLoadedObjects[meshFilter.GetMeshIndex].Objects[0].Material != null)
                 {
-                    MeshFilter.allLoadedOBJs[meshFilter.GetMeshIndex].Objects[0].Material.Program["model_matrix"].SetValue(modelMatrix);
+                    ObjCacher.AlreadyLoadedObjects[meshFilter.GetMeshIndex].Objects[0].Material.Program["model_matrix"].SetValue(modelMatrix);
                 }
                 else
                 {
                     Program.ShaderProg["model_matrix"].SetValue(modelMatrix);
                 }
-                MeshFilter.allLoadedOBJs[meshFilter.GetMeshIndex].Draw();
+                ObjCacher.AlreadyLoadedObjects[meshFilter.GetMeshIndex].Draw();
                 Gl.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             }
         }

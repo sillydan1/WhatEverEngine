@@ -76,6 +76,9 @@
       <HintPath>libs\OpenGL.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PhysX.Net">
+      <HintPath>libs\PhysX.Net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Reflection.Context" />
@@ -151,6 +154,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Engine\FBX Importer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

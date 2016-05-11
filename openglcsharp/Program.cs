@@ -8,7 +8,8 @@ namespace openglcsharp
 {
     class Program
     {
-        private static int width = 1280, height = 720;
+        private static int width = 1250, height = 720;
+        private static int framCounter = 0;
         private static ShaderProgram program;
         private static System.Diagnostics.Stopwatch watch;
         private static string VertexShader;
@@ -187,9 +188,18 @@ namespace openglcsharp
 
             //Update all the graphics elements.
             sceneMan.Update();
-
+            
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
+
+            if (framCounter >= 30)
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                framCounter = 0;
+            }
+            else
+                framCounter++;
         }
 
         public static ShaderProgram ShaderProg

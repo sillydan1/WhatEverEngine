@@ -16,36 +16,41 @@ namespace openglcsharp.Engine
     public static class ObjCacher
     {
         private static List<ObjLoader> alreadyLoadedObjects = new List<ObjLoader>();
+        public static List<ObjLoader> AlreadyLoadedObjects
+        {
+            get
+            {
+                return alreadyLoadedObjects;
+            }
+        }
 
         public static void CacheOBJ(ObjLoader obj)
         {
             if(!alreadyLoadedObjects.Contains(obj))
                 alreadyLoadedObjects.Add(obj);
         }
-        public static ObjLoader SafeGetNewObjLoader(string fileName, ShaderProgram prog)
+        public static int SafeGetNewObjLoader(string fileName, ShaderProgram prog)
         {
             if(alreadyLoadedObjects.Count > 0)
             {
-                foreach (ObjLoader objL in alreadyLoadedObjects)
+                for (int i = 0; i < alreadyLoadedObjects.Count; i++)
                 {
-                    if(objL.FileName == fileName)
+                    if(alreadyLoadedObjects[i].FileName == fileName)
                     {
-                        //This means that is file has already been cached!
-                        //Return this file instead of wasting resources!
-                        return objL;
+                        return i;
                     }
                 }
                 //We did not have the object loader cached. Let's create a new one.
                 ObjLoader nobjl = new ObjLoader(fileName, prog);
                 CacheOBJ(nobjl);
-                return nobjl;
+                return alreadyLoadedObjects.IndexOf(nobjl);
             }
             else
             {
                 //The very first one.
                 ObjLoader nobj = new ObjLoader(fileName, prog);
                 CacheOBJ(nobj);
-                return alreadyLoadedObjects[0];
+                return 0;
             }
         }
     }
