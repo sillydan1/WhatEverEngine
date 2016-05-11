@@ -115,7 +115,14 @@ namespace openglcsharp
         {
             sceneMan.Instantiate(newGobject);
         }
-
+        public static GameObject GetGameObjectWithTag(string tag)
+        {
+            return sceneMan.GetGameObjectWithTag(tag);
+        }
+        public static GameObject[] GetGameObjectsWithTag(string tag)
+        {
+            return sceneMan.GetGameObjectsWithTag(tag);
+        }
         public static void Destroy(GameObject objToDestroy)
         {
             sceneMan.Destroy(objToDestroy);

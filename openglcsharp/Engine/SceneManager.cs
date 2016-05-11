@@ -72,5 +72,28 @@ namespace openglcsharp.Engine
             if (sceneObjects.Contains(obj))
                 deleteList.Add(obj);
         }
+        public GameObject GetGameObjectWithTag(string tag)
+        {
+            foreach (GameObject item in sceneObjects)
+            {
+                if(item.GetTag == tag)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+        public GameObject[] GetGameObjectsWithTag(string tag)
+        {
+            List<GameObject> gol = new List<GameObject>();
+            foreach (GameObject item in sceneObjects)
+            {
+                if(item.GetTag == tag)
+                {
+                    gol.Add(item);
+                }
+            }
+            return gol.ToArray();
+        }
     }
 }

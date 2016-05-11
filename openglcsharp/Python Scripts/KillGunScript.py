@@ -32,3 +32,5 @@ def Update():
     if(timer > 7):
         EngineFunctions.Destroy(trans.GetOwner) #Self destruct.
         timer = 0
+
+

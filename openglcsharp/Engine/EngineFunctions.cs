@@ -11,5 +11,13 @@ namespace openglcsharp.Engine
         {
             Program.Destroy(obj);
         }
+        public static GameObject GetGameObjectWithTag(string tag)
+        {
+            return Program.GetGameObjectWithTag(tag);
+        }
+        public static GameObject[] GetGameObjectsWithTag(string tag)
+        {
+            return Program.GetGameObjectsWithTag(tag);
+        }
     }
 }

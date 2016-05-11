@@ -26,6 +26,16 @@ namespace openglcsharp.Engine
             myScriptFileName = fileName;
             dirty = true;
         }
+        public void CallVoidMethod(string methodName)
+        {
+            //This method is not currently functional yet.
+            //if(HasMethod(methodName))
+                //myScope.methodName() //<-- This is what I want to do... But can't
+            //else
+                //Program.LogError("The method '" + methodName + "' Does not exist");
+
+            Program.LogError("This method is not currently functional yet.");
+        }
         private bool HasMethod(string whatMethod)
         {
             if (hasMethods.ContainsKey(whatMethod))
