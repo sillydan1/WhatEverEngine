@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class SceneManager
     {

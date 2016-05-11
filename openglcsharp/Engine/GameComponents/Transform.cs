@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class Transform : GameComponent
     {
@@ -107,6 +107,10 @@ namespace openglcsharp.Engine
         {
             Vector3 axis = orientation * Vector3.UnitX;
             Rotate(angle, axis);
+        }
+        public void SetRotation(Quaternion newRot)
+        {
+            orientation = newRot;
         }
         public Vector3 GetForwardVector()
         {

@@ -1,5 +1,5 @@
 ﻿
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public static class EngineFunctions
     {

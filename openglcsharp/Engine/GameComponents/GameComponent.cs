@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class GameComponent
     {

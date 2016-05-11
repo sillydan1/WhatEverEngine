@@ -2,7 +2,7 @@
 sys.path.append(r"C:\Program Files(x86)\IronPython 2.7\Lib") #doing this because Ironpython is too stupid to know where os is...
 import os	#and yet. os is still missing - check the game log for yourself.
 import clr	#I can't use sqlite3 because I can't use clr to add the refference to the DLL because I can't use os to find the local folder.
-clr.AddReferenceToFileAndPath("F:\\Documents\\Skole\\Python\\openglcsharp\\openglcsharp\\bin\\Debug\\IronPython.SQLite.dll") # This works for shit. (hence why I need 'os')
+clr.AddReferenceToFileAndPath("F:\\Documents\\Skole\\Python\\WhateverEngine\\WhateverEngine\\bin\\Debug\\IronPython.SQLite.dll") # This works for shit. (hence why I need 'os')
 import _sqlite3 # <- F@!# you Ironpython
 
 # It's 4 AM now and I still have to do the report! 

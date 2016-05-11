@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class Renderer : GameComponent
     {

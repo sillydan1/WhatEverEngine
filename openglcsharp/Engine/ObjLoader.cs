@@ -6,7 +6,7 @@ using System.Threading;
 
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     /// <summary>
     /// A quite useless attempt at a Cacher... You should really take a look at this shit, because it sucks ass

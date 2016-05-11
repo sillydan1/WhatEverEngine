@@ -1,7 +1,7 @@
 ﻿import sys
 from OpenGL import Vector3
-from openglcsharp.Engine import Transform
-from openglcsharp.Engine import EngineFunctions
+from WhateverEngine.Engine import Transform
+from WhateverEngine.Engine import EngineFunctions
 
 trans=Transform()
 deltaTime=0.0

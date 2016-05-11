@@ -1,8 +1,8 @@
 ﻿import sys
 from OpenGL import Vector3
-from openglcsharp.Engine import Transform 
-from openglcsharp.Engine import Input # you can import Engine specific classes like this. 
-from openglcsharp.Engine import EngineFunctions # Input and EngineFunctions are two very useful classes. 
+from WhateverEngine.Engine import Transform 
+from WhateverEngine.Engine import Input # you can import Engine specific classes like this. 
+from WhateverEngine.Engine import EngineFunctions # Input and EngineFunctions are two very useful classes. 
 
 # standard stuff - these will get updated / read from the engine and applied on the attached GameObject.
 trans=Transform() # This is the attached Transform component. You can access all of the publiv methods on this.

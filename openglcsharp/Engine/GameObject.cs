@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class GameObject : IDisposable
     {

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class PythonComponent : GameComponent
     {
@@ -72,7 +72,7 @@ namespace openglcsharp.Engine
             base.Start();
             pyngine = Python.CreateRuntime();
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
-            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(openglcsharp.Engine.Input)));
+            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(WhateverEngine.Engine.Input)));
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(System.Random)));
             
             if (myScriptFileName != "")

@@ -3,28 +3,28 @@
   <Comment CommentText="Deprecated">
     <Position X="14.085" Y="5.698" Height="0.457" Width="1.261" />
   </Comment>
-  <Class Name="openglcsharp.Engine.CameraComponent" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.CameraComponent" Collapsed="true">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAgAAACAAAAAAAAAAAgAAIAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\CameraComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.EngineFunctions" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.EngineFunctions" Collapsed="true">
     <Position X="12.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\EngineFunctions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.GameComponent">
+  <Class Name="WhateverEngine.Engine.GameComponent">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAKAggAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Engine\GameComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.GameObject" BaseTypeListCollapsed="true">
+  <Class Name="WhateverEngine.Engine.GameObject" BaseTypeListCollapsed="true">
     <Position X="7.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgQAAABAACAIAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
@@ -32,35 +32,35 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="openglcsharp.Engine.Input">
+  <Class Name="WhateverEngine.Engine.Input">
     <Position X="10.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACGAAhAgQAAQAAAAAAAAAQCAlCAAAAAAAgAAIACBoA=</HashCode>
       <FileName>Engine\Input.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.MeshFilter">
+  <Class Name="WhateverEngine.Engine.MeshFilter">
     <Position X="6" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAgAAAAAAAAAAAEAAAAAAAQAAAA=</HashCode>
       <FileName>Engine\MeshFilter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.ObjImporter" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjImporter" Collapsed="true">
     <Position X="14.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Engine\ObjImporter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.ObjCacher" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjCacher" Collapsed="true">
     <Position X="14.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAgBAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.ObjLoader" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjLoader" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="13.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAACAAAgAAAAAAAIAAAQAAAAEAAEAAACBAAAA=</HashCode>
@@ -68,7 +68,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="openglcsharp.Engine.ObjMaterial" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjMaterial" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="14.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAQAAACAAAAAAAgAAAAQAAACEAAACAAABAEAAQAA=</HashCode>
@@ -76,7 +76,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="openglcsharp.Engine.ObjObject" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjObject" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="14.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAIAACAAAhAAAAAAAQUAAAAQAAAAAAAAAAAAIgA=</HashCode>
@@ -84,42 +84,42 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="openglcsharp.Engine.PythonComponent">
+  <Class Name="WhateverEngine.Engine.PythonComponent">
     <Position X="1.25" Y="2" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAAABCAAAAAAAgAQQAAgEAAAACAAAAAAAAEAAAI=</HashCode>
       <FileName>Engine\PythonComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.Renderer" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.Renderer" Collapsed="true">
     <Position X="6.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAUAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\Renderer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.SceneManager">
+  <Class Name="WhateverEngine.Engine.SceneManager">
     <Position X="4.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQIAAAAQCAAAAgAAARAAAgAAABAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Engine\SceneManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Engine.Transform" Collapsed="true">
+  <Class Name="WhateverEngine.Engine.Transform" Collapsed="true">
     <Position X="8.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQBAAQAAaAIAAEgACIAYAACGAAAQAAAAABBAAAAAAA=</HashCode>
       <FileName>Engine\Transform.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Program" Collapsed="true">
+  <Class Name="WhateverEngine.Program" Collapsed="true">
     <Position X="12.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAUAEAAACQEAAARFQAQAAARBYABABDAAAAIABEAEAAE=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="openglcsharp.Properties.Settings" Collapsed="true">
+  <Class Name="WhateverEngine.Properties.Settings" Collapsed="true">
     <Position X="14.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
