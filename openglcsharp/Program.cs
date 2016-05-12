@@ -85,27 +85,25 @@ namespace openglcsharp
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            GameObject newGobject = new GameObject();
-            newGobject.AddGameComponent(new Renderer(@"data\box.obj"));
-            newGobject.AddGameComponent(new PythonComponent(@"Python Scripts\Test.py"));
+            //GameObject newGobject = new GameObject();
+            //newGobject.AddGameComponent(new Renderer(@"data\box.obj"));
+            //newGobject.AddGameComponent(new PythonComponent(@"Python Scripts\Test.py"));
 
             GameObject cameraGameObject = new GameObject();
             cameraGameObject.AddGameComponent(new CameraComponent());
             cameraGameObject.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
             GameObject gunSpawner = new GameObject();
-            gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\GunSpawnerScript.py"));
-
-            GameObject dbHandler = new GameObject();
-            gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\DatabaseBullshit.py"));
+            //gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\GunSpawnerScript.py"));
 
             GameObject demoObject = new GameObject();
-            demoObject.AddGameComponent(new PythonComponent(@"Python Scripts\Blank_Code_Go_Nuts.py"));
+            demoObject.AddGameComponent(new Renderer(@"data\box.obj"));
+            demoObject.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
 
             sceneMan.Instantiate(cameraGameObject);
-            sceneMan.Instantiate(newGobject);
+            //sceneMan.Instantiate(newGobject);
+            sceneMan.Instantiate(demoObject);
             sceneMan.Instantiate(gunSpawner);
-            sceneMan.Instantiate(dbHandler);
             sceneMan.CheckAddList();
             //sceneMan.Start();
         }
