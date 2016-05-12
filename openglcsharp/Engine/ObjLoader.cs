@@ -434,28 +434,32 @@ namespace WhateverEngine.Engine
                     normalsList.Add(triangle[2]);
                 }
 
-                if (unpackedUvs[triangle[0]] == Vector2.Zero) unpackedUvs[triangle[0]] = uvList[int.Parse(uvs[0]) - uvOffset];
-                else
+                if (uvList.Count > 0)
                 {
-                    unpackedUvs.Add(uvList[int.Parse(uvs[0]) - uvOffset]);
-                    vertexList.Add(vertexList[triangle[0]]);
-                    triangle[0] = unpackedUvs.Count - 1;
-                }
+                    if (unpackedUvs[triangle[0]] == Vector2.Zero) unpackedUvs[triangle[0]] = uvList[int.Parse(uvs[0]) - uvOffset];
+                    else
+                    {
+                        unpackedUvs.Add(uvList[int.Parse(uvs[0]) - uvOffset]);
+                        vertexList.Add(vertexList[triangle[0]]);
+                        triangle[0] = unpackedUvs.Count - 1;
+                    }
 
-                if (unpackedUvs[triangle[1]] == Vector2.Zero) unpackedUvs[triangle[1]] = uvList[int.Parse(uvs[1]) - uvOffset];
-                else
-                {
-                    unpackedUvs.Add(uvList[int.Parse(uvs[1]) - uvOffset]);
-                    vertexList.Add(vertexList[triangle[1]]);
-                    triangle[1] = unpackedUvs.Count - 1;
-                }
 
-                if (unpackedUvs[triangle[2]] == Vector2.Zero) unpackedUvs[triangle[2]] = uvList[int.Parse(uvs[2]) - uvOffset];
-                else
-                {
-                    unpackedUvs.Add(uvList[int.Parse(uvs[2]) - uvOffset]);
-                    vertexList.Add(vertexList[triangle[2]]);
-                    triangle[2] = unpackedUvs.Count - 1;
+                    if (unpackedUvs[triangle[1]] == Vector2.Zero) unpackedUvs[triangle[1]] = uvList[int.Parse(uvs[1]) - uvOffset];
+                    else
+                    {
+                        unpackedUvs.Add(uvList[int.Parse(uvs[1]) - uvOffset]);
+                        vertexList.Add(vertexList[triangle[1]]);
+                        triangle[1] = unpackedUvs.Count - 1;
+                    }
+
+                    if (unpackedUvs[triangle[2]] == Vector2.Zero) unpackedUvs[triangle[2]] = uvList[int.Parse(uvs[2]) - uvOffset];
+                    else
+                    {
+                        unpackedUvs.Add(uvList[int.Parse(uvs[2]) - uvOffset]);
+                        vertexList.Add(vertexList[triangle[2]]);
+                        triangle[2] = unpackedUvs.Count - 1;
+                    }
                 }
 
                 triangleList.Add(triangle[0]);

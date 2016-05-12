@@ -9,8 +9,8 @@ namespace WhateverEngine
 {
     class Program
     {
-        private static int width = 500;
-        private static int height = 500;
+        private static int width = 1250;
+        private static int height = 720;
         private static float fixedUpdateTime = 0.01f, fixedUpdateTimer = 0.0f;
         private static int framCounter = 0;
         private static ShaderProgram program;
@@ -19,7 +19,18 @@ namespace WhateverEngine
         private static string FragmentShader;
         private static string errorLog = "";
         private static SceneManager sceneMan;
+        private static Random random;
 
+        public static Random Random
+        {
+            get
+            {
+                if (random == null)
+                    random = new Random(128);
+
+                return random;
+            }
+        }
         public static int GetWidth
         {
             get
@@ -69,15 +80,12 @@ namespace WhateverEngine
             Gl.Enable(EnableCap.Blend);
             Gl.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-            // Load teh shaders into memory and compile the shader program
+            // Load the shaders into memory and compile the shader program
             LoadShaders();
             program = new ShaderProgram(VertexShader, FragmentShader);
 
-            // set the view and projection matrix
             program.Use();
-            //program["model_matrix"].SetValue(Matrix4.Identity);
 
-            //program["light_direction"].SetValue(new Vector3(0,0,1));
             InitializePhysics();
             StartScene();
 
@@ -92,12 +100,26 @@ namespace WhateverEngine
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0,3,10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            
+            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
+            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero));
-            physicsGO.AddGameComponent(new PhysicsComponent());
-            physicsGO.AddGameComponent(new Renderer(@"data\box.obj"));
+            GameObject refferenceGo = new GameObject();
+            //refferenceGo.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
+            //GameObject physicsGO2 = new GameObject(new Transform(Vector3.Right + Vector3.Up * 3));
+            //physicsGO2.AddGameComponent(new PhysicsComponent());
+            //physicsGO2.AddGameComponent(new Renderer(@"data\sphere.obj"));
+
+            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0,0,3))));
+            groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
+            groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
+
+            sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(physicsGO);
+            sceneMan.Instantiate(refferenceGo);
+            //sceneMan.Instantiate(physicsGO2);
             sceneMan.Instantiate(cameraGO);
             sceneMan.CheckAddList();
             //sceneMan.Start();
@@ -134,7 +156,7 @@ namespace WhateverEngine
             {
                 physics.RemoteDebugger.Connect("localhost");
             }
-            CreateGroundPlane();
+            //CreateGroundPlane();
         }
 
         private static void CreateGroundPlane()
@@ -183,6 +205,7 @@ namespace WhateverEngine
             // dispose of all of the resources that were created
             program.DisposeChildren = true;
             program.Dispose();
+            physics.Dispose();
         }
 
         private static void OnKeyboardDown(byte key, int x, int y)
@@ -234,6 +257,15 @@ namespace WhateverEngine
                 scene.Simulate(fixedUpdateTime);
 			    scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
+
+                if (framCounter >= 30)
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    framCounter = 0;
+                }
+                else
+                    framCounter++;
             }
 
             Gl.Enable(EnableCap.Multisample);
@@ -251,14 +283,7 @@ namespace WhateverEngine
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
 
-            if (framCounter >= 30)
-            {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                framCounter = 0;
-            }
-            else
-                framCounter++;
+            
         }
 
         public static ShaderProgram ShaderProg
