@@ -1,5 +1,5 @@
 ﻿
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public static class EngineFunctions
     {
@@ -10,6 +10,14 @@ namespace openglcsharp.Engine
         public static void Destroy(GameObject obj)
         {
             Program.Destroy(obj);
+        }
+        public static GameObject GetGameObjectWithTag(string tag)
+        {
+            return Program.GetGameObjectWithTag(tag);
+        }
+        public static GameObject[] GetGameObjectsWithTag(string tag)
+        {
+            return Program.GetGameObjectsWithTag(tag);
         }
     }
 }

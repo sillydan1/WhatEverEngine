@@ -1,8 +1,8 @@
 ﻿import sys
 from OpenGL import Vector3
 from OpenGL import Vector2
-from openglcsharp.Engine import Transform
-from openglcsharp.Engine import Input
+from WhateverEngine.Engine import Transform
+from WhateverEngine.Engine import Input
 
 trans=Transform()
 rot=Vector3()
@@ -25,7 +25,7 @@ class MouseLookClass:
 msLook=MouseLookClass()
 
 def Update():
-    speed = 50.0
+    speed = 5.0
     translation = Vector3(0.0, 0.0, 0.0)    
     global rot
     global deltaTime

@@ -2,13 +2,17 @@
 using Tao.FreeGlut;
 using OpenGL;
 using System.IO;
-using openglcsharp.Engine;
+using WhateverEngine.Engine;
+using PhysX;
 
-namespace openglcsharp
+namespace WhateverEngine
 {
     class Program
     {
-        private static int width = 1280, height = 720;
+        private static int width = 500;
+        private static int height = 500;
+        private static float fixedUpdateTime = 0.01f, fixedUpdateTimer = 0.0f;
+        private static int framCounter = 0;
         private static ShaderProgram program;
         private static System.Diagnostics.Stopwatch watch;
         private static string VertexShader;
@@ -74,10 +78,10 @@ namespace openglcsharp
             //program["model_matrix"].SetValue(Matrix4.Identity);
 
             //program["light_direction"].SetValue(new Vector3(0,0,1));
+            InitializePhysics();
             StartScene();
 
             watch = System.Diagnostics.Stopwatch.StartNew();
-
             Glut.glutMainLoop();
         }
 
@@ -85,34 +89,84 @@ namespace openglcsharp
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            //GameObject newGobject = new GameObject();
-            //newGobject.AddGameComponent(new Renderer(@"data\box.obj"));
-            //newGobject.AddGameComponent(new PythonComponent(@"Python Scripts\Test.py"));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0,3,10)));
+            cameraGO.AddGameComponent(new CameraComponent());
+            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
-            GameObject cameraGameObject = new GameObject();
-            cameraGameObject.AddGameComponent(new CameraComponent());
-            cameraGameObject.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero));
+            physicsGO.AddGameComponent(new PhysicsComponent());
+            physicsGO.AddGameComponent(new Renderer(@"data\box.obj"));
 
-            GameObject gunSpawner = new GameObject();
-            //gunSpawner.AddGameComponent(new PythonComponent(@"Python Scripts\GunSpawnerScript.py"));
-
-            GameObject demoObject = new GameObject();
-            demoObject.AddGameComponent(new Renderer(@"data\box.obj"));
-            demoObject.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
-
-            sceneMan.Instantiate(cameraGameObject);
-            //sceneMan.Instantiate(newGobject);
-            sceneMan.Instantiate(demoObject);
-            sceneMan.Instantiate(gunSpawner);
+            sceneMan.Instantiate(physicsGO);
+            sceneMan.Instantiate(cameraGO);
             sceneMan.CheckAddList();
             //sceneMan.Start();
         }
 
+        private static void InitializePhysics()
+        {
+            Foundation foundation = new Foundation();
+            physics = new Physics(foundation, checkRuntimeFiles: true);
+
+#if GPU
+			var cudaContext = new CudaContextManager(foundation);
+#endif
+
+            SceneDesc sceneDesc = new SceneDesc()
+            {
+                Gravity = new PhysX.Math.Vector3(0, -9.81f, 0),
+#if GPU
+				GpuDispatcher = cudaContext.GpuDispatcher
+#endif
+            };
+
+            scene = physics.CreateScene(sceneDesc);
+
+            scene.SetVisualizationParameter(VisualizationParameter.Scale, 2.0f);
+            scene.SetVisualizationParameter(VisualizationParameter.CollisionShapes, true);
+            scene.SetVisualizationParameter(VisualizationParameter.JointLocalFrames, true);
+            scene.SetVisualizationParameter(VisualizationParameter.JointLimits, true);
+            scene.SetVisualizationParameter(VisualizationParameter.ParticleSystemPosition, true);
+            scene.SetVisualizationParameter(VisualizationParameter.ActorAxes, true);
+
+            // Connect to the remote debugger (if it's there)
+            if (physics.RemoteDebugger != null)
+            {
+                physics.RemoteDebugger.Connect("localhost");
+            }
+            CreateGroundPlane();
+        }
+
+        private static void CreateGroundPlane()
+        {
+            var groundPlaneMaterial = scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f);
+
+            var groundPlane = scene.Physics.CreateRigidStatic();
+            groundPlane.GlobalPose = PhysX.Math.Matrix.RotationAxis(new PhysX.Math.Vector3(0, 0, 3), (float)System.Math.PI / 2);
+
+            var planeGeom = new PlaneGeometry();
+
+            groundPlane.CreateShape(planeGeom, groundPlaneMaterial);
+
+            scene.AddActor(groundPlane);
+        }
+
+        public static Scene scene { get; private set; }
+        public static Physics physics { get; private set; }
+
+        //EngineFunctions functions
         public static void Instantiate(GameObject newGobject)
         {
             sceneMan.Instantiate(newGobject);
         }
-
+        public static GameObject GetGameObjectWithTag(string tag)
+        {
+            return sceneMan.GetGameObjectWithTag(tag);
+        }
+        public static GameObject[] GetGameObjectsWithTag(string tag)
+        {
+            return sceneMan.GetGameObjectsWithTag(tag);
+        }
         public static void Destroy(GameObject objToDestroy)
         {
             sceneMan.Destroy(objToDestroy);
@@ -174,6 +228,14 @@ namespace openglcsharp
             deltaTime = (float)watch.ElapsedTicks / System.Diagnostics.Stopwatch.Frequency;
             watch.Restart();
 
+            fixedUpdateTimer += deltaTime;
+            if (fixedUpdateTimer >= fixedUpdateTime)
+            {
+                scene.Simulate(fixedUpdateTime);
+			    scene.FetchResults(block: true);
+                fixedUpdateTimer = 0;
+            }
+
             Gl.Enable(EnableCap.Multisample);
 
             // set up the OpenGL viewport and clear both the color and depth bits
@@ -185,9 +247,18 @@ namespace openglcsharp
 
             //Update all the graphics elements.
             sceneMan.Update();
-
+            
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
+
+            if (framCounter >= 30)
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                framCounter = 0;
+            }
+            else
+                framCounter++;
         }
 
         public static ShaderProgram ShaderProg

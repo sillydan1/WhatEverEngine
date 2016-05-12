@@ -1,9 +1,9 @@
 ﻿import sys
 from OpenGL import Vector3
-from openglcsharp.Engine import Input
-from openglcsharp.Engine import Renderer
-from openglcsharp.Engine import GameObject
-from openglcsharp.Engine import EngineFunctions
+from WhateverEngine.Engine import Input
+from WhateverEngine.Engine import Renderer
+from WhateverEngine.Engine import GameObject
+from WhateverEngine.Engine import EngineFunctions
 
 pos=Vector3()
 rot=Vector3()

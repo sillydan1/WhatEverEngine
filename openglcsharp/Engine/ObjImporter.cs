@@ -2,7 +2,7 @@
 using System.IO;
 using OpenGL;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public static class ObjImporter
     {

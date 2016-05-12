@@ -1,7 +1,7 @@
 ﻿import sys
 from OpenGL import Vector3
-from openglcsharp.Engine import Transform
-from openglcsharp.Engine import EngineFunctions
+from WhateverEngine.Engine import Transform
+from WhateverEngine.Engine import EngineFunctions
 
 trans=Transform()
 deltaTime=0.0
@@ -22,7 +22,7 @@ def Update():
     global gravity
     global velocity    
     #rotate the object
-    trans.Roll(rotatioSpeed * deltaTime)
+    #trans.Roll(rotatioSpeed * deltaTime)
     #Move downwards
     velocity += Vector3(0.0, -gravity, 0.0)
     trans.Move(velocity)
@@ -32,3 +32,5 @@ def Update():
     if(timer > 7):
         EngineFunctions.Destroy(trans.GetOwner) #Self destruct.
         timer = 0
+
+

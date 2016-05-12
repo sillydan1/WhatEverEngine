@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace openglcsharp.Engine
+namespace WhateverEngine.Engine
 {
     public class GameObject : IDisposable
     {
         private Transform transform;
         private List<GameComponent> myComponents = new List<GameComponent>();
+        public string name;
+        private string tag;
 
+        public string GetTag
+        {
+            get
+            {
+                return tag;
+            }
+        }
         public Transform Transform
         {
             get
@@ -15,17 +24,32 @@ namespace openglcsharp.Engine
                 return transform;
             }
         }
-        //Constructor
+        //Constructors
         public GameObject()
         {
-            transform = new Transform();
-            transform.AddToGameObject(this);
+            MakeNewGameObject("GameObject", "", new Transform());
         }
         public GameObject(Transform transform)
         {
-            this.transform = transform;
-            transform.AddToGameObject(this);
+            MakeNewGameObject("GameObject", "", transform);
         }
+        public GameObject(string name)
+        {
+            MakeNewGameObject(name, "", new Transform());
+        }
+        public GameObject(string name, string tag, Transform transform)
+        {
+            MakeNewGameObject(name, tag, transform);
+        }
+        //Constructor method
+        private void MakeNewGameObject(string name, string tag, Transform transform)
+        {
+            this.name = name;
+            this.tag = tag;
+            this.transform = transform;
+            this.transform.AddToGameObject(this);
+        }
+
         //Called once per frame
         public void Update()
         {
@@ -84,6 +108,17 @@ namespace openglcsharp.Engine
                     return;
                 }
             }
+        }
+        public T GetGameComponent<T>() where T:GameComponent
+        {
+            foreach (GameComponent item in myComponents)
+            {
+                if(item.GetType() is T)
+                {
+                    return (T)item;
+                }
+            }
+            return null;
         }
     }
 }
