@@ -2,7 +2,11 @@
 from OpenGL import Vector3
 from OpenGL import Vector2
 from WhateverEngine.Engine import Transform
+from WhateverEngine.Engine import PhysicsComponent
+from WhateverEngine.Engine import Renderer
 from WhateverEngine.Engine import Input
+from WhateverEngine.Engine import GameObject
+from WhateverEngine.Engine import EngineFunctions
 
 trans=Transform()
 rot=Vector3()
@@ -46,6 +50,12 @@ def Update():
     if(Input.GetKeyboardKey['d'] is True):
         translation += Vector3(speed * deltaTime, 0.0, 0.0)
 
+    if(Input.GetKeyboardKeyUp['p'] is True):
+        go = GameObject(Transform(Vector3(0,10,1))) 
+        go.AddGameComponent(Renderer("data\\sphere.obj")) # kan give exception hvis forkert syntaks og/eller filen ikke findes.
+        go.AddGameComponent(PhysicsComponent())
+        EngineFunctions.Instantiate(go)
+    
     trans.MoveRelative(translation)
 
     #use the MouseLooker class
