@@ -89,7 +89,7 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0,3,10)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
@@ -97,9 +97,20 @@ namespace WhateverEngine
             physicsGO.AddGameComponent(new PhysicsComponent());
             physicsGO.AddGameComponent(new Renderer(@"data\box.obj"));
 
-            sceneMan.Instantiate(physicsGO);
+            GameObject netCube = new GameObject(new Transform(Vector3.Zero));
+            netCube.AddGameComponent(new Renderer(@"data\box.obj"));
+            netCube.id = 5;
+
+            //GameObject networkGuy = new GameObject();
+            //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
+
+            sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(cameraGO);
+            //sceneMan.Instantiate(networkGuy);
             sceneMan.CheckAddList();
+
+            NetworkClass nwc = new NetworkClass();
+            nwc.Start();
             //sceneMan.Start();
         }
 
@@ -167,6 +178,11 @@ namespace WhateverEngine
         {
             return sceneMan.GetGameObjectsWithTag(tag);
         }
+        public static GameObject GetGameObjectWithId(int id)
+        {
+            return sceneMan.GetGameObjectWithId(id);
+        }
+
         public static void Destroy(GameObject objToDestroy)
         {
             sceneMan.Destroy(objToDestroy);
@@ -232,7 +248,7 @@ namespace WhateverEngine
             if (fixedUpdateTimer >= fixedUpdateTime)
             {
                 scene.Simulate(fixedUpdateTime);
-			    scene.FetchResults(block: true);
+                scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
             }
 
@@ -247,7 +263,7 @@ namespace WhateverEngine
 
             //Update all the graphics elements.
             sceneMan.Update();
-            
+
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
 

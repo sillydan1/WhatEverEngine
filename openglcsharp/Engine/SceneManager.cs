@@ -88,12 +88,24 @@ namespace WhateverEngine.Engine
             List<GameObject> gol = new List<GameObject>();
             foreach (GameObject item in sceneObjects)
             {
-                if(item.GetTag == tag)
+                if (item.GetTag == tag)
                 {
                     gol.Add(item);
                 }
             }
             return gol.ToArray();
+        }
+        public GameObject GetGameObjectWithId(int id)
+        {
+            List<GameObject> gol = new List<GameObject>();
+            foreach (GameObject item in sceneObjects)
+            {
+                if (item.id == id)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
     }
 }

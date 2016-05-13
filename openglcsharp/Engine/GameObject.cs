@@ -8,6 +8,7 @@ namespace WhateverEngine.Engine
         private Transform transform;
         private List<GameComponent> myComponents = new List<GameComponent>();
         public string name;
+        public int id;
         private string tag;
 
         public string GetTag
@@ -24,6 +25,7 @@ namespace WhateverEngine.Engine
                 return transform;
             }
         }
+
         //Constructors
         public GameObject()
         {
