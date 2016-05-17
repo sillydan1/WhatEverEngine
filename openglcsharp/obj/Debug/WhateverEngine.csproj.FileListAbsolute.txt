@@ -27,3 +27,33 @@ D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.xml
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.xml
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\whateverengine.exe.config
+F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.exe
+F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.pdb
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Shaders\FragmentShader.glsl
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Shaders\VertexShader.glsl
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\whateverengine.exe
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\whateverengine.pdb
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.Modules.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.SQLite.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\OpenGL.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\PhysX.Net.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Tao.FreeGlut.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.dll
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.Modules.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.SQLite.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.xml
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
+F:\Documents\WhateverEngine\openglcsharp\obj\Debug\WhateverEngine.csprojResolveAssemblyReference.cache
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py

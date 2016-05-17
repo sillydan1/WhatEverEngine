@@ -9,6 +9,7 @@ namespace WhateverEngine.Engine
         private Material material;
         private RigidActor rigidActor;
         private PhysX.Geometry myGeo;
+        private bool isDynamic;
 
         //Constructors
         public PhysicsComponent()
@@ -49,7 +50,7 @@ namespace WhateverEngine.Engine
                 rigidActor = Program.scene.Physics.CreateRigidStatic();
                 rigidActor.GlobalPose = PhysX.Math.Matrix.RotationAxis(new PhysX.Math.Vector3(0, 0, 3), (float)System.Math.PI / 2);
             }
-
+            this.isDynamic = isDynamic;
             myGeo = geometry;
         }
 
@@ -59,7 +60,7 @@ namespace WhateverEngine.Engine
 
             Quaternion q = owner.Transform.Orientation;
             PhysX.Math.Quaternion q2 = new PhysX.Math.Quaternion(q.x, q.y, q.z, q.w);
-
+            
             PhysX.Math.Vector3 physicsStartPos = new PhysX.Math.Vector3(owner.Transform.Position.x, owner.Transform.Position.y, owner.Transform.Position.z);
             rigidActor.GlobalPose = PhysX.Math.Matrix.RotationQuaternion(q2);
             rigidActor.GlobalPose *= PhysX.Math.Matrix.Translation(physicsStartPos);
@@ -85,6 +86,40 @@ namespace WhateverEngine.Engine
             owner.Transform.Position = rigidPos;
             
             base.Update();
+        }
+        public void ChangePosition(Vector3 newPos)
+        {
+            rigidActor.GlobalPose.set_Rows(3, new PhysX.Math.Vector4(newPos.x, newPos.y, newPos.z, 0.0f));
+        }
+        public void AddForce(Vector3 force)
+        {
+            if(isDynamic)
+            {
+                PhysX.Math.Vector3 f = new PhysX.Math.Vector3(force.x, force.y, force.z);
+                ((RigidDynamic)rigidActor).AddForce(f);
+            }
+            else
+            {
+                Program.LogError("Rigidbody is not dynamic. Forces are not allowed on static rigidactors in PhysX 3.3");
+            }
+        }
+        /// <summary>
+        /// Force = 0,
+        /// Impulse = 1,
+        /// VelocityChange = 2,
+        /// Acceleration = 3
+        /// </summary>
+        public void AddForce(Vector3 force, int forceMode, bool wake)
+        {
+            if (isDynamic)
+            {
+                PhysX.Math.Vector3 f = new PhysX.Math.Vector3(force.x, force.y, force.z);
+                ((RigidDynamic)rigidActor).AddForce(f, (ForceMode)forceMode, wake);
+            }
+            else
+            {
+                Program.LogError("Rigidbody is not dynamic. Forces are not allowed on static rigidactors in PhysX 3.3");
+            }
         }
     }
 }

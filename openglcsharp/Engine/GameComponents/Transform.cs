@@ -6,9 +6,11 @@ namespace WhateverEngine.Engine
     public class Transform : GameComponent
     {
         private Vector3 position;
+        private Vector3 localPosition;
         private Quaternion orientation;
         private Vector3 scale;
         private bool dirty = false;
+        private Transform parent;
 
         public Vector3 Position
         {
@@ -21,6 +23,17 @@ namespace WhateverEngine.Engine
             {
                 position = value;
                 dirty = true;
+            }
+        }
+        public Vector3 LocalPosition
+        {
+            get
+            {
+                return localPosition;
+            }
+            set
+            {
+                localPosition = value;
             }
         }
         public Vector3 Scale
@@ -54,29 +67,36 @@ namespace WhateverEngine.Engine
 
         public Transform()
         {
-            Position = Vector3.Zero;
-            Orientation = Quaternion.Identity;
-            Scale = new Vector3(1, 1, 1);
+            ConstructorMethod(Vector3.Zero, Quaternion.Identity, new Vector3(1, 1, 1), null);
         }
-        public Transform(Vector3 position)
+        public Transform(Vector3 position, Transform parent = null)
         {
-            this.Position = position;
-            Orientation = Quaternion.Identity;
-            Scale = new Vector3(1, 1, 1);
+            ConstructorMethod(position, Quaternion.Identity, new Vector3(1, 1, 1), parent);
         }
-        public Transform(Vector3 position, Quaternion rotation)
+        public Transform(Vector3 position, Quaternion rotation, Transform parent = null)
         {
-            this.Position = position;
-            this.Orientation = rotation;
-            this.Scale = new Vector3(1,1,1);
+            ConstructorMethod(position, rotation, new Vector3(1, 1, 1), parent);
         }
-        public Transform(Vector3 position, Quaternion rotation, Vector3 scale)
+        public Transform(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent = null)
+        {
+            ConstructorMethod(position, rotation, scale, parent);
+        }
+        private void ConstructorMethod(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent)
         {
             this.Position = position;
             this.orientation = rotation;
             this.Scale = scale;
+            this.parent = parent;
+            if (parent != null)
+            {
+                this.localPosition = position - parent.Position;
+            }
         }
 
+        public void SetParent(Transform parent)
+        {
+            this.parent = parent;
+        }
         public void SetNotDirty()
         {
             dirty = false;
@@ -129,7 +149,12 @@ namespace WhateverEngine.Engine
         /// <param name="by">The amount to move the position by.</param>
         public void Move(Vector3 by)
         {
-            Position += by;
+            if(parent != null)
+            {
+                localPosition += by;
+            }
+            else
+                Position += by;
         }
         /// <summary>
         /// Moves the camera taking into account the orientation of the camera.
@@ -138,7 +163,12 @@ namespace WhateverEngine.Engine
         /// <param name="by">The amount to move the position by, relative to the camera.</param>
         public void MoveRelative(Vector3 by)
         {
-            Position += Orientation * by;
+            if (parent != null)
+            {
+                localPosition += Orientation * by;
+            }
+            else
+                Position += Orientation * by;
         }
         public override void Start()
         {
@@ -147,6 +177,10 @@ namespace WhateverEngine.Engine
         public override void Update()
         {
             base.Update();
+            if(parent != null)
+            {
+                position = parent.position + localPosition;
+            }
         }
     }
 }

@@ -24,6 +24,18 @@ namespace WhateverEngine.Engine
                 return transform;
             }
         }
+
+        //--------------------------------------------------------
+        //Properties for IronPython. This segment hurts.
+        public PhysicsComponent GetPhysics
+        {
+            get
+            {
+                PhysicsComponent p = GetGameComponent<PhysicsComponent>();
+                return p;
+            }
+        }
+        //--------------------------------------------------------
         //Constructors
         public GameObject()
         {
@@ -53,6 +65,7 @@ namespace WhateverEngine.Engine
         //Called once per frame
         public void Update()
         {
+            transform.Update();
             //Update all attached components
             foreach (GameComponent component in myComponents)
             {
@@ -113,7 +126,7 @@ namespace WhateverEngine.Engine
         {
             foreach (GameComponent item in myComponents)
             {
-                if(item.GetType() is T)
+                if(item.GetType() == typeof(T))
                 {
                     return (T)item;
                 }

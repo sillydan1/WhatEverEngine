@@ -90,21 +90,27 @@ namespace WhateverEngine.Engine
                     }
                     Program.LogError("Loading Pythonscript failed: " + myScriptFileName + " CAUSE: \n" + e.Message + "\n");
                 }
+                //Initial rotation
+                if (HasVar<Vector3>("rot"))
+                {
+                    Vector3 result = myScope.GetVariable<Vector3>("rot");
+                    owner.Transform.Pitch(result.x);
+                    owner.Transform.Yaw(result.y);
+                    owner.Transform.Roll(result.z);
+
+                }
+                if (HasVar<Transform>("trans"))
+                {
+                    myScope.SetVariable("trans", owner.Transform);
+                }
+
                 if (HasMethod("Start"))
                     myScope.Start();
 
                 dirty = false;
             }
 
-            //Initial rotation
-            if (HasVar<Vector3>("rot"))
-            {
-                Vector3 result = myScope.GetVariable<Vector3>("rot");
-                owner.Transform.Pitch(result.x);
-                owner.Transform.Yaw(result.y);
-                owner.Transform.Roll(result.z);
-
-            }
+            
         }
         public override void Update()
         {
@@ -126,10 +132,7 @@ namespace WhateverEngine.Engine
                 owner.Transform.Yaw(result.y);
                 owner.Transform.Roll(result.z);
             }
-            if(HasVar<Transform>("trans"))
-            {
-                myScope.SetVariable("trans", owner.Transform);
-            }
+            
             //Call Update
             if (HasMethod("Update"))
                 myScope.Update();
