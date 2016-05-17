@@ -73,6 +73,8 @@ def Start():
             thread2 = myThread(2, "WritingThread")
             thread1.start()
             thread2.start()
+        except :
+            pass
 
 def ReturnSplitMsg():
     global splitMsg

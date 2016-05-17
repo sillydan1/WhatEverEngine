@@ -15,17 +15,17 @@ namespace WhateverEngine.Engine
         private Dictionary<string, bool> hasFields = new Dictionary<string, bool>();
         private string myScript = @"Python Scripts\Network.py";
         private Thread listenThread;
-        //private static NetworkClass instance;
+        private static NetworkClass instance;
 
-        //public static NetworkClass Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //            instance = new NetworkClass();
-        //        return instance;
-        //    }
-        //}
+        public static NetworkClass Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new NetworkClass();
+                return instance;
+            }
+        }
 
         private bool HasVar<T>(string variableName)
         {

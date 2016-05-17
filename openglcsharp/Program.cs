@@ -96,8 +96,7 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            NetworkClass nwc = new NetworkClass();
-            nwc.Start();
+            NetworkClass.Instance.Start(); // Network stuff
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
@@ -132,7 +131,6 @@ namespace WhateverEngine
             //sceneMan.Instantiate(refferenceGo);
             //sceneMan.Instantiate(physicsGO2);
             sceneMan.Instantiate(cameraGO);
-            //sceneMan.Instantiate(networkGuy);
             sceneMan.CheckAddList();
             //sceneMan.Start();
         }
