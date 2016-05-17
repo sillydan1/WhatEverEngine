@@ -116,8 +116,8 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
-            sceneMan.Instantiate(groundPlane);
-            sceneMan.Instantiate(physicsGO);
+            //sceneMan.Instantiate(groundPlane);
+            //sceneMan.Instantiate(physicsGO);
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
@@ -126,7 +126,7 @@ namespace WhateverEngine
             //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
 
             sceneMan.Instantiate(netCube);
-            sceneMan.Instantiate(refferenceGo);
+            //sceneMan.Instantiate(refferenceGo);
             //sceneMan.Instantiate(physicsGO2);
             sceneMan.Instantiate(cameraGO);
             //sceneMan.Instantiate(networkGuy);

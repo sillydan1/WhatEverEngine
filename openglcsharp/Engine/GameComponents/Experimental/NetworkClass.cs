@@ -51,41 +51,8 @@ namespace WhateverEngine.Engine
                 if (HasVar<string>("splitMsg"))
                 {
                     string result = myScope.ReturnSplitMsg();
-                    string[] splitMsg = result.Split('|');
-                    if (splitMsg.Count() > 0 && splitMsg[0] != "")
-                    {
-                        OpenGL.Vector3 v3;
-                        switch (splitMsg[0])
-                        {
-                            case "[string]":
-                                Console.WriteLine("NetworkClass says: " + splitMsg[1]);
-                                break;
-                            case "[position]":
-                                v3 = new OpenGL.Vector3(
-                                    Convert.ToInt32(splitMsg[2]),
-                                    Convert.ToInt32(splitMsg[3]),
-                                    Convert.ToInt32(splitMsg[4]));
-                                EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Position = v3;
-                                Console.WriteLine("I did pos stuff");
-                                break;
-                            case "[scale]":
-                                v3 = new OpenGL.Vector3(
-                                    Convert.ToInt32(splitMsg[2]),
-                                    Convert.ToInt32(splitMsg[3]),
-                                    Convert.ToInt32(splitMsg[4]));
-                                EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
-                                Console.WriteLine("I did pos stuff");
-                                break;
-                            case "[rotation]":
-
-                                //EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation()
-                                break;
-                            default:
-                                Console.WriteLine("Unknow translation type: " + splitMsg[0]);
-                                break;
-                        }
-                        myScope.SetVariable("splitMsg", "");
-                    }
+                    NetworkTranslator.RecieveData(result);
+                    myScope.SetVariable("splitMsg", "");
                 }
             }
         }

@@ -36,7 +36,7 @@ def Start():
     print "network started"
     global s
     s = socket.socket()         # Create a socket object
-    host = "192.168.43.163"    # Get local machine name
+    host = "192.168.43.214"    # Get local machine name
     port = 12345                # Reserve a port for your service.
     s.connect((host, port))
     print "connection found"

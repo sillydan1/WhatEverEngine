@@ -111,6 +111,7 @@
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\GameComponents\MeshFilter.cs" />
+    <Compile Include="Engine\NetworkTranslator.cs" />
     <Compile Include="Engine\ObjImporter.cs" />
     <Compile Include="Engine\ObjLoader.cs" />
     <Compile Include="Engine\GameComponents\PythonComponent.cs" />
