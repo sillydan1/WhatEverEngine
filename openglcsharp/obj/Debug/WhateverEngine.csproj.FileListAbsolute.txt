@@ -100,3 +100,4 @@ D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\WhateverEngine.csprojResolveAssemblyReference.cache
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\NetCubeTest.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\NetCubeTest.py

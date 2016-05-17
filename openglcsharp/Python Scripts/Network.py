@@ -19,6 +19,8 @@ class myThread (threading.Thread):
 global splitMsg
 global sendMsg
 global s
+global isServer
+isServer = False
 sendMsg = ""
 splitMsg = ""
 s = socket.socket()
@@ -38,16 +40,20 @@ def ListenThread():
 
 def WritingThread():
     global sendMsg
+    global s
     global c
     try:
         while True:
             if sendMsg != "":
-                c.send(sendMsg)
+                if isServer:
+                    c.send(sendMsg)
+                else:
+                    s.send(sendMsg)
                 sendMsg = ""
     except :
         print "ListenThread died"
 
-def GetConnection():
+def Server():
     global s
     global c
     print "waiting for connection..."
@@ -58,6 +64,14 @@ def GetConnection():
     s.listen(5)
     c, addr = s.accept()
 
+def Client():
+    global s
+    print "waiting for connection..."
+    s = socket.socket()         # Create a socket object
+    host = "192.168.43.214"     # Get local machine name
+    port = 12345                # Reserve a port for your service.l
+    s.connect((host, port))
+
 def Start():
     print "network started"
     #global s
@@ -67,11 +81,14 @@ def Start():
     #s.connect((host, port))
     while True:
         try:
-            GetConnection()
             print "connection found"
+            if isServer:
+                Server()
+            else:
+                Client()
             thread1 = myThread(1, "ListenThread")
-            thread2 = myThread(2, "WritingThread")
             thread1.start()
+            thread2 = myThread(2, "WritingThread")
             thread2.start()
         except :
             pass
