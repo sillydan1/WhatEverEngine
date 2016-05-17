@@ -8,13 +8,24 @@ using System.Threading;
 
 namespace WhateverEngine.Engine
 {
-    class NetworkClass
+    public class NetworkClass
     {
         private ScriptRuntime pyngine;
         private dynamic myScope;
         private Dictionary<string, bool> hasFields = new Dictionary<string, bool>();
-        string myScript = @"Python Scripts\Network.py";
-        Thread listenThread;
+        private string myScript = @"Python Scripts\Network.py";
+        private Thread listenThread;
+        //private static NetworkClass instance;
+
+        //public static NetworkClass Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //            instance = new NetworkClass();
+        //        return instance;
+        //    }
+        //}
 
         private bool HasVar<T>(string variableName)
         {
@@ -51,8 +62,11 @@ namespace WhateverEngine.Engine
                 if (HasVar<string>("splitMsg"))
                 {
                     string result = myScope.ReturnSplitMsg();
-                    NetworkTranslator.RecieveData(result);
-                    myScope.SetVariable("splitMsg", "");
+                    if (result != "")
+                    {
+                        NetworkTranslator.RecieveData(result);
+                        myScope.SetVariable("splitMsg", "");
+                    }
                 }
             }
         }
@@ -62,6 +76,17 @@ namespace WhateverEngine.Engine
             while (true)
             {
                 RecieveData();
+            }
+        }
+        
+        public void SendData(string data)
+        {
+            if (HasVar<string>("sendMsg"))
+            {
+                if (data != "")
+                {
+                    myScope.SetVariable("sendMsg", data);
+                }
             }
         }
 

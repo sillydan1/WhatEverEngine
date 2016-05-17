@@ -20,7 +20,6 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
-
         public static Random Random
         {
             get
@@ -97,6 +96,9 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
+            NetworkClass nwc = new NetworkClass();
+            nwc.Start();
+
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
@@ -119,6 +121,7 @@ namespace WhateverEngine
             //sceneMan.Instantiate(groundPlane);
             //sceneMan.Instantiate(physicsGO);
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
+            netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
 
@@ -131,9 +134,6 @@ namespace WhateverEngine
             sceneMan.Instantiate(cameraGO);
             //sceneMan.Instantiate(networkGuy);
             sceneMan.CheckAddList();
-
-            NetworkClass nwc = new NetworkClass();
-            nwc.Start();
             //sceneMan.Start();
         }
 
@@ -310,7 +310,7 @@ namespace WhateverEngine
                 return program;
             }
         }
-
+        
         public static void LogError(string message)
         {
             errorLog += message + "\n";

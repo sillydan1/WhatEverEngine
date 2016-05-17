@@ -30,9 +30,9 @@ namespace WhateverEngine.Engine
         {
             //This method is not currently functional yet.
             //if(HasMethod(methodName))
-                //myScope.methodName() //<-- This is what I want to do... But can't
+            //myScope.methodName() //<-- This is what I want to do... But can't
             //else
-                //Program.LogError("The method '" + methodName + "' Does not exist");
+            //Program.LogError("The method '" + methodName + "' Does not exist");
 
             Program.LogError("This method is not currently functional yet.");
         }
@@ -45,14 +45,15 @@ namespace WhateverEngine.Engine
             try
             {
                 br = myScope.GetVariable(whatMethod) != null;
-            } catch { }
+            }
+            catch { }
 
             hasMethods.Add(whatMethod, br);
             return br;
         }
         private bool HasVar<T>(string variableName)
         {
-            
+
             if (hasFields.ContainsKey(variableName))
                 return hasFields[variableName];
 
@@ -63,7 +64,8 @@ namespace WhateverEngine.Engine
                 T eh = myScope.GetVariable<T>(variableName);
                 if (!br)
                     Program.LogError("Error getting variable '" + variableName + "' on Python script: '" + myScriptFileName + "' Are you missing a definition of '" + variableName + "'?");
-            } catch { }
+            }
+            catch { }
             hasFields.Add(variableName, br);
             return br;
         }
@@ -74,7 +76,7 @@ namespace WhateverEngine.Engine
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(WhateverEngine.Engine.Input)));
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(System.Random)));
-            
+
             if (myScriptFileName != "")
             {
                 try
@@ -83,7 +85,7 @@ namespace WhateverEngine.Engine
                 }
                 catch (Exception e)
                 {
-                    if(e is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+                    if (e is Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
                     {
                         dirty = false;
                         return;
@@ -104,6 +106,10 @@ namespace WhateverEngine.Engine
                 owner.Transform.Yaw(result.y);
                 owner.Transform.Roll(result.z);
 
+            }
+            if (HasVar<GameObject>("gameObject"))
+            {
+                myScope.SetVariable("gameObject", owner);
             }
         }
         public override void Update()
@@ -126,7 +132,7 @@ namespace WhateverEngine.Engine
                 owner.Transform.Yaw(result.y);
                 owner.Transform.Roll(result.z);
             }
-            if(HasVar<Transform>("trans"))
+            if (HasVar<Transform>("trans"))
             {
                 myScope.SetVariable("trans", owner.Transform);
             }
@@ -138,7 +144,7 @@ namespace WhateverEngine.Engine
         }
         private void CheckDirty()
         {
-            if(dirty)
+            if (dirty)
             {
                 Start();
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WhateverEngine.Engine
 {
-    class NetworkTranslator
+    public class NetworkTranslator
     {
         public static string NetPosition(GameObject obj, OpenGL.Vector3 newPos)
         {
