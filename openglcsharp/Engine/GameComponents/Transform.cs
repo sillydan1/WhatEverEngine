@@ -8,6 +8,7 @@ namespace WhateverEngine.Engine
         private Vector3 position;
         private Vector3 localPosition;
         private Quaternion orientation;
+        private Quaternion localOrientation;
         private Vector3 scale;
         private bool dirty = false;
         private Transform parent;
@@ -85,6 +86,7 @@ namespace WhateverEngine.Engine
         {
             this.Position = position;
             this.orientation = rotation;
+            this.localOrientation = rotation;
             this.Scale = scale;
             this.parent = parent;
             if (parent != null)
@@ -103,7 +105,13 @@ namespace WhateverEngine.Engine
         }
         public void Rotate(Quaternion rotation)
         {
-            Orientation = rotation * orientation;
+            if(parent != null)
+            {
+                localOrientation = rotation * localOrientation;
+                Orientation = rotation * orientation;
+            }
+            else
+                Orientation = rotation * orientation;
         }
         public void Rotate(float angle, Vector3 axis)
         {
@@ -149,12 +157,15 @@ namespace WhateverEngine.Engine
         /// <param name="by">The amount to move the position by.</param>
         public void Move(Vector3 by)
         {
-            if(parent != null)
+            if (parent != null)
             {
                 localPosition += by;
             }
             else
+            {
                 Position += by;
+                GetOwner.GetPhysics.ChangePosition(position);
+            }
         }
         /// <summary>
         /// Moves the camera taking into account the orientation of the camera.
@@ -168,7 +179,12 @@ namespace WhateverEngine.Engine
                 localPosition += Orientation * by;
             }
             else
+            {
                 Position += Orientation * by;
+
+                if(GetOwner.GetPhysics != null)
+                    GetOwner.GetPhysics.ChangePosition(position);
+            }
         }
         public override void Start()
         {
@@ -179,7 +195,8 @@ namespace WhateverEngine.Engine
             base.Update();
             if(parent != null)
             {
-                position = parent.position + localPosition;
+                position = (parent.position + (parent.Orientation * localPosition));
+                //orientation = localOrientation * parent.Orientation;
             }
         }
     }

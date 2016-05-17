@@ -89,7 +89,9 @@ namespace WhateverEngine.Engine
         }
         public void ChangePosition(Vector3 newPos)
         {
-            rigidActor.GlobalPose.set_Rows(3, new PhysX.Math.Vector4(newPos.x, newPos.y, newPos.z, 0.0f));
+            PhysX.Math.Vector3 v = new PhysX.Math.Vector3(newPos.x, newPos.y, newPos.z);
+            rigidActor.GlobalPose = PhysX.Math.Matrix.Translation(v);
+            //rigidActor.GlobalPose.set_Rows(3, new PhysX.Math.Vector4(newPos.x, newPos.y, newPos.z, 0.0f));
         }
         public void AddForce(Vector3 force)
         {

@@ -111,10 +111,6 @@ namespace WhateverEngine.Engine
 
                 dirty = false;
             }
-
-<<<<<<< HEAD
-            
-=======
             //Initial rotation
             if (HasVar<Vector3>("rot"))
             {
@@ -128,7 +124,6 @@ namespace WhateverEngine.Engine
             {
                 myScope.SetVariable("gameObject", owner);
             }
->>>>>>> 0fff451f6b9182bda4914689bfd0c8a2acb74998
         }
         public override void Update()
         {
@@ -150,14 +145,10 @@ namespace WhateverEngine.Engine
                 owner.Transform.Yaw(result.y);
                 owner.Transform.Roll(result.z);
             }
-<<<<<<< HEAD
-            
-=======
             if (HasVar<Transform>("trans"))
             {
                 myScope.SetVariable("trans", owner.Transform);
             }
->>>>>>> 0fff451f6b9182bda4914689bfd0c8a2acb74998
             //Call Update
             if (HasMethod("Update"))
                 myScope.Update();
