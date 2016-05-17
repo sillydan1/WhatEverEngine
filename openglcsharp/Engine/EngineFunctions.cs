@@ -19,5 +19,9 @@ namespace WhateverEngine.Engine
         {
             return Program.GetGameObjectsWithTag(tag);
         }
+        public static GameObject GetGameObjectWithId(int id)
+        {
+            return Program.GetGameObjectWithId(id);
+        }
     }
 }

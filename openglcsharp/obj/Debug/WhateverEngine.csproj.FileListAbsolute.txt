@@ -57,3 +57,77 @@ F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.xml
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
 F:\Documents\WhateverEngine\openglcsharp\obj\Debug\WhateverEngine.csprojResolveAssemblyReference.cache
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\whateverengine.exe.config
+D:\Projects\Python\WhatEverEngine\openglcsharp\obj\Debug\whateverengine.exe
+D:\Projects\Python\WhatEverEngine\openglcsharp\obj\Debug\whateverengine.pdb
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Shaders\FragmentShader.glsl
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Shaders\VertexShader.glsl
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\whateverengine.exe
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\whateverengine.pdb
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.Modules.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.SQLite.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\OpenGL.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\PhysX.Net.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Tao.FreeGlut.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.Modules.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.SQLite.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\obj\Debug\WhateverEngine.csprojResolveAssemblyReference.cache
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\Network.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\NormalBullet.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\PlayerGun.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.Wpf.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.dll
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\whateverengine.exe.config
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\whateverengine.exe
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\whateverengine.pdb
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\Network.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\NormalBullet.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\PlayerGun.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Shaders\FragmentShader.glsl
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Shaders\VertexShader.glsl
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\whateverengine.exe
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\whateverengine.pdb
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.Modules.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.SQLite.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.Wpf.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\OpenGL.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\PhysX.Net.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Tao.FreeGlut.dll
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.Modules.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.SQLite.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Dynamic.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Microsoft.Scripting.Metadata.xml
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\WhateverEngine.csprojResolveAssemblyReference.cache
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\NetCubeTest.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\NetCubeTest.py
