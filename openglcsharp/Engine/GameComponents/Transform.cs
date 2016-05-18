@@ -12,6 +12,8 @@ namespace WhateverEngine.Engine
         private Vector3 scale;
         private bool dirty = false;
         private Transform parent;
+        public Vector3 previousPos;
+        public Quaternion previousRot;
         private Vector3 movePrediction;
         private Quaternion rotPrediction;
 
@@ -119,6 +121,8 @@ namespace WhateverEngine.Engine
             {
                 this.localPosition = position - parent.Position;
             }
+            previousPos = position;
+            previousRot = rotation;
         }
 
         public void SetParent(Transform parent)

@@ -16,6 +16,7 @@ namespace WhateverEngine.Engine
             result += newPos.x + "|";
             result += newPos.y + "|";
             result += newPos.z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
@@ -27,6 +28,7 @@ namespace WhateverEngine.Engine
             result += newPos.X + "|";
             result += newPos.Y + "|";
             result += newPos.Z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
@@ -39,6 +41,7 @@ namespace WhateverEngine.Engine
             result += newRotation.y + "|";
             result += newRotation.z + "|";
             result += newRotation.w + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
