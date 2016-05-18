@@ -15,7 +15,8 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.x + "|";
             result += newPos.y + "|";
-            result += newPos.z + "|";
+            result += newPos.z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
@@ -26,7 +27,8 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.X + "|";
             result += newPos.Y + "|";
-            result += newPos.Z + "|";
+            result += newPos.Z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
@@ -38,7 +40,8 @@ namespace WhateverEngine.Engine
             result += newRotation.x + "|";
             result += newRotation.y + "|";
             result += newRotation.z + "|";
-            result += newRotation.w + "|";
+            result += newRotation.w + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 

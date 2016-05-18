@@ -118,7 +118,7 @@ namespace WhateverEngine
             //cameraGO.Transform.SetParent(physicsGO.Transform);
 
             GameObject gun = new GameObject(new Transform(new Vector3(-0.1724952f, 11.6f, 0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
-            
+
             gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
@@ -126,7 +126,7 @@ namespace WhateverEngine
             //refferenceGo.AddGameComponent(new Renderer(@"data\arrow.obj")); 
 
 
-            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0,0,3))));
+            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
@@ -286,6 +286,7 @@ namespace WhateverEngine
                 scene.Simulate(fixedUpdateTime);
                 scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
+                OnNetUpdate();
 
                 if (framCounter >= 30)
                 {
@@ -311,18 +312,15 @@ namespace WhateverEngine
 
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
-            OnNetUpdate();
-
-
         }
 
         private static void OnNetUpdate()
         {
-            netTimer += deltaTime;
-            if (netTimer >= netTime)
-            {
+            //netTimer += deltaTime;
+            //if (netTimer >= netTime)
+            //{
                 sceneMan.SendNetData();
-            }
+            //}
         }
 
         public static ShaderProgram ShaderProg

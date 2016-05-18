@@ -61,7 +61,7 @@ namespace WhateverEngine.Engine
                 }
             }
         }
-        
+
         private void Listener()
         {
             pyngine = Python.CreateRuntime();
@@ -77,20 +77,24 @@ namespace WhateverEngine.Engine
                 Program.LogError("Loading Pythonscript failed: " + myScript + " CAUSE: \n" + e.Message + "\n");
             }
             myScope.Start();
-            
+
             while (true)
             {
                 RecieveData();
+
             }
         }
-        
+
         public void SendData(string data)
         {
-            if (HasVar<string>("sendMsg"))
+            if (myScope != null)
             {
-                if (data != "")
+                if (HasVar<string>("sendMsg"))
                 {
-                    myScope.SetVariable("sendMsg", data);
+                    if (data != "")
+                    {
+                        myScope.SetVariable("sendMsg", data);
+                    }
                 }
             }
         }
