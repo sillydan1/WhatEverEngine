@@ -46,8 +46,12 @@ def Update():
     if(Input.GetKeyboardKey['d'] is True):
         translation += Vector3(speed * deltaTime, 0.0, 0.0)
 
-    if(Input.IsMouseRightButtonDown is True):
-            yaw = (Input.PrevX - Input.CurX) * 0.002
-            trans.Yaw(yaw)
+    #if(Input.IsMouseRightButtonDown is True):
+            
+    yaw = (Input.PrevX - Input.CurX) * 0.005
+    trans.Yaw(yaw)
+
+    pitch = (Input.PrevY - Input.CurY) * 0.005
+    trans.Pitch(pitch) 
 
     trans.MoveRelative(translation)
