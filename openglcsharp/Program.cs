@@ -105,8 +105,7 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            NetworkClass.Instance.Start();
-
+            NetworkClass.Instance.Start(); // Network stuff
 
             GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
             physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
