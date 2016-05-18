@@ -15,7 +15,7 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.x + "|";
             result += newPos.y + "|";
-            result += newPos.z + "|";
+            result += newPos.z + "&";
             return result;
         }
 
@@ -26,7 +26,7 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.X + "|";
             result += newPos.Y + "|";
-            result += newPos.Z + "|";
+            result += newPos.Z + "&";
             return result;
         }
 
@@ -38,27 +38,29 @@ namespace WhateverEngine.Engine
             result += newRotation.x + "|";
             result += newRotation.y + "|";
             result += newRotation.z + "|";
-            result += newRotation.w + "|";
+            result += newRotation.w + "&";
             return result;
         }
 
         public static void RecieveData(string data)
         {
             string[] allMsg = data.Split('&');
-            if (allMsg.Count() > 1)
-            {
-                foreach (string item in allMsg)
-                {
-                    RecieveData(item);
-                }
-                return;
-            }
-            string[] splitMsg = data.Split('|');
+            //if (allMsg.Count() > 2)
+            //{
+            //    foreach (string item in allMsg)
+            //    {
+            //        RecieveData(item);
+            //    }
+            //    return;
+            //}
+            string[] splitMsg = allMsg[0].Split('|');
+
 
             if (splitMsg.Count() > 0 && splitMsg[0] != "")
             {
                 OpenGL.Vector3 v3;
                 OpenGL.Vector4 v4;
+                GameObject g;
                 switch (splitMsg[0])
                 {
                     case "[position]":
@@ -66,8 +68,16 @@ namespace WhateverEngine.Engine
                             Convert.ToSingle(splitMsg[2]),
                             Convert.ToSingle(splitMsg[3]),
                             Convert.ToSingle(splitMsg[4]));
-                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Position = v3;
-                        Console.WriteLine("I did pos stuff");
+                        g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
+                        g.Transform.Position = v3;
+                        //if (g.Transform.pre == g.Transform.Position)
+                        //{
+                        //    g.Transform.MovePrediction = OpenGL.Vector3.Zero;
+                        //}
+                        //else
+                        //{
+                        //    g.Transform.MovePrediction = v3;
+                        //}
                         break;
                     case "[scale]":
                         v3 = new OpenGL.Vector3(
@@ -75,7 +85,6 @@ namespace WhateverEngine.Engine
                             Convert.ToSingle(splitMsg[3]),
                             Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
-                        Console.WriteLine("I did scale stuff");
                         break;
                     case "[rotation]":
                         v4 = new OpenGL.Vector4(
@@ -84,7 +93,16 @@ namespace WhateverEngine.Engine
                             Convert.ToSingle(splitMsg[4]),
                             Convert.ToSingle(splitMsg[5]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation(new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w));
-                        Console.WriteLine("I did rotation stuff");
+                        g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
+                        g.Transform.Orientation = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
+                        if (g.Transform.RotPrediction == OpenGL.Quaternion.Zero)
+                        {
+                            g.Transform.RotPrediction = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
+                        }
+                        else
+                        {
+                            g.Transform.RotPrediction = OpenGL.Quaternion.Zero;
+                        }
                         break;
                     default:
                         Console.WriteLine("Unknow translation type: " + splitMsg[0]);
@@ -92,6 +110,5 @@ namespace WhateverEngine.Engine
                 }
             }
         }
-
     }
 }

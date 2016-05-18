@@ -35,7 +35,7 @@ def ListenThread():
         while True:
             if splitMsg == "":
                 print "Waiting for message"
-                splitMsg = s.recv(1024)
+                splitMsg = s.recv(2048)
                 print "Network.py says: " + splitMsg
     except e:
         print "ListenThread died" + e
