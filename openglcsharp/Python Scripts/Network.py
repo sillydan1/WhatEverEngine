@@ -22,7 +22,7 @@ global s
 global e
 global isServer
 e = ""
-isServer = True
+isServer = False
 sendMsg = ""
 splitMsg = ""
 s = socket.socket()
@@ -38,7 +38,7 @@ def ListenThread():
                 splitMsg = s.recv(2048)
                 print "Network.py says: " + splitMsg
     except e:
-        print "ListenThread died: " + e
+        print "ListenThread died" + e
 
 def WritingThread():
     global sendMsg
@@ -72,6 +72,7 @@ def Client():
     global s
     print "waiting for connection..."
     s = socket.socket()         # Create a socket object
+    host = "192.168.43.163"     # Get local machine name //michael's ip
     host = "192.168.43.214"     # Get local machine name //martin's ip
     port = 12345                # Reserve a port for your service.l
     s.connect((host, port))
@@ -90,7 +91,7 @@ def Start():
         thread2 = myThread(2, "WritingThread")
         thread2.start()
     except e:
-        print(e)
+        print("error: " + e)
 
 def ReturnSplitMsg():
     global splitMsg

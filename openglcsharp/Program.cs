@@ -129,21 +129,16 @@ namespace WhateverEngine
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
-
-            //sceneMan.Instantiate(groundPlane);
-            //sceneMan.Instantiate(physicsGO);
+            
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
 
-            //GameObject networkGuy = new GameObject();
-            //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
-
             sceneMan.Instantiate(netCube);
+            sceneMan.Instantiate(cameraGO);
             //sceneMan.Instantiate(gun);
             //sceneMan.Instantiate(physicsGO);
-            sceneMan.Instantiate(cameraGO);
             //sceneMan.Instantiate(groundPlane);
             sceneMan.CheckAddList();
             //sceneMan.Start();
@@ -287,7 +282,6 @@ namespace WhateverEngine
                 scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
                 OnNetUpdate();
-
                 if (framCounter >= 30)
                 {
                     GC.Collect();
@@ -318,7 +312,7 @@ namespace WhateverEngine
         {
             //netTimer += deltaTime;
             //if (netTimer >= netTime)
-            //{
+            {
                 sceneMan.SendNetData();
             //}
         }
