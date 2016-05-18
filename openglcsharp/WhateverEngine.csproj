@@ -665,6 +665,9 @@
     <Content Include="Python Scripts\CameraControlScript.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Python Scripts\charactercontroller.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Python Scripts\DatabaseBullshit.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

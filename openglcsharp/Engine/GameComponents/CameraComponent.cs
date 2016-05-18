@@ -29,11 +29,11 @@ namespace WhateverEngine.Engine
         public override void Start()
         {
             base.Start();
-            Program.ShaderProg["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(0.90f, (float)Program.GetWidth / Program.GetHeight, 1.0f, 1000f));
+            Program.ShaderProg["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(0.90f, (float)Program.GetWidth / Program.GetHeight, 0.1f, 1000f));
         }
         public static void OnWindowResize()
         {
-            Program.ShaderProg["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(FoV, (float)Program.GetWidth / Program.GetHeight, 1.0f, 1000f));
+            Program.ShaderProg["projection_matrix"].SetValue(Matrix4.CreatePerspectiveFieldOfView(FoV, (float)Program.GetWidth / Program.GetHeight, 0.1f, 1000f));
         }
     }
 }

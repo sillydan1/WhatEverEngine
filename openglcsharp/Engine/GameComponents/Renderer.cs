@@ -20,7 +20,7 @@ namespace WhateverEngine.Engine
         {
             if(meshFilter.GetMeshIndex != -1)
             {
-                Matrix4 modelMatrix = owner.Transform.Orientation.Matrix4 * Matrix4.CreateTranslation(owner.Transform.Position);
+                Matrix4 modelMatrix = Matrix4.CreateScaling(owner.Transform.Scale) * owner.Transform.Orientation.Matrix4 * Matrix4.CreateTranslation(owner.Transform.Position);
                 if (ObjCacher.AlreadyLoadedObjects[meshFilter.GetMeshIndex].Objects[0].Material != null)
                 {
                     ObjCacher.AlreadyLoadedObjects[meshFilter.GetMeshIndex].Objects[0].Material.Program["model_matrix"].SetValue(modelMatrix);

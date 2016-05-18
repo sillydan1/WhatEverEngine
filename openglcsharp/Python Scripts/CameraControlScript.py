@@ -35,21 +35,6 @@ def Update():
     global deltaTime
     global trans    
 
-    #First Person movement
-    #Movement
-    if (Input.GetKeyboardKey['w'] is True):
-        translation -= Vector3(0.0, 0.0, speed * deltaTime)
-    if(Input.GetKeyboardKey['s'] is True):
-        translation += Vector3(0.0, 0.0, speed * deltaTime)
-    if(Input.GetKeyboardKey['q'] is True):
-        translation -= Vector3(0.0, speed * deltaTime, 0.0)
-    if(Input.GetKeyboardKey['e'] is True):
-        translation += Vector3(0.0, speed * deltaTime, 0.0)
-    if(Input.GetKeyboardKey['a'] is True):
-        translation -= Vector3(speed * deltaTime, 0.0, 0.0)
-    if(Input.GetKeyboardKey['d'] is True):
-        translation += Vector3(speed * deltaTime, 0.0, 0.0)
-
     if(Input.GetKeyboardKeyUp['p'] is True):
         go = GameObject(Transform(Vector3(0,10,1))) 
         go.AddGameComponent(Renderer("data\\sphere.obj")) # kan give exception hvis forkert syntaks og/eller filen ikke findes.
