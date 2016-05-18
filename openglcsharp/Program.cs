@@ -20,6 +20,15 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
+        private static NetworkClass nwc;
+        private static float netTime = 0.1f, netTimer = 0.0f;
+        public static NetworkClass Nwc
+        {
+            get
+            {
+                return nwc;
+            }
+        }
         public static Random Random
         {
             get
@@ -97,6 +106,8 @@ namespace WhateverEngine
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
             NetworkClass.Instance.Start(); // Network stuff
+            //nwc = new NetworkClass();
+            //nwc.Start();
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
@@ -297,8 +308,18 @@ namespace WhateverEngine
 
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
+            OnNetUpdate();
 
-            
+
+        }
+
+        private static void OnNetUpdate()
+        {
+            netTimer += deltaTime;
+            if (netTimer >= netTime)
+            {
+                sceneMan.SendNetData();
+            }
         }
 
         public static ShaderProgram ShaderProg
@@ -308,7 +329,7 @@ namespace WhateverEngine
                 return program;
             }
         }
-        
+
         public static void LogError(string message)
         {
             errorLog += message + "\n";

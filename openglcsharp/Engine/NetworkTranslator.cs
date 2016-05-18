@@ -52,25 +52,25 @@ namespace WhateverEngine.Engine
                 {
                     case "[position]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Position = v3;
                         Console.WriteLine("I did pos stuff");
                         break;
                     case "[scale]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
                         Console.WriteLine("I did scale stuff");
                         break;
                     case "[rotation]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Pitch(v3.x);
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Yaw(v3.y);
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Roll(v3.z);
