@@ -43,6 +43,15 @@ namespace WhateverEngine.Engine
 
         public static void RecieveData(string data)
         {
+            string[] allMsg = data.Split('&');
+            if (allMsg.Count() > 1)
+            {
+                foreach (string item in allMsg)
+                {
+                    RecieveData(item);
+                }
+                return;
+            }
             string[] splitMsg = data.Split('|');
 
             if (splitMsg.Count() > 0 && splitMsg[0] != "")

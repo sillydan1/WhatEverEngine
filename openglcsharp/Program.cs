@@ -105,14 +105,15 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
-            
+            NetworkClass.Instance.Start();
+
+
             GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
             physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 12, 0)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             //cameraGO.Transform.SetParent(physicsGO.Transform);
@@ -129,22 +130,17 @@ namespace WhateverEngine
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0,0,3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
-
-            //sceneMan.Instantiate(groundPlane);
-            //sceneMan.Instantiate(physicsGO);
+            
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
 
-            //GameObject networkGuy = new GameObject();
-            //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
-
-            //sceneMan.Instantiate(netCube);
-            sceneMan.Instantiate(gun);
-            sceneMan.Instantiate(physicsGO);
+            sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(cameraGO);
-            sceneMan.Instantiate(groundPlane);
+            //sceneMan.Instantiate(gun);
+            //sceneMan.Instantiate(physicsGO);
+            //sceneMan.Instantiate(groundPlane);
             sceneMan.CheckAddList();
             //sceneMan.Start();
         }
@@ -286,7 +282,7 @@ namespace WhateverEngine
                 scene.Simulate(fixedUpdateTime);
                 scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
-
+                OnNetUpdate();
                 if (framCounter >= 30)
                 {
                     GC.Collect();
@@ -311,15 +307,14 @@ namespace WhateverEngine
 
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
-            OnNetUpdate();
 
 
         }
 
         private static void OnNetUpdate()
         {
-            netTimer += deltaTime;
-            if (netTimer >= netTime)
+            //netTimer += deltaTime;
+            //if (netTimer >= netTime)
             {
                 sceneMan.SendNetData();
             }
