@@ -105,7 +105,7 @@ namespace WhateverEngine.Engine
         }
         public void Rotate(Quaternion rotation)
         {
-            if(parent != null)
+            if (parent != null)
             {
                 localOrientation = rotation * localOrientation;
                 Orientation = rotation * orientation;
@@ -164,7 +164,10 @@ namespace WhateverEngine.Engine
             else
             {
                 Position += by;
-                GetOwner.GetPhysics.ChangePosition(position);
+                if (GetOwner.GetPhysics != null)
+                {
+                    GetOwner.GetPhysics.ChangePosition(position);
+                }
             }
         }
         /// <summary>
@@ -182,7 +185,7 @@ namespace WhateverEngine.Engine
             {
                 Position += Orientation * by;
 
-                if(GetOwner.GetPhysics != null)
+                if (GetOwner.GetPhysics != null)
                     GetOwner.GetPhysics.ChangePosition(position);
             }
         }
@@ -193,7 +196,7 @@ namespace WhateverEngine.Engine
         public override void Update()
         {
             base.Update();
-            if(parent != null)
+            if (parent != null)
             {
                 position = (parent.position + (parent.Orientation * localPosition));
                 //orientation = localOrientation * parent.Orientation;

@@ -48,15 +48,6 @@ namespace WhateverEngine.Engine
 
         private void RecieveData()
         {
-            try
-            {
-                myScope = pyngine.UseFile(myScript);
-            }
-            catch (Exception e)
-            {
-                Program.LogError("Loading Pythonscript failed: " + myScript + " CAUSE: \n" + e.Message + "\n");
-            }
-            myScope.Start();
             while (true)
             {
                 if (HasVar<string>("splitMsg"))
@@ -73,6 +64,20 @@ namespace WhateverEngine.Engine
 
         private void Listener()
         {
+            pyngine = Python.CreateRuntime();
+            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
+            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(WhateverEngine.Engine.Input)));
+            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(System.Random)));
+            try
+            {
+                myScope = pyngine.UseFile(myScript);
+            }
+            catch (Exception e)
+            {
+                Program.LogError("Loading Pythonscript failed: " + myScript + " CAUSE: \n" + e.Message + "\n");
+            }
+            myScope.Start();
+
             while (true)
             {
                 RecieveData();
@@ -92,11 +97,6 @@ namespace WhateverEngine.Engine
 
         public void Start()
         {
-            pyngine = Python.CreateRuntime();
-            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
-            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(WhateverEngine.Engine.Input)));
-            pyngine.LoadAssembly(Assembly.GetAssembly(typeof(System.Random)));
-
             listenThread = new Thread(() => Listener());
             listenThread.Start();
         }
