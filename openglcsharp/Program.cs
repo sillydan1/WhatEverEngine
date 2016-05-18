@@ -110,40 +110,34 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-<<<<<<< HEAD
-            //NetworkClass.Instance.Start(); // Network stuff
 
             //-----------------First person controller------------------
 
-            GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero + Vector3.Up * 10));
-            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
-            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
-            physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
-
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 10, 5)));
-=======
-            NetworkClass.Instance.Start(); // Network stuff
-
-            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
-            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            //GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero + Vector3.Up * 10));
+            ////physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
-            physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
+            //physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
->>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
-            cameraGO.AddGameComponent(new CameraComponent());
-            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            NetworkClass.Instance.Start(); // Network stuff
+
+            //GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
+            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            ////physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            //physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
+
+            //GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
+            //cameraGO.AddGameComponent(new CameraComponent());
+            //cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             //cameraGO.Transform.SetParent(physicsGO.Transform);
-
-<<<<<<< HEAD
-            GameObject gun = new GameObject(new Transform(new Vector3(2,10,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
+            
+            //GameObject gun = new GameObject(new Transform(new Vector3(2,10,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             //gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
-=======
-            GameObject gun = new GameObject(new Transform(new Vector3(-0.1724952f, 11.6f, 0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
 
-            gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
->>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
-            gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            //GameObject gun = new GameObject(new Transform(new Vector3(-0.1724952f, 11.6f, 0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
+
+            //gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            //gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
             //-----------------First person controller------------------
 
@@ -160,17 +154,13 @@ namespace WhateverEngine
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
 
-<<<<<<< HEAD
             //GameObject networkGuy = new GameObject();
             //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
-
-            //sceneMan.Instantiate(netCube);
-            sceneMan.Instantiate(gun);
+            
+            //sceneMan.Instantiate(gun);
             //sceneMan.Instantiate(refferenceGo);
-            sceneMan.Instantiate(physicsGO);
-=======
+            //sceneMan.Instantiate(physicsGO);
             sceneMan.Instantiate(netCube);
->>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
             sceneMan.Instantiate(cameraGO);
             //sceneMan.Instantiate(gun);
             //sceneMan.Instantiate(physicsGO);
@@ -347,7 +337,7 @@ namespace WhateverEngine
         {
             //netTimer += deltaTime;
             //if (netTimer >= netTime)
-            {
+            //{
                 sceneMan.SendNetData();
             //}
         }

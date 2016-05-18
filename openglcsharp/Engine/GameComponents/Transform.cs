@@ -15,6 +15,9 @@ namespace WhateverEngine.Engine
         private Transform parent;
         private Vector3 movePrediction;
         private Quaternion rotPrediction;
+        public Vector3 previousPos;
+        public Quaternion previousRot;
+
 
         public Vector3 Position
         {
