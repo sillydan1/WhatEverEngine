@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>FennecFoxLogo.ico</ApplicationIcon>
+    <ApplicationIcon>Dotm-megatron-2_copy.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>WhateverEngine.Program</StartupObject>
@@ -146,6 +146,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dotm-megatron-2_copy.ico" />
     <Content Include="FennecFoxLogo.ico" />
     <Content Include="Lib\abc.py" />
     <Content Include="Lib\aifc.py" />

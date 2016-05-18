@@ -76,6 +76,7 @@ namespace WhateverEngine.Engine
         //Called when the game starts
         public void Start()
         {
+            transform.Start();
             //Start all attached components
             foreach (GameComponent component in myComponents)
             {

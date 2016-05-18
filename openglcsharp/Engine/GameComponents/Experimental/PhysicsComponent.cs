@@ -93,6 +93,11 @@ namespace WhateverEngine.Engine
             rigidActor.GlobalPose = PhysX.Math.Matrix.Translation(v);
             //rigidActor.GlobalPose.set_Rows(3, new PhysX.Math.Vector4(newPos.x, newPos.y, newPos.z, 0.0f));
         }
+        public void ChangeRotation(Quaternion newRot)
+        {
+            PhysX.Math.Quaternion q = new PhysX.Math.Quaternion(newRot.x, newRot.y, newRot.z, newRot.w);
+            rigidActor.GlobalPose = PhysX.Math.Matrix.RotationQuaternion(q);
+        }
         public void AddForce(Vector3 force)
         {
             if(isDynamic)

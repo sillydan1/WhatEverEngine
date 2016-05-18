@@ -69,8 +69,13 @@ namespace WhateverEngine
             Glut.glutKeyboardFunc(OnKeyboardDown);
             Glut.glutKeyboardUpFunc(OnKeyboardUp);
             //Mouse move callbacks
+            Input.Start();
             Glut.glutMouseFunc(OnMouse);
-            Glut.glutMotionFunc(OnMove);
+            //Glut.glutMotionFunc(OnMove);
+            Glut.glutPassiveMotionFunc(OnMove);
+
+            Glut.PassiveMotionCallback moveEvent = new Glut.PassiveMotionCallback(OnMove);
+
 
             Glut.glutReshapeFunc(OnReshape);
 
@@ -97,24 +102,27 @@ namespace WhateverEngine
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
             //NetworkClass.Instance.Start(); // Network stuff
-            
-            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
-            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
-            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+
+            //-----------------First person controller------------------
+
+            GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero + Vector3.Up * 10));
+            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 12, 0)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 10, 5)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             //cameraGO.Transform.SetParent(physicsGO.Transform);
 
-            GameObject gun = new GameObject(new Transform(new Vector3(-0.1724952f, 11.6f, 0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
-            
-            gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            GameObject gun = new GameObject(new Transform(new Vector3(2,10,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
+            //gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
-            //GameObject refferenceGo = new GameObject();
-            //refferenceGo.AddGameComponent(new Renderer(@"data\arrow.obj")); 
+            //-----------------First person controller------------------
+
+            //GameObject refferenceGo = new GameObject(new Transform(cameraGO.Transform.Position + cameraGO.Transform.GetForwardVector() * 3));
+            //refferenceGo.AddGameComponent(new Renderer(@"data\box.obj")); 
 
 
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0,0,3))));
@@ -133,6 +141,7 @@ namespace WhateverEngine
 
             //sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(gun);
+            //sceneMan.Instantiate(refferenceGo);
             sceneMan.Instantiate(physicsGO);
             sceneMan.Instantiate(cameraGO);
             sceneMan.Instantiate(groundPlane);

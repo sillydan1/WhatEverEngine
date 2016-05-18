@@ -7,13 +7,15 @@ namespace WhateverEngine.Engine
 {
     public static class Input
     {
-        static bool mouselbDown, mouserbDown;
+        static bool mouselbDown, mouserbDown, mouseLocked;
         static int prevX;
         static int prevY;
         static int curX;
         static int curY; //Hehe... Curry
         static Dictionary<string, bool> keyboardKeyIsDown = null;
         static Dictionary<string, bool> keyboardKeyIsUp = null;
+        private static int halfWidth;
+        private static int halfHeight;
 
         public static Dictionary<string, bool> GetKeyboardKey
         {
@@ -88,6 +90,15 @@ namespace WhateverEngine.Engine
             }
         }
 
+        public static void LockMouse()
+        {
+            mouseLocked = true;
+        }
+        public static void UnLockMouse()
+        {
+            mouseLocked = true;
+        }
+
         public static void OnMouseButton(int button, int state, int x, int y)
         {
             switch (button)
@@ -98,6 +109,9 @@ namespace WhateverEngine.Engine
                 case Glut.GLUT_RIGHT_BUTTON:
                     mouserbDown = (state == Glut.GLUT_DOWN);
                     break;
+                case Glut.GLUT_MIDDLE_BUTTON:
+                    mouserbDown = (state == Glut.GLUT_DOWN);
+                    break;
                 default:
                     break;
             }
@@ -105,6 +119,20 @@ namespace WhateverEngine.Engine
             curY = y;
             prevX = curX;
             prevY = curY;
+
+            //Glut.glutWarpPointer(Program.GetWidth / 2, Program.GetHeight / 2);
+
+            //if (x < 0) Glut.glutWarpPointer((prevX = Program.GetWidth), y);
+            //else if (x > Program.GetWidth) Glut.glutWarpPointer((int)(prevX = 0), y);
+
+            //if (y < 0) Glut.glutWarpPointer(x, (prevY = Program.GetHeight));
+            //else if (y > Program.GetHeight) Glut.glutWarpPointer(x, (prevY = 0));
+        }
+        public static void Start()
+        {
+            Glut.glutWarpPointer(Program.GetWidth / 2, Program.GetHeight / 2);
+            curX = Program.GetWidth / 2;
+            curY = Program.GetHeight / 2;
         }
         public static void OnMouseMove(int x, int y)
         {
@@ -116,17 +144,36 @@ namespace WhateverEngine.Engine
                 return;
             }
 
-            if (x < 0) Glut.glutWarpPointer((prevX = Program.GetWidth), y);
-            else if (x > Program.GetWidth) Glut.glutWarpPointer((int)(prevX = 0), y);
 
-            if (y < 0) Glut.glutWarpPointer(x, (prevY = Program.GetHeight));
-            else if (y > Program.GetHeight) Glut.glutWarpPointer(x, (prevY = 0));
+            //
+            halfWidth = Program.GetWidth / 2;
+            halfHeight = Program.GetHeight / 2;
+
+            if (x < (Program.GetWidth / 2))
+            {
+                //halfwidth - difference
+                prevX = halfWidth - (x - halfWidth);
+                Glut.glutWarpPointer((Program.GetWidth / 2), y);
+            }
+            else if (x > (Program.GetWidth / 2))
+            {
+                prevX = halfWidth - (x - halfWidth);
+                Glut.glutWarpPointer((Program.GetWidth / 2), y);
+            }
+
+            if (y < (Program.GetHeight / 2))
+            {
+                prevY = halfHeight - (y - halfHeight);
+                Glut.glutWarpPointer(x, ((Program.GetHeight / 2)));
+            }
+            else if (y > (Program.GetHeight / 2))
+            {
+                prevY = halfHeight - (y - halfHeight);
+                Glut.glutWarpPointer(x, ((Program.GetHeight / 2)));
+            }
         }
         public static void OnEndOfFrame()
         {
-            prevX = CurX;
-            prevY = CurY;
-
             if (keyboardKeyIsUp != null)
             {
                 for (byte i = 0; i < byte.MaxValue; i++)
@@ -134,6 +181,17 @@ namespace WhateverEngine.Engine
                     keyboardKeyIsUp[((char)i).ToString()] = false;
                 }
             }
+            prevX = CurX;
+            prevY = CurY;
+            //if (curX == Program.GetWidth / 2 && curY == Program.GetHeight / 2)
+            //{
+            //    return;
+            //}
+
+            //prevX = (Program.GetWidth / 2) - curX;
+            //prevY = (Program.GetHeight / 2) - curY;
+            //Glut.glutWarpPointer(Program.GetWidth / 2, Program.GetHeight / 2);
+            //
         }
         public static void OnKeyboardDown(byte key, int x, int y)
         {
