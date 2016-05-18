@@ -20,6 +20,15 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
+        private static NetworkClass nwc;
+        private static float netTime = 0.1f, netTimer = 0.0f;
+        public static NetworkClass Nwc
+        {
+            get
+            {
+                return nwc;
+            }
+        }
         public static Random Random
         {
             get
@@ -101,6 +110,7 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
+<<<<<<< HEAD
             //NetworkClass.Instance.Start(); // Network stuff
 
             //-----------------First person controller------------------
@@ -111,12 +121,28 @@ namespace WhateverEngine
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 10, 5)));
+=======
+            NetworkClass.Instance.Start(); // Network stuff
+
+            GameObject physicsGO = new GameObject(new Transform(Vector3.Zero + Vector3.Up * 10));
+            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
+
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
+>>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             //cameraGO.Transform.SetParent(physicsGO.Transform);
 
+<<<<<<< HEAD
             GameObject gun = new GameObject(new Transform(new Vector3(2,10,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             //gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+=======
+            GameObject gun = new GameObject(new Transform(new Vector3(-0.1724952f, 11.6f, 0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
+
+            gun.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+>>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
             //-----------------First person controller------------------
@@ -125,17 +151,16 @@ namespace WhateverEngine
             //refferenceGo.AddGameComponent(new Renderer(@"data\box.obj")); 
 
 
-            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0,0,3))));
+            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
-
-            //sceneMan.Instantiate(groundPlane);
-            //sceneMan.Instantiate(physicsGO);
+            
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
 
+<<<<<<< HEAD
             //GameObject networkGuy = new GameObject();
             //networkGuy.AddGameComponent(new PythonComponent(@"Python Scripts\Network.py"));
 
@@ -143,8 +168,13 @@ namespace WhateverEngine
             sceneMan.Instantiate(gun);
             //sceneMan.Instantiate(refferenceGo);
             sceneMan.Instantiate(physicsGO);
+=======
+            sceneMan.Instantiate(netCube);
+>>>>>>> 2589017882fb9d68b2a3118c1b0a3d609a745b33
             sceneMan.Instantiate(cameraGO);
-            sceneMan.Instantiate(groundPlane);
+            //sceneMan.Instantiate(gun);
+            //sceneMan.Instantiate(physicsGO);
+            //sceneMan.Instantiate(groundPlane);
             sceneMan.CheckAddList();
             //sceneMan.Start();
         }
@@ -286,7 +316,7 @@ namespace WhateverEngine
                 scene.Simulate(fixedUpdateTime);
                 scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
-
+                OnNetUpdate();
                 if (framCounter >= 30)
                 {
                     GC.Collect();
@@ -311,8 +341,15 @@ namespace WhateverEngine
 
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
+        }
 
-            
+        private static void OnNetUpdate()
+        {
+            //netTimer += deltaTime;
+            //if (netTimer >= netTime)
+            {
+                sceneMan.SendNetData();
+            //}
         }
 
         public static ShaderProgram ShaderProg
@@ -322,7 +359,7 @@ namespace WhateverEngine
                 return program;
             }
         }
-        
+
         public static void LogError(string message)
         {
             errorLog += message + "\n";

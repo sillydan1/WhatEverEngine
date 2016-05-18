@@ -53,7 +53,7 @@ namespace WhateverEngine.Engine
         }
         public void CheckAddList()
         {
-            if(addList.Count > 0)
+            if (addList.Count > 0)
             {
                 for (int i = 0; i < addList.Count; i++)
                 {
@@ -76,7 +76,7 @@ namespace WhateverEngine.Engine
         {
             foreach (GameObject item in sceneObjects)
             {
-                if(item.GetTag == tag)
+                if (item.GetTag == tag)
                 {
                     return item;
                 }
@@ -106,6 +106,25 @@ namespace WhateverEngine.Engine
                 }
             }
             return null;
+        }
+        public void SendNetData()
+        {
+            foreach (GameObject item in sceneObjects)
+            {
+                // rotation \\
+                if (item.Transform.Orientation != item.Transform.previousRot)
+                {
+                    NetworkClass.Instance.SendData(NetworkTranslator.NetRotation(item, item.Transform.Orientation));
+                    item.Transform.previousRot = item.Transform.Orientation;
+                }
+
+                // position \\
+                if (item.Transform.Position != item.Transform.previousPos)
+                {
+                    NetworkClass.Instance.SendData(NetworkTranslator.NetPosition(item, item.Transform.Position));
+                    item.Transform.previousPos = item.Transform.Position;
+                }
+            }
         }
     }
 }

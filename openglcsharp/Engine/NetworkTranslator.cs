@@ -15,7 +15,8 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.x + "|";
             result += newPos.y + "|";
-            result += newPos.z;
+            result += newPos.z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
@@ -26,54 +27,66 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += newPos.X + "|";
             result += newPos.Y + "|";
-            result += newPos.Z;
+            result += newPos.Z + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
-        public static string NetRotation(GameObject obj, OpenGL.Vector3 newRotation)
+        public static string NetRotation(GameObject obj, OpenGL.Quaternion newRotation)
         {
             string result = "";
             result += "[rotation]|";
             result += obj.id + "|";
             result += newRotation.x + "|";
             result += newRotation.y + "|";
-            result += newRotation.z;
+            result += newRotation.z + "|";
+            result += newRotation.w + "&";
+            result = result.Replace('.', ',');
             return result;
         }
 
         public static void RecieveData(string data)
         {
+            string[] allMsg = data.Split('&');
+            if (allMsg.Count() > 1)
+            {
+                foreach (string item in allMsg)
+                {
+                    RecieveData(item);
+                }
+                return;
+            }
             string[] splitMsg = data.Split('|');
 
             if (splitMsg.Count() > 0 && splitMsg[0] != "")
             {
                 OpenGL.Vector3 v3;
+                OpenGL.Vector4 v4;
                 switch (splitMsg[0])
                 {
                     case "[position]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Position = v3;
                         Console.WriteLine("I did pos stuff");
                         break;
                     case "[scale]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
                         Console.WriteLine("I did scale stuff");
                         break;
                     case "[rotation]":
-                        v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
-                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Pitch(v3.x);
-                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Yaw(v3.y);
-                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Roll(v3.z);
+                        v4 = new OpenGL.Vector4(
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]),
+                            Convert.ToSingle(splitMsg[5]));
+                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation(new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w));
                         Console.WriteLine("I did rotation stuff");
                         break;
                     default:
