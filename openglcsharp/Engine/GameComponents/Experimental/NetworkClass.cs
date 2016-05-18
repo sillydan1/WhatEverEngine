@@ -61,7 +61,7 @@ namespace WhateverEngine.Engine
                 }
             }
         }
-
+        
         private void Listener()
         {
             pyngine = Python.CreateRuntime();
@@ -77,7 +77,7 @@ namespace WhateverEngine.Engine
                 Program.LogError("Loading Pythonscript failed: " + myScript + " CAUSE: \n" + e.Message + "\n");
             }
             myScope.Start();
-
+            
             while (true)
             {
                 RecieveData();

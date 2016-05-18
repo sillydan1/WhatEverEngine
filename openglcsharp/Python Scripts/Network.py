@@ -2,14 +2,14 @@
 from System import Console
 import threading
 import socket               # Import socket module
-    
-class myThread (threading.Thread):
+
+class myThread(threading.Thread):
     def __init__(self, threadID, name):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
     def run(self):
-        print "Starting " + self.name
+        print "Starting " + self.name 
         if self.name == "ListenThread":
             ListenThread()
         else:
@@ -71,14 +71,14 @@ def Client():
     global s
     print "waiting for connection..."
     s = socket.socket()         # Create a socket object
-    host = "192.168.43.163"     # Get local machine name
-    host = "192.168.43.214"     # Get local machine name
+    host = "192.168.43.163"     # Get local machine name //michael's ip
+    host = "192.168.43.214"     # Get local machine name //martin's ip
     port = 12345                # Reserve a port for your service.l
     s.connect((host, port))
 
 def Start():
-    print "network started"
     global e
+    print "network started"
     try:
         if isServer:
             Server()

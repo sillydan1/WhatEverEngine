@@ -20,6 +20,15 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
+        private static NetworkClass nwc;
+        private static float netTime = 0.1f, netTimer = 0.0f;
+        public static NetworkClass Nwc
+        {
+            get
+            {
+                return nwc;
+            }
+        }
         public static Random Random
         {
             get
@@ -302,8 +311,18 @@ namespace WhateverEngine
 
             Glut.glutSwapBuffers();
             Input.OnEndOfFrame();
+            OnNetUpdate();
 
-            
+
+        }
+
+        private static void OnNetUpdate()
+        {
+            netTimer += deltaTime;
+            if (netTimer >= netTime)
+            {
+                sceneMan.SendNetData();
+            }
         }
 
         public static ShaderProgram ShaderProg
@@ -313,7 +332,7 @@ namespace WhateverEngine
                 return program;
             }
         }
-        
+
         public static void LogError(string message)
         {
             errorLog += message + "\n";

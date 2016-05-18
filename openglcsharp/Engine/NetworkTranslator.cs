@@ -54,26 +54,26 @@ namespace WhateverEngine.Engine
                 {
                     case "[position]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Position = v3;
                         Console.WriteLine("I did pos stuff");
                         break;
                     case "[scale]":
                         v3 = new OpenGL.Vector3(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
                         Console.WriteLine("I did scale stuff");
                         break;
                     case "[rotation]":
                         v4 = new OpenGL.Vector4(
-                            Convert.ToInt32(splitMsg[2]),
-                            Convert.ToInt32(splitMsg[3]),
-                            Convert.ToInt32(splitMsg[4]),
-                            Convert.ToInt32(splitMsg[5]));
+                            Convert.ToSingle(splitMsg[2]),
+                            Convert.ToSingle(splitMsg[3]),
+                            Convert.ToSingle(splitMsg[4]),
+                            Convert.ToSingle(splitMsg[5]));
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation(new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w));
                         Console.WriteLine("I did rotation stuff");
                         break;

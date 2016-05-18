@@ -27,7 +27,8 @@ def Update():
     gg = rot
     if Input.GetKeyboardKey['t']:
         trans.Move(trans.GetForwardVector() * 10 * deltaTime)
-        NetworkClass.Instance.SendData(NetworkTranslator.NetPosition(gameObject,Vector3(trans.Position.x,trans.Position.y,trans.Position.z)))
+        #NetworkClass.Instance.SendData(NetworkTranslator.NetPosition(gameObject,Vector3(trans.Position.x,trans.Position.y,trans.Position.z)))
+        NetworkClass.Instance.SendData("[position]|5|0|2|0")
     if Input.GetKeyboardKey['r']:
         trans.Yaw(3*deltaTime)
 
