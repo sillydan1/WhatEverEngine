@@ -22,7 +22,7 @@ class MouseLookClass:
 msLook=MouseLookClass()
 
 def Update():
-    speed = 5.0
+    speed = 10.0
     translation = Vector3(0.0, 0.0, 0.0)    
     global rot
     global deltaTime
@@ -51,6 +51,12 @@ def Update():
 
     #use the MouseLooker class
     lookSpeed = 0.002
+
+    yaw = (Input.PrevX - Input.CurX) * lookSpeed
+    trans.Yaw(yaw)
+
+    pitch = (Input.PrevY - Input.CurY) * lookSpeed
+    trans.Pitch(pitch) 
 
     
 

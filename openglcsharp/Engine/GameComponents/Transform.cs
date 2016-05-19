@@ -14,6 +14,9 @@ namespace WhateverEngine.Engine
         private bool dirty = false;
         private Transform parent;
 
+        public Quaternion previousRot;
+        public Vector3 previousPos;
+
         public Vector3 Position
         {
             get
