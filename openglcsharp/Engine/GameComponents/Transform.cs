@@ -13,6 +13,11 @@ namespace WhateverEngine.Engine
         private Vector3 scale;
         private bool dirty = false;
         private Transform parent;
+        private Vector3 movePrediction;
+        private Quaternion rotPrediction;
+        public Vector3 previousPos;
+        public Quaternion previousRot;
+
 
         public Quaternion previousRot;
         public Vector3 previousPos;
@@ -67,6 +72,30 @@ namespace WhateverEngine.Engine
             get
             {
                 return dirty;
+            }
+        }
+        public Vector3 MovePrediction
+        {
+            get
+            {
+                return movePrediction;
+            }
+
+            set
+            {
+                movePrediction = value;
+            }
+        }
+        public Quaternion RotPrediction
+        {
+            get
+            {
+                return rotPrediction;
+            }
+
+            set
+            {
+                rotPrediction = value;
             }
         }
 
@@ -233,6 +262,14 @@ namespace WhateverEngine.Engine
 
                 position = (parent.position + ((localOrientation / parent.orientation) * localPosition));
                 orientation = parent.Orientation / localOrientation;
+            }
+            if (movePrediction != Vector3.Zero)
+            {
+                Move(movePrediction * Program.DeltaTime);
+            }
+            if (rotPrediction != Quaternion.Zero)
+            {
+                Rotate(rotPrediction * Program.DeltaTime);
             }
         }
     }
