@@ -112,18 +112,18 @@ namespace WhateverEngine.Engine
             foreach (GameObject item in sceneObjects)
             {
                 // rotation \\
-                if (item.Transform.Orientation != item.Transform.previousRot)
-                {
-                    NetworkClass.Instance.SendData(NetworkTranslator.NetRotation(item, item.Transform.Orientation));
-                    item.Transform.previousRot = item.Transform.Orientation;
-                }
+                //if (item.Transform.Orientation != item.Transform.previousRot)
+                //{
+                //    NetworkClass.Instance.SendData(NetworkTranslator.NetRotation(item, item.Transform.Orientation));
+                //    item.Transform.previousRot = item.Transform.Orientation;
+                //}
 
-                // position \\
-                if (item.Transform.Position != item.Transform.previousPos)
-                {
-                    NetworkClass.Instance.SendData(NetworkTranslator.NetPosition(item, item.Transform.Position));
-                    item.Transform.previousPos = item.Transform.Position;
-                }
+                //// position \\
+                //if (item.Transform.Position != item.Transform.previousPos)
+                //{
+                //    NetworkClass.Instance.SendData(NetworkTranslator.NetPosition(item, item.Transform.Position));
+                //    item.Transform.previousPos = item.Transform.Position;
+                //}
             }
         }
     }

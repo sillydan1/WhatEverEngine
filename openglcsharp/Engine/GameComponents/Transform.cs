@@ -119,7 +119,7 @@ namespace WhateverEngine.Engine
             this.Scale = scale;
 
             SetParent(parent);
-            if(parent != null)
+            if (parent != null)
                 this.localOrientation = parent.orientation / rotation;
             else
                 this.localOrientation = rotation;
@@ -127,7 +127,7 @@ namespace WhateverEngine.Engine
 
         public void SetParent(Transform parent)
         {
-            if(this.parent != null)
+            if (this.parent != null)
             {
                 this.parent.RemoveChild(this);
                 this.parent = null;
@@ -141,7 +141,7 @@ namespace WhateverEngine.Engine
         }
         public void RemoveChild(Transform who)
         {
-            if(children.Contains(who))
+            if (children.Contains(who))
             {
                 children.Remove(who);
             }
@@ -250,7 +250,7 @@ namespace WhateverEngine.Engine
         public override void Update()
         {
             base.Update();
-            if(parent != null)
+            if (parent != null)
             {
                 //Vector3 v = new Vector3(
                 //        (parent.orientation * Vector3.Right) * localPosition.x,
@@ -260,14 +260,22 @@ namespace WhateverEngine.Engine
                 position = (parent.position + ((localOrientation / parent.orientation) * localPosition));
                 orientation = parent.Orientation / localOrientation;
             }
-            if (movePrediction != Vector3.Zero)
+            //if (movePrediction == previousPos)
+            //{
+            //    movePrediction = Vector3.Zero;
+            //}
+            //if (rotPrediction == previousRot)
+            //{
+            //    rotPrediction = Quaternion.Zero;
+            //}
+            //if (movePrediction != Vector3.Zero)
             {
-                Move(movePrediction * Program.DeltaTime);
+                Move((movePrediction) * Program.DeltaTime);
             }
-            if (rotPrediction != Quaternion.Zero)
-            {
-                Rotate(rotPrediction * Program.DeltaTime);
-            }
+            //if (rotPrediction != Quaternion.Zero)
+            //{
+            //    Rotate(-(rotPrediction - previousRot) * Program.DeltaTime);
+            //}
         }
     }
 }

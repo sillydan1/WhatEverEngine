@@ -8,6 +8,8 @@ namespace WhateverEngine.Engine
 {
     public class NetworkTranslator
     {
+        //private static OpenGL.Vector3[] packs = new OpenGL.Vector3[byte.MaxValue];
+
         public static string NetPosition(GameObject obj, OpenGL.Vector3 newPos)
         {
             string result = "";
@@ -48,14 +50,14 @@ namespace WhateverEngine.Engine
         public static void RecieveData(string data)
         {
             string[] allMsg = data.Split('&');
-            //if (allMsg.Count() > 2)
-            //{
-            //    foreach (string item in allMsg)
-            //    {
-            //        RecieveData(item);
-            //    }
-            //    return;
-            //}
+            if (allMsg.Count() > 2)
+            {
+                foreach (string item in allMsg)
+                {
+                    RecieveData(item);
+                }
+                return;
+            }
             string[] splitMsg = allMsg[0].Split('|');
 
 
@@ -72,8 +74,10 @@ namespace WhateverEngine.Engine
                             Convert.ToSingle(splitMsg[3]),
                             Convert.ToSingle(splitMsg[4]));
                         g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
-                        g.Transform.Position = v3;
-                        //if (g.Transform.pre == g.Transform.Position)
+                        g.Packs.Add(v3);
+                        //g.Transform.Position = v3;
+
+                        //if (g.Transform.previousPos == g.Transform.Position)
                         //{
                         //    g.Transform.MovePrediction = OpenGL.Vector3.Zero;
                         //}

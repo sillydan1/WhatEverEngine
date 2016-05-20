@@ -10,6 +10,8 @@ namespace WhateverEngine.Engine
         public string name;
         public int id;
         private string tag;
+        public List<OpenGL.Vector3> Packs = new List<OpenGL.Vector3>();
+        float time =1.0f, timer = 0.0f;
 
         public string GetTag
         {
@@ -72,6 +74,19 @@ namespace WhateverEngine.Engine
             {
                 component.Update();
             }
+            if (Packs.Count > 2)
+            {
+                transform.Position = Packs[0];
+                transform.MovePrediction = GetSum();
+                timer += Program.DeltaTime;
+                if (timer >= time)
+                {
+                    Packs.Clear();
+                }
+            }
+            transform.previousPos = transform.Position;
+            transform.previousRot = transform.Orientation;
+
         }
         //Called when the game starts
         public void Start()
@@ -103,7 +118,7 @@ namespace WhateverEngine.Engine
         }
         public void RemoveGameComponent(GameComponent whatComponent)
         {
-            if(myComponents.Contains(whatComponent))
+            if (myComponents.Contains(whatComponent))
             {
                 int indexOfComponent = myComponents.IndexOf(whatComponent);
                 myComponents.RemoveAt(indexOfComponent);
@@ -116,7 +131,7 @@ namespace WhateverEngine.Engine
         {
             foreach (GameComponent item in myComponents)
             {
-                if(item is Renderer)
+                if (item is Renderer)
                 {
                     //Dispose of the render data
                     (item as Renderer).Dispose();
@@ -124,16 +139,35 @@ namespace WhateverEngine.Engine
                 }
             }
         }
-        public T GetGameComponent<T>() where T:GameComponent
+        public T GetGameComponent<T>() where T : GameComponent
         {
             foreach (GameComponent item in myComponents)
             {
-                if(item.GetType() == typeof(T))
+                if (item.GetType() == typeof(T))
                 {
                     return (T)item;
                 }
             }
             return null;
+        }
+
+        private OpenGL.Vector3 GetSum()
+        {
+            float x = 0, y = 0, z = 0;
+
+            x = x * transform.Position.x;
+            y = y * transform.Position.y;
+            z = z * transform.Position.z;
+
+            OpenGL.Vector3 v3 = (Packs[Packs.Count - 1] - Packs[Packs.Count - 2]);
+            v3 *= PhysX.Math.Vector3.Distance(
+                new PhysX.Math.Vector3(transform.Position.x, transform.Position.y, transform.Position.z),
+                new PhysX.Math.Vector3(v3.x, v3.y, v3.z));
+            if (Packs[Packs.Count - 1] == Packs[Packs.Count - 2])
+            {
+                v3 = OpenGL.Vector3.Zero;
+            }
+            return v3;
         }
     }
 }

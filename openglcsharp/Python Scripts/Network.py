@@ -34,9 +34,9 @@ def ListenThread():
     try:
         while True:
             if splitMsg == "":
-                print "Waiting for message"
+                #print "Waiting for message"
                 splitMsg = s.recv(2048)
-                print "Network.py says: " + splitMsg
+                #print "Network.py says: " + splitMsg
     except e:
         print "ListenThread died" + e
 
@@ -70,12 +70,17 @@ def Server():
 
 def Client():
     global s
-    print "waiting for connection..."
-    s = socket.socket()         # Create a socket object
-    host = "192.168.43.163"     # Get local machine name //michael's ip
-    host = "192.168.43.214"     # Get local machine name //martin's ip
-    port = 12345                # Reserve a port for your service.l
-    s.connect((host, port))
+    while True:
+        try:
+            print "waiting for connection..."
+            s = socket.socket()         # Create a socket object
+            host = "192.168.43.163"     # Get local machine name //michael's ip
+            #host = "192.168.43.214"     # Get local machine name //martin's ip
+            port = 12345                # Reserve a port for your service.l
+            s.connect((host, port))
+            break
+        except :
+            pass
 
 def Start():
     global e
@@ -95,4 +100,8 @@ def Start():
 
 def ReturnSplitMsg():
     global splitMsg
-    return splitMsg
+    global e
+    try:
+     return splitMsg
+    except e:
+        print e

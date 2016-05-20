@@ -48,11 +48,21 @@ namespace WhateverEngine.Engine
 
         private void RecieveData()
         {
-            while (true)
+            if (HasVar<string>("splitMsg"))
             {
-                if (HasVar<string>("splitMsg"))
+                string result;
+                while (true)
                 {
-                    string result = myScope.ReturnSplitMsg();
+                    var v = myScope.ReturnSplitMsg();
+                    if (v.GetType() == typeof(string))
+                    {
+                        result = v;
+                    }
+                    else
+                    {
+                        result = v[0];
+                    }
+
                     if (result != "")
                     {
                         NetworkTranslator.RecieveData(result);
@@ -78,11 +88,7 @@ namespace WhateverEngine.Engine
             }
             myScope.Start();
 
-            while (true)
-            {
-                RecieveData();
-
-            }
+            RecieveData();
         }
 
         public void SendData(string data)
