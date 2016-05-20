@@ -10,6 +10,9 @@ namespace WhateverEngine.Engine
         public string name;
         public int id;
         private string tag;
+        public bool NetworkStatic = false;
+        public bool LastPosSent = false;
+        public bool LastRotSent = false;
 
         public string GetTag
         {

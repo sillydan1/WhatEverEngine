@@ -140,3 +140,4 @@ F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.dl
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py

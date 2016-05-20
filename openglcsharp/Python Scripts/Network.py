@@ -22,7 +22,7 @@ global s
 global e
 global isServer
 e = ""
-isServer = False
+isServer = True
 sendMsg = ""
 splitMsg = ""
 s = socket.socket()
@@ -72,7 +72,7 @@ def Client():
     global s
     print "waiting for connection..."
     s = socket.socket()         # Create a socket object
-    host = "192.168.43.163"     # Get local machine name //michael's ip
+    #host = "192.168.43.163"     # Get local machine name //michael's ip
     host = "192.168.43.214"     # Get local machine name //martin's ip
     port = 12345                # Reserve a port for your service.l
     s.connect((host, port))
