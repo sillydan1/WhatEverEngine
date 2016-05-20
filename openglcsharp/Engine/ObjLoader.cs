@@ -236,6 +236,7 @@ namespace WhateverEngine.Engine
         public Vector3 Specular { get; private set; }
         public float SpecularCoefficient { get; private set; }
         public float Transparency { get; private set; }
+        public bool uselighting { get; private set; }
         public IlluminationMode Illumination { get; private set; }
 
         public Texture DiffuseMap { get; private set; }
@@ -260,6 +261,7 @@ namespace WhateverEngine.Engine
         {
             this.Name = "opengl-default-project";
             this.Transparency = 1f;
+            this.uselighting = true;
             this.Ambient = Vector3.UnitScale;
             this.Diffuse = Vector3.UnitScale;
             this.Program = program;
@@ -272,6 +274,7 @@ namespace WhateverEngine.Engine
             this.Name = lines[0].Substring(7);
             this.Transparency = 1f;
 
+            this.uselighting = true;
             for (int i = 1; i < lines.Count; i++)
             {
                 string[] split = lines[i].Split(' ');
@@ -281,7 +284,6 @@ namespace WhateverEngine.Engine
                 {
                     split[0] = split[0].Replace("\t", string.Empty);
                 }
-
                 switch (split[0])
                 {
                     case "Ns": this.SpecularCoefficient = float.Parse(split[1]);
@@ -295,6 +297,8 @@ namespace WhateverEngine.Engine
                     case "d": this.Transparency = float.Parse(split[1]);
                         break;
                     case "illum": this.Illumination = (IlluminationMode)int.Parse(split[1]);
+                        break;
+                    case "whatever_disable_lighting": this.uselighting = false;
                         break;
                     case "map_Kd": if (File.Exists(lines[i].Split(new char[] { ' ' }, 2)[1])) this.DiffuseMap = new Texture(lines[i].Split(new char[] { ' ' }, 2)[1]);
                         break;
@@ -314,10 +318,14 @@ namespace WhateverEngine.Engine
             }
             else this.Program["useTexture"].SetValue(false);
 
+
             this.Program.Use();
 
             this.Program["diffuse"].SetValue(this.Diffuse);
             this.Program["texture"].SetValue(0);
+            //if(!this.uselighting)
+            this.Program["uselighting"].SetValue(this.uselighting);
+
             this.Program["transparency"].SetValue(this.Transparency);
         }
 
@@ -462,6 +470,7 @@ namespace WhateverEngine.Engine
                     }
                 }
 
+
                 triangleList.Add(triangle[0]);
                 triangleList.Add(triangle[1]);
                 triangleList.Add(triangle[2]);
@@ -505,7 +514,7 @@ namespace WhateverEngine.Engine
             if (vertices == null || triangles == null) return;
             if (Material == null) return;
 
-            Gl.Disable(EnableCap.CullFace);
+            Gl.Enable(EnableCap.CullFace);
             if (Material != null) Material.Use();
 
             Gl.BindBufferToShaderAttribute(vertices, Material.Program, "vertexPosition");

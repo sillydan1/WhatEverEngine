@@ -22,7 +22,7 @@ global s
 global e
 global isServer
 e = ""
-isServer = False
+isServer = True
 sendMsg = ""
 splitMsg = ""
 s = socket.socket()

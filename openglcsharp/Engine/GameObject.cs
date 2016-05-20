@@ -10,6 +10,9 @@ namespace WhateverEngine.Engine
         public string name;
         public int id;
         private string tag;
+        public bool NetworkStatic = false;
+        public bool LastPosSent = false;
+        public bool LastRotSent = false;
         public List<OpenGL.Vector3> Packs = new List<OpenGL.Vector3>();
         float time =1.0f, timer = 0.0f;
 
