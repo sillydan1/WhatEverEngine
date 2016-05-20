@@ -48,10 +48,10 @@ def Update():
 
     #if(Input.IsMouseRightButtonDown is True):
             
-    yaw = (Input.PrevX - Input.CurX) * 0.005
-    trans.Yaw(yaw)
+    #yaw = (Input.PrevX - Input.CurX) * 0.005
+    #trans.Yaw(-yaw)
 
-    pitch = (Input.PrevY - Input.CurY) * 0.005
-    trans.Pitch(pitch) 
+    #pitch = (Input.PrevY - Input.CurY) * 0.005
+    #trans.Pitch(pitch) 
 
     trans.MoveRelative(translation)

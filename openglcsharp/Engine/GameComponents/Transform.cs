@@ -18,7 +18,6 @@ namespace WhateverEngine.Engine
         public Vector3 previousPos;
         public Quaternion previousRot;
 
-
         public Vector3 Position
         {
             get
