@@ -112,22 +112,28 @@ namespace WhateverEngine
             sceneMan = new SceneManager();
             //NetworkClass.Instance.Start(); // Network stuff
 
-            
+
+            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
+            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
 
             //-----------------First person controller------------------
 
-            GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero));
-            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
-            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 3, 0)));
+           // physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.9f)));
+            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
+
+            GameObject camDummy = new GameObject(new Transform(new Vector3(0, 2, 0),Quaternion.Identity, new Vector3(0.3f, 0.3f, 0.3f), physicsGO.Transform));
+            camDummy.AddGameComponent(new Renderer(@"data\arrow.obj"));
+            camDummy.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
-            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
-            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
 
+            //Guns.
             GameObject gun = new GameObject(new Transform(new Vector3(1,0,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
@@ -156,6 +162,7 @@ namespace WhateverEngine
             //sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(cameraGO);
+            sceneMan.Instantiate(camDummy);
             sceneMan.CheckAddList();
         }
 

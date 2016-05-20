@@ -12,14 +12,7 @@ trans=Transform()
 rot=Vector3()
 deltaTime=0.0
 
-#class specificly for handling the mouse look controls
-class MouseLookClass:
-    def MouseLook(self):
-        global trans
-        
-
-# script specific vars
-msLook=MouseLookClass()
+tgglmvmnt = True
 
 def Update():
     speed = 10.0
@@ -27,13 +20,10 @@ def Update():
     global rot
     global deltaTime
     global trans    
+    global tgglmvmnt
 
-    if(Input.GetKeyboardKeyUp['p'] is True):
-        go = GameObject(Transform(Vector3(0,10,1))) 
-        go.AddGameComponent(Renderer("data\\sphere.obj")) # kan give exception hvis forkert syntaks og/eller filen ikke findes.
-        go.AddGameComponent(PhysicsComponent())
-        EngineFunctions.Instantiate(go)
-    
+    lookSpeed = 0.002
+
     if (Input.GetKeyboardKey['w'] is True):
         translation -= Vector3(0.0, 0.0, speed * deltaTime)
     if(Input.GetKeyboardKey['s'] is True):
@@ -47,22 +37,14 @@ def Update():
     if(Input.GetKeyboardKey['d'] is True):
         translation += Vector3(speed * deltaTime, 0.0, 0.0)
 
-    trans.MoveRelative(translation)
-
-    #use the MouseLooker class
-    lookSpeed = 0.002
-
-    yaw = (Input.PrevX - Input.CurX) * lookSpeed
-    trans.Yaw(yaw)
-
-    pitch = (Input.PrevY - Input.CurY) * lookSpeed
-    trans.Pitch(pitch) 
-
+    if(Input.GetKeyboardKeyUp[' '] is True):
+        tgglmvmnt = not tgglmvmnt
     
+    if(tgglmvmnt):    
+        trans.MoveRelative(translation);
 
-    #if(Input.IsMouseRightButtonDown is True):
-    #yaw = (Input.PrevX - Input.CurX) * lookSpeed
-    #trans.Yaw(yaw)
-        
-    #pitch = (Input.PrevY - Input.CurY) * lookSpeed
-    #trans.Pitch(pitch) 
+        yaw = (Input.PrevX - Input.CurX) * lookSpeed
+        trans.YawFPS(yaw)
+
+        pitch = (Input.PrevY - Input.CurY) * lookSpeed
+        trans.Pitch(pitch) 
