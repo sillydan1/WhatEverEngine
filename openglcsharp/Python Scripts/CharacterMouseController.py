@@ -15,24 +15,25 @@ deltaTime=0.0 # Delta time. This is very useful for smooth interpolation stuff
 
 physcomp = PhysicsComponent()
 
-def Start():
-    global physcomp
-    pc = trans.GetOwner
-    physcomp = pc.GetPhysics
-    print(physcomp)
-
 # Update gets called once per frame.
 def Update():
     global deltaTime
     global trans
     global physcomp
-    speed = 10.0
+    speed = 1.0
    
     pitch = 0.0
+    yaw = 0.0
     if(Input.GetKeyboardKey['i'] is True):
-        pitch = (speed) * 0.002
+        pitch = (speed * deltaTime)
     if(Input.GetKeyboardKey['k'] is True):
-        pitch = (-speed) * 0.002
+        pitch = (-speed) * deltaTime
+
+    if(Input.GetKeyboardKey['o'] is True):
+        yaw = (speed) * deltaTime
+    if(Input.GetKeyboardKey['p'] is True):
+        yaw = -speed * deltaTime
 
     trans.Pitch(pitch) 
+    trans.YawFPS(yaw) 
 

@@ -113,13 +113,13 @@ namespace WhateverEngine
             //NetworkClass.Instance.Start(); // Network stuff
 
 
-            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
-            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
+            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -50, Quaternion.Identity, new Vector3(200, 200, 200)));
+            skybox.AddGameComponent(new Renderer(@"data\skydome.obj"));
 
             //-----------------First person controller------------------
 
             GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 3, 0)));
-           // physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.9f)));
+            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.9f)));
             //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
@@ -136,9 +136,11 @@ namespace WhateverEngine
             //Guns.
             GameObject gun = new GameObject(new Transform(new Vector3(1,0,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
             GameObject gun2 = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun2.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            gun2.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
             //-----------------First person controller------------------
 

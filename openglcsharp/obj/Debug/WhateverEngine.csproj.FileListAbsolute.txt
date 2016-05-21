@@ -31,7 +31,6 @@ F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.exe
 F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.pdb
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
-F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
@@ -149,3 +148,4 @@ D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py

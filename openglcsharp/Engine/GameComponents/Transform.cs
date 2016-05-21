@@ -30,7 +30,7 @@ namespace WhateverEngine.Engine
             {
                 position = value;
                 dirty = true;
-                
+                UpdateChildren();
             }
         }
         public Vector3 LocalPosition
@@ -42,7 +42,7 @@ namespace WhateverEngine.Engine
             set
             {
                 localPosition = value;
-                
+                CalculateLocalPosition();
             }
         }
         public Vector3 Scale
@@ -99,6 +99,20 @@ namespace WhateverEngine.Engine
                 rotPrediction = value;
             }
         }
+        public int ChildCount
+        {
+            get
+            {
+                return children.Count;
+            }
+        }
+        public List<Transform> GetChildren
+        {
+            get
+            {
+                return children;
+            }
+        }
 
         public Transform()
         {
@@ -133,18 +147,18 @@ namespace WhateverEngine.Engine
         }
         private void LocalConstructorMethod(Vector3 localPos, Quaternion rotation, Vector3 scale, Transform parent)
         {
-            Vector3 pos = parent.position + localPos;
+            Vector3 pos = parent.Position + localPos;
             ConstructorMethod(pos, rotation, scale, parent);
         }
         private void ConstructorMethod(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent)
         {
             this.Position = position;
-            this.orientation = rotation;
+            this.Orientation = rotation;
             this.Scale = scale;
 
             SetParent(parent);
             if(parent != null)
-                this.localOrientation = parent.orientation / rotation;
+                this.localOrientation = parent.Orientation / rotation;
             else
                 this.localOrientation = rotation;
         }
@@ -238,7 +252,7 @@ namespace WhateverEngine.Engine
         {
             Quaternion q;
             if (parent != null)
-                q = localOrientation + parent.orientation;
+                q = localOrientation + parent.Orientation;
             else
                 q = localOrientation;
 
@@ -296,8 +310,18 @@ namespace WhateverEngine.Engine
         {
             if (parent != null)
             {
-                position = (parent.position + ((parent.orientation) * localPosition));
-                orientation = parent.Orientation / localOrientation;
+                Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                Orientation = (localOrientation * parent.Orientation);
+            }
+        }
+        public void UpdateChildren()
+        {
+            if (children.Count > 0)
+            {
+                foreach (Transform child in children)
+                {
+                    child.CalculateLocalPosition();
+                }
             }
         }
         public void CalculateLocalRotaion()
@@ -311,13 +335,7 @@ namespace WhateverEngine.Engine
         public override void Update()
         {
             base.Update();
-            if (children.Count > 0)
-            {
-                foreach (Transform child in children)
-                {
-                    child.CalculateLocalPosition();
-                }
-            }
+            UpdateChildren();
             if (movePrediction != Vector3.Zero)
             {
                 Move(movePrediction * Program.DeltaTime);
