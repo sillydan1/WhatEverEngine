@@ -148,6 +148,7 @@ namespace WhateverEngine.Engine
         private void LocalConstructorMethod(Vector3 localPos, Quaternion rotation, Vector3 scale, Transform parent)
         {
             Vector3 pos = parent.Position + localPos;
+            this.LocalPosition = localPos;
             ConstructorMethod(pos, rotation, scale, parent);
         }
         private void ConstructorMethod(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent)
