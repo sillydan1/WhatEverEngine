@@ -124,7 +124,7 @@ namespace WhateverEngine
             physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject camDummy = new GameObject(new Transform(new Vector3(0, 2, 0),Quaternion.Identity, new Vector3(0.3f, 0.3f, 0.3f), physicsGO.Transform));
+            GameObject camDummy = new GameObject(new Transform(new Vector3(0, 2, 0), Quaternion.Identity, new Vector3(0.3f, 0.3f, 0.3f), physicsGO.Transform));
             camDummy.AddGameComponent(new Renderer(@"data\arrow.obj"));
             camDummy.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
@@ -134,7 +134,7 @@ namespace WhateverEngine
 
 
             //Guns.
-            GameObject gun = new GameObject(new Transform(new Vector3(0,0,1), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
+            GameObject gun = new GameObject(new Transform(new Vector3(1,0,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
             gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
@@ -144,13 +144,9 @@ namespace WhateverEngine
 
             //-----------------First person controller------------------
 
-            GameObject refferenceGo = new GameObject(new Transform(cameraGO.Transform.Position + cameraGO.Transform.GetForwardVector() * 11));
-            refferenceGo.AddGameComponent(new Renderer(@"data\box.obj")); 
-
-
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
-            //groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
+            groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
             
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             //netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));

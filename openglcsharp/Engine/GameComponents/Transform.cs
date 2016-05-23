@@ -25,12 +25,14 @@ namespace WhateverEngine.Engine
             {
                 return position;
             }
-
             set
             {
-                position = value;
-                dirty = true;
-                UpdateChildren();
+                if (value != Position)
+                {
+                    position = value;
+                    dirty = true;
+                    UpdateChildren();
+                }
             }
         }
         public Vector3 LocalPosition
@@ -41,8 +43,12 @@ namespace WhateverEngine.Engine
             }
             set
             {
-                localPosition = value;
-                CalculateLocalPosition();
+                if (value != LocalPosition)
+                {
+                    localPosition = value;
+                    dirty = true;
+                    CalculateLocalPosition();
+                }
             }
         }
         public Vector3 Scale
@@ -60,12 +66,27 @@ namespace WhateverEngine.Engine
         }
         public Quaternion Orientation
         {
-            get { return orientation; }
+            get
+            {
+                return orientation;
+            }
             set
             {
                 orientation = value;
                 dirty = true;
                 
+            }
+        }
+        public Quaternion LocalOrientation
+        {
+            get
+            {
+                return localOrientation;
+            }
+            set
+            {
+                localOrientation = value;
+                dirty = true;
             }
         }
         public bool IsDirty
@@ -311,8 +332,16 @@ namespace WhateverEngine.Engine
         {
             if (parent != null)
             {
-                Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
-                Orientation = (localOrientation * parent.Orientation);
+                if(parent.GetOwner.GetCamera != null)
+                {
+                    Position = (parent.Position + ((parent.Orientation) * localPosition));
+                    Orientation = (localOrientation / parent.Orientation);
+                }
+                else
+                {
+                    Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                    Orientation = (localOrientation * parent.Orientation);
+                }
             }
         }
         public void UpdateChildren()

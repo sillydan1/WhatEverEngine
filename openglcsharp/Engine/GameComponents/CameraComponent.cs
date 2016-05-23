@@ -14,7 +14,7 @@ namespace WhateverEngine.Engine
             {
                 if(owner.Transform.IsDirty)
                 {
-                    viewMatrix = Matrix4.CreateTranslation(owner.Transform.Position) * owner.Transform.Orientation.Matrix4;
+                    viewMatrix = Matrix4.CreateTranslation(-owner.Transform.Position) * owner.Transform.Orientation.Matrix4;
                     owner.Transform.SetNotDirty();
                 }
                 return viewMatrix;
