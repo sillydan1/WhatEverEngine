@@ -2,7 +2,6 @@
 from System import Console
 import threading
 import socket               # Import socket module
-
 class myThread(threading.Thread):
     def __init__(self, threadID, name):
         threading.Thread.__init__(self)
@@ -28,15 +27,15 @@ splitMsg = ""
 s = socket.socket()
 
 def ListenThread():
-    global s
+    global c
     global splitMsg
     global e
     try:
         while True:
             if splitMsg == "":
-                #print "Waiting for message"
-                splitMsg = s.recv(2048)
-                #print "Network.py says: " + splitMsg
+                print "Waiting for message"
+                splitMsg = c.recv(2048)
+                print "Network.py says: " + splitMsg
     except e:
         print "ListenThread died" + e
 
@@ -74,8 +73,8 @@ def Client():
         try:
             print "waiting for connection..."
             s = socket.socket()         # Create a socket object
-            host = "192.168.43.163"     # Get local machine name //michael's ip
-            #host = "192.168.43.214"     # Get local machine name //martin's ip
+            #host = "192.168.43.163" # Get local machine name //michael's ip
+            host = "192.168.43.214"     # Get local machine name //martin's ip
             port = 12345                # Reserve a port for your service.l
             s.connect((host, port))
             break
@@ -90,9 +89,9 @@ def Start():
             Server()
         else:
             Client()
-            thread1 = myThread(1, "ListenThread")
-            thread1.start()
         print "connection found"
+        thread1 = myThread(1, "ListenThread")
+        thread1.start()
         thread2 = myThread(2, "WritingThread")
         thread2.start()
     except e:
