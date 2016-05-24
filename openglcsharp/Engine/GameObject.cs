@@ -87,8 +87,8 @@ namespace WhateverEngine.Engine
                     Packs.Clear();
                 }
             }
-            transform.previousPos = transform.Position;
-            transform.previousRot = transform.Orientation;
+            //transform.previousPos = transform.Position;
+            //transform.previousRot = transform.Orientation;
 
         }
         //Called when the game starts

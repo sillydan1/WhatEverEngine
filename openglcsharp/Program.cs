@@ -112,20 +112,22 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            //NetworkClass.Instance.Start(); // Network stuff
-
-            
-
+            NetworkClass.Instance.Start(false); // Network stuff
             //-----------------First person controller------------------
 
             GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero));
-            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
-            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
+            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
+            //physicsGO.id = 5;
+            //physicsGO.NetworkStatic = true;
 
-            //GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            cameraGO.id = 1;
+            cameraGO.NetworkStatic = true;
 
             GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
             skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
@@ -147,16 +149,22 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
-            //netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
             netCube.id = 5;
             netCube.NetworkStatic = true;
+
+            GameObject netCube2 = new GameObject(new Transform(Vector3.Zero));
+            netCube2.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
+            netCube2.AddGameComponent(new Renderer(@"data\box.obj"));
+            netCube2.id = 6;
+            netCube2.NetworkStatic = true;
 
             sceneMan.Instantiate(gun);
             sceneMan.Instantiate(gun2);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(physicsGO);
-            //sceneMan.Instantiate(netCube);
+            sceneMan.Instantiate(netCube);
+            sceneMan.Instantiate(netCube2);
             sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(cameraGO);
             sceneMan.CheckAddList();
