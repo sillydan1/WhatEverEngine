@@ -69,24 +69,16 @@ namespace WhateverEngine.Engine
                 switch (splitMsg[0])
                 {
                     case "[position]":
+                        if (splitMsg.Count() != 5) return;
                         v3 = new OpenGL.Vector3(
                             Convert.ToSingle(splitMsg[2]),
                             Convert.ToSingle(splitMsg[3]),
                             Convert.ToSingle(splitMsg[4]));
                         g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
                         g.Packs.Add(v3);
-                        //g.Transform.Position = v3;
-
-                        //if (g.Transform.previousPos == g.Transform.Position)
-                        //{
-                        //    g.Transform.MovePrediction = OpenGL.Vector3.Zero;
-                        //}
-                        //else
-                        //{
-                        //    g.Transform.MovePrediction = v3;
-                        //}
                         break;
                     case "[scale]":
+                        if (splitMsg.Count() != 5) return;
                         v3 = new OpenGL.Vector3(
                             Convert.ToSingle(splitMsg[2]),
                             Convert.ToSingle(splitMsg[3]),
@@ -94,21 +86,24 @@ namespace WhateverEngine.Engine
                         EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.Scale = v3;
                         break;
                     case "[rotation]":
-                        v4 = new OpenGL.Vector4(
-                            Convert.ToSingle(splitMsg[2]),
-                            Convert.ToSingle(splitMsg[3]),
-                            Convert.ToSingle(splitMsg[4]),
-                            Convert.ToSingle(splitMsg[5]));
-                        EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation(new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w));
-                        g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
-                        g.Transform.Orientation = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
-                        if (g.Transform.RotPrediction == OpenGL.Quaternion.Zero)
+                        if (splitMsg.Count() == 6)
                         {
-                            g.Transform.RotPrediction = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
-                        }
-                        else
-                        {
-                            g.Transform.RotPrediction = OpenGL.Quaternion.Zero;
+                            v4 = new OpenGL.Vector4(
+                                Convert.ToSingle(splitMsg[2]),
+                                Convert.ToSingle(splitMsg[3]),
+                                Convert.ToSingle(splitMsg[4]),
+                                Convert.ToSingle(splitMsg[5]));
+                            EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1])).Transform.SetRotation(new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w));
+                            g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
+                            g.Transform.Orientation = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
+                            if (g.Transform.RotPrediction == OpenGL.Quaternion.Zero)
+                            {
+                                g.Transform.RotPrediction = new OpenGL.Quaternion(v4.x, v4.y, v4.z, v4.w);
+                            }
+                            else
+                            {
+                                g.Transform.RotPrediction = OpenGL.Quaternion.Zero;
+                            }
                         }
                         break;
                     default:

@@ -72,7 +72,7 @@ namespace WhateverEngine.Engine
             }
         }
 
-        private void Listener()
+        private void Listener(bool isServer)
         {
             pyngine = Python.CreateRuntime();
             pyngine.LoadAssembly(Assembly.GetAssembly(typeof(OpenGL.Vector3)));
@@ -86,7 +86,7 @@ namespace WhateverEngine.Engine
             {
                 Program.LogError("Loading Pythonscript failed: " + myScript + " CAUSE: \n" + e.Message + "\n");
             }
-            myScope.Start();
+            myScope.Start(isServer);
 
             RecieveData();
         }
@@ -105,9 +105,9 @@ namespace WhateverEngine.Engine
             }
         }
 
-        public void Start()
+        public void Start(bool isServer)
         {
-            listenThread = new Thread(() => Listener());
+            listenThread = new Thread(() => Listener(isServer));
             listenThread.Start();
         }
     }

@@ -21,7 +21,7 @@ global s
 global e
 global isServer
 e = ""
-isServer = True
+isServer = False
 sendMsg = ""
 splitMsg = ""
 s = socket.socket()
@@ -81,8 +81,10 @@ def Client():
         except :
             pass
 
-def Start():
+def Start(isServerBool):
     global e
+    global isServer
+    isServer = isServerBool
     print "network started"
     try:
         if isServer:

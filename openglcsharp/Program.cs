@@ -112,20 +112,16 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            NetworkClass.Instance.Start(); // Network stuff
-
-            
-
+            NetworkClass.Instance.Start(false); // Network stuff
             //-----------------First person controller------------------
 
-            GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Up * 10));
-            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.9f)));
-            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero));
+            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
+            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
             //physicsGO.NetworkStatic = true;
             //physicsGO.id = 5;
-
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
             cameraGO.AddGameComponent(new CameraComponent());
