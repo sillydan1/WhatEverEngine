@@ -339,8 +339,16 @@ namespace WhateverEngine.Engine
                 }
                 else
                 {
-                    Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
-                    Orientation = (localOrientation * parent.Orientation);
+                    if (GetOwner.GetCamera != null)
+                    {
+                        Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                        Orientation = (localOrientation * parent.Orientation);
+                    }
+                    else
+                    {
+                        Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                        Orientation = (localOrientation * parent.Orientation);
+                    }
                 }
             }
         }

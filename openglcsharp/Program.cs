@@ -128,7 +128,7 @@ namespace WhateverEngine
             camDummy.AddGameComponent(new Renderer(@"data\arrow.obj"));
             camDummy.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 0), physicsGO.Transform));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
