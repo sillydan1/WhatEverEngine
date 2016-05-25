@@ -114,37 +114,30 @@ namespace WhateverEngine
 
 
             GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -50, Quaternion.Identity, new Vector3(200, 200, 200)));
-            skybox.AddGameComponent(new Renderer(@"data\skydome.obj"));
+            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
 
             //-----------------First person controller------------------
 
-            GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 3, 0)));
-            //physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.9f)));
-            //physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\charactercontroller.py"));
+            GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 12, 0)));
             physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
-            physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject camDummy = new GameObject(new Transform(new Vector3(0, 2, 0), Quaternion.Identity, new Vector3(0.3f, 0.3f, 0.3f), physicsGO.Transform));
-            camDummy.AddGameComponent(new Renderer(@"data\arrow.obj"));
-            camDummy.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
+            GameObject ball = new GameObject(new Transform(new Vector3(0, 12, 6)));
+            ball.AddGameComponent(new PhysicsComponent());
+            ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 0), physicsGO.Transform));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 1, 0), physicsGO.Transform));
             cameraGO.AddGameComponent(new CameraComponent());
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
 
             //Guns.
-            GameObject gun = new GameObject(new Transform(new Vector3(1,0,0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
+            GameObject gun = new GameObject(new Transform(new Vector3(0.5f,-0.4f,-0.8f), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
             gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
-            GameObject gun2 = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
-            gun2.AddGameComponent(new Renderer(@"data\rifle.obj"));
-            gun2.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
-
             //-----------------First person controller------------------
 
-            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
+            GameObject groundPlane = new GameObject(new Transform(Vector3.Down * 5.0f, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
             
@@ -154,13 +147,12 @@ namespace WhateverEngine
             netCube.id = 5;
 
             sceneMan.Instantiate(gun);
-            sceneMan.Instantiate(gun2);
+            sceneMan.Instantiate(ball);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(physicsGO);
             //sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(cameraGO);
-            sceneMan.Instantiate(camDummy);
             sceneMan.CheckAddList();
         }
 
