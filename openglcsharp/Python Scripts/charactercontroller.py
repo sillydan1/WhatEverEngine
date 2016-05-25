@@ -13,25 +13,68 @@ trans=Transform() # This is the attached Transform component. You can access all
 #rot=Vector3() # The raw rotation of the object (as angle axis')
 deltaTime=0.0 # Delta time. This is very useful for smooth interpolation stuff
 
-physcomp = PhysicsComponent()
+height = 2.0
+heightOffset = 0.0
+grav = 0.0
+gravityAccelleration = -0.381
+velocity = Vector3(0.0, 0.0, 0.0)
+grounded = False
+moveSpeed = 10.0
+jumpForce = 10
+lookSpeed = 0.002
 
 # Update gets called once per frame.
 def Update():
     global deltaTime
     global trans
-    global physcomp
-    speed = 1.0
-    jumpForce = 50
-    
-    #if (Input.GetKeyboardKeyUp[' '] is True):
-    #    physcomp.AddForce(Vector3(0,1,0) * jumpForce, 1, True)
-    
+
+    ApplyMouseRotation()
+    ApplyGravityAndGrounded()
+    ApplyInput()
+
+    trans.Move(velocity * deltaTime)
+
+def ApplyInput():
+    global velocity
+    global moveSpeed
+    global jumpForce
+    global grounded
+    translation = Vector3(0,0,0)
+
+    if (Input.GetKeyboardKey['w'] is True):
+        translation -= Vector3(0.0, 0.0, moveSpeed)
+    if(Input.GetKeyboardKey['s'] is True):
+        translation += Vector3(0.0, 0.0, moveSpeed)
+
+    if(Input.GetKeyboardKey['a'] is True):
+        translation -= Vector3(moveSpeed, 0.0, 0.0)
+    if(Input.GetKeyboardKey['d'] is True):
+        translation += Vector3(moveSpeed, 0.0, 0.0)  
+
+    if(translation != Vector3.Zero):
+        trans.MoveRelative(translation * deltaTime)
+
+    if (Input.GetKeyboardKey[' '] is True & grounded is True):
+        velocity += Vector3(0.0, jumpForce, 0.0)
+        grounded = False
+        
+def ApplyMouseRotation():
+    global lookSpeed
     yaw = 0.0
-    #if(Input.IsMouseRightButtonDown is True):
-    if(Input.GetKeyboardKey['l'] is True):
-        yaw = (-speed) * deltaTime
-    if(Input.GetKeyboardKey['j'] is True):
-        yaw = (speed) * deltaTime
+    yaw = (Input.PrevX - Input.CurX) * lookSpeed
+    trans.YawFPS(-yaw)
 
-    trans.Yaw(yaw)
+def ApplyGravityAndGrounded():
+    global velocity
+    global trans    
+    global grounded
 
+    if(trans.Position.y <= 0):
+        grounded = True
+        velocity = Vector3(0.0, 0.0, 0.0)
+        if(trans.Position.y < 0):
+            trans.Position = Vector3(trans.Position.x, 0.0, trans.Position.z)
+    
+    if(grounded is False):
+        velocity += Vector3(0.0, gravityAccelleration, 0.0)
+    

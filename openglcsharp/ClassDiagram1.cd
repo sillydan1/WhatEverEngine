@@ -1,67 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Deprecated">
-    <Position X="14.085" Y="5.698" Height="0.457" Width="1.261" />
-  </Comment>
-  <Class Name="WhateverEngine.Engine.CameraComponent" Collapsed="true">
-    <Position X="0.5" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAgAAACAAAAAAAAAAAgAAIAIAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Engine\CameraComponent.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WhateverEngine.Engine.EngineFunctions" Collapsed="true">
-    <Position X="12.5" Y="1.25" Width="1.5" />
+    <Position X="9" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAABAAAAAAAAAQAAAAAAABAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Engine\EngineFunctions.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="WhateverEngine.Engine.CameraComponent" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAACAAAAAAAAAAAgAAIAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\GameComponents\CameraComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.NetworkClass" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKAAAAAAAAAQAAAwEABAAAKASAAAAAEAAAA=</HashCode>
+      <FileName>Engine\GameComponents\Experimental\NetworkClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.PhysicsComponent" Collapsed="true">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAiAAAAAAAAAAAAAAAAAAAAAAIZAAAABgAAE=</HashCode>
+      <FileName>Engine\GameComponents\Experimental\PhysicsComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="WhateverEngine.Engine.GameComponent">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="4" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAKAggAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Engine\GameComponent.cs</FileName>
+      <FileName>Engine\GameComponents\GameComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.MeshFilter" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAQAAAA=</HashCode>
+      <FileName>Engine\GameComponents\MeshFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.PythonComponent" Collapsed="true">
+    <Position X="1.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABCAAAAAAAgAQQIAgEAAAACAAAAAAAAEAAAI=</HashCode>
+      <FileName>Engine\GameComponents\PythonComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.Renderer" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\GameComponents\Renderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WhateverEngine.Engine.Transform" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIYBAAQCAaEIEgVhACcAYAEDGAIAwAgABUBBAASAAAA=</HashCode>
+      <FileName>Engine\GameComponents\Transform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Engine.GameObject" BaseTypeListCollapsed="true">
-    <Position X="7.75" Y="3.75" Width="1.5" />
+    <Position X="9" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgQAAABAACAIAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IgRAACBAACAIAAAAAAAAIAQAABAEAIAAAAAAAAAAAgA=</HashCode>
       <FileName>Engine\GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="WhateverEngine.Engine.Input">
-    <Position X="10.75" Y="1.25" Width="1.5" />
+  <Class Name="WhateverEngine.Engine.Input" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACGAAhAgQAAQAAAAAAAAAQCAlCAAAAAAAgAAIACBoA=</HashCode>
+      <HashCode>IACGAAhAgSAAQAAAAAAAAIQCAlCACAAAAAgEAIAiBoA=</HashCode>
       <FileName>Engine\Input.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WhateverEngine.Engine.MeshFilter">
-    <Position X="6" Y="3.75" Width="1.5" />
+  <Class Name="WhateverEngine.Engine.NetworkTranslator" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAgAAAAAAAAAAAEAAAAAAAQAAAA=</HashCode>
-      <FileName>Engine\MeshFilter.cs</FileName>
+      <HashCode>AAAAAEEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\NetworkTranslator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Engine.ObjImporter" Collapsed="true">
-    <Position X="14.25" Y="2" Width="1.5" />
+    <Position X="17.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Engine\ObjImporter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Engine.ObjCacher" Collapsed="true">
-    <Position X="14.25" Y="2.75" Width="1.5" />
+    <Position X="15.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAgBAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAgBAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Engine.ObjLoader" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="13.5" Y="6.25" Width="1.5" />
+    <Position X="10.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAACAAAgAAAAAAAIAAAQAAAAEAAEAAACBAAAA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
@@ -69,58 +108,37 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WhateverEngine.Engine.ObjMaterial" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14.25" Y="3.5" Width="1.5" />
+    <Position X="13.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAQAAACAAAAAAAgAAAAQAAACEAAACAAABAEAAQAA=</HashCode>
+      <HashCode>AEAAAQAAACAAAEAAAgAAAAQAAACEAAACAAABAEAAQAA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WhateverEngine.Engine.ObjObject" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14.25" Y="1.25" Width="1.5" />
+    <Position X="15.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAIAACAAAhAAAAAAAQUAAAAQAAAAAAAAAAAAIgA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="WhateverEngine.Engine.PythonComponent">
-    <Position X="1.25" Y="2" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAABCAAAAAAAgAQQAAgEAAAACAAAAAAAAEAAAI=</HashCode>
-      <FileName>Engine\PythonComponent.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WhateverEngine.Engine.Renderer" Collapsed="true">
-    <Position X="6.75" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAUAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Engine\Renderer.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WhateverEngine.Engine.SceneManager">
-    <Position X="4.25" Y="3.75" Width="1.5" />
+    <Position X="12.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQIAAAAQCAAAAgAAARAAAgAAABAAAAAAAAAEAAAAAA=</HashCode>
+      <HashCode>AARIAAAARCAAAggAAARAAAgAAABAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Engine\SceneManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WhateverEngine.Engine.Transform" Collapsed="true">
-    <Position X="8.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQBAAQAAaAIAAEgACIAYAACGAAAQAAAAABBAAAAAAA=</HashCode>
-      <FileName>Engine\Transform.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="WhateverEngine.Program" Collapsed="true">
-    <Position X="12.5" Y="2" Width="1.5" />
+    <Position X="17.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAUAEAAACQEAAARFQAQAAARBYABABDAAAAIABEAEAAE=</HashCode>
+      <HashCode>gAVIkgAADQEAAgRFQAQAAMRBYIJgBDAAIEYAFEAEAIE=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Properties.Settings" Collapsed="true">
-    <Position X="14.25" Y="4.25" Width="1.5" />
+    <Position X="18.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
