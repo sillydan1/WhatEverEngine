@@ -29,14 +29,16 @@ s = socket.socket()
 
 def ListenThread():
     global s
-    global splitMsg
+    global c
     global e
+    global splitMsg
     try:
         while True:
             if splitMsg == "":
-                #print "Waiting for message"
-                splitMsg = s.recv(2048)
-                #print "Network.py says: " + splitMsg
+                if isServer:
+                    splitMsg = c.recv(8192)
+                else:
+                    splitMsg = s.recv(8192)
     except e:
         print "ListenThread died" + e
 
@@ -48,7 +50,6 @@ def WritingThread():
     try:
         while True:
             if sendMsg != "":
-                print sendMsg
                 if isServer:
                     c.send(sendMsg)
                 else:
