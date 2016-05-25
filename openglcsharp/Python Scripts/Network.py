@@ -18,6 +18,7 @@ class myThread(threading.Thread):
 global splitMsg
 global sendMsg
 global s
+global c
 global e
 global isServer
 e = ""
@@ -33,9 +34,10 @@ def ListenThread():
     try:
         while True:
             if splitMsg == "":
-                print "Waiting for message"
-                splitMsg = c.recv(2048)
-                print "Network.py says: " + splitMsg
+                if isServer:
+                    splitMsg = c.recv(8192)
+                else:
+                    splitMsg = s.recv(8192)
     except e:
         print "ListenThread died" + e
 
@@ -47,7 +49,6 @@ def WritingThread():
     try:
         while True:
             if sendMsg != "":
-                print sendMsg
                 if isServer:
                     c.send(sendMsg)
                 else:
