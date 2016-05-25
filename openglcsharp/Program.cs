@@ -198,12 +198,10 @@ namespace WhateverEngine
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
             GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero));
-            physicsGO.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
             physicsGO.id = 1;
 
             GameObject physicsGOC = new GameObject(new Transform(Vector3.Zero, cameraGO.Transform));
-            physicsGOC.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             physicsGOC.AddGameComponent(new Renderer(@"data\sphere.obj"));
             physicsGOC.id = 2;
             physicsGOC.NetworkStatic = true;
