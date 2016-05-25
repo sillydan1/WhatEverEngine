@@ -666,10 +666,10 @@
     <Content Include="Python Scripts\CameraControlScript.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Python Scripts\charactercontroller.py">
+    <Content Include="Python Scripts\CharacterMouseController.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Python Scripts\DatabaseBullshit.py">
+    <Content Include="Python Scripts\CharacterController.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Python Scripts\GunSpawnerScript.py">

@@ -3,7 +3,6 @@ D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\obj
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\obj\Debug\whateverengine.pdb
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
-D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
@@ -32,7 +31,6 @@ F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.exe
 F:\Documents\WhateverEngine\openglcsharp\obj\Debug\whateverengine.pdb
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
-F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
@@ -98,7 +96,6 @@ D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\whateveren
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\obj\Debug\whateverengine.pdb
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
-D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\Network.py
@@ -141,3 +138,15 @@ F:\Documents\WhateverEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\NetCubeTest.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\charactercontroller.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\Network.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\NormalBullet.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\PlayerGun.py
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\IronPython.Wpf.dll
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.dll
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\IronPython.Wpf.xml
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Microsoft.Scripting.AspNet.xml
+D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
+F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
+D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py

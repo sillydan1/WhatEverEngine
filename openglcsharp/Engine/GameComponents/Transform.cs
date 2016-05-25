@@ -15,6 +15,7 @@ namespace WhateverEngine.Engine
         private Transform parent;
         private Vector3 movePrediction;
         private Quaternion rotPrediction;
+
         public Vector3 previousPos;
         public Quaternion previousRot;
 
@@ -24,11 +25,14 @@ namespace WhateverEngine.Engine
             {
                 return position;
             }
-
             set
             {
-                position = value;
-                dirty = true;
+                if (value != Position)
+                {
+                    position = value;
+                    dirty = true;
+                    UpdateChildren();
+                }
             }
         }
         public Vector3 LocalPosition
@@ -39,7 +43,12 @@ namespace WhateverEngine.Engine
             }
             set
             {
-                localPosition = value;
+                if (value != LocalPosition)
+                {
+                    localPosition = value;
+                    dirty = true;
+                    CalculateLocalPosition();
+                }
             }
         }
         public Vector3 Scale
@@ -52,14 +61,31 @@ namespace WhateverEngine.Engine
             set
             {
                 scale = value;
+                
             }
         }
         public Quaternion Orientation
         {
-            get { return orientation; }
+            get
+            {
+                return orientation;
+            }
             set
             {
                 orientation = value;
+                dirty = true;
+                
+            }
+        }
+        public Quaternion LocalOrientation
+        {
+            get
+            {
+                return localOrientation;
+            }
+            set
+            {
+                localOrientation = value;
                 dirty = true;
             }
         }
@@ -94,6 +120,20 @@ namespace WhateverEngine.Engine
                 rotPrediction = value;
             }
         }
+        public int ChildCount
+        {
+            get
+            {
+                return children.Count;
+            }
+        }
+        public List<Transform> GetChildren
+        {
+            get
+            {
+                return children;
+            }
+        }
 
         public Transform()
         {
@@ -101,32 +141,53 @@ namespace WhateverEngine.Engine
         }
         public Transform(Vector3 position, Transform parent = null)
         {
+            if(parent != null)
+            {
+                LocalConstructorMethod(position, Quaternion.Identity, new Vector3(1, 1, 1), parent);
+                return;
+            }
             ConstructorMethod(position, Quaternion.Identity, new Vector3(1, 1, 1), parent);
         }
         public Transform(Vector3 position, Quaternion rotation, Transform parent = null)
         {
+            if (parent != null)
+            {
+                LocalConstructorMethod(position, rotation, new Vector3(1, 1, 1), parent);
+                return;
+            }
             ConstructorMethod(position, rotation, new Vector3(1, 1, 1), parent);
         }
         public Transform(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent = null)
         {
+            if(parent != null)
+            {
+                LocalConstructorMethod(position, rotation, scale, parent);
+                return;
+            }
             ConstructorMethod(position, rotation, scale, parent);
+        }
+        private void LocalConstructorMethod(Vector3 localPos, Quaternion rotation, Vector3 scale, Transform parent)
+        {
+            Vector3 pos = parent.Position + localPos;
+            this.LocalPosition = localPos;
+            ConstructorMethod(pos, rotation, scale, parent);
         }
         private void ConstructorMethod(Vector3 position, Quaternion rotation, Vector3 scale, Transform parent)
         {
             this.Position = position;
-            this.orientation = rotation;
+            this.Orientation = rotation;
             this.Scale = scale;
 
             SetParent(parent);
-            if (parent != null)
-                this.localOrientation = parent.orientation / rotation;
+            if(parent != null)
+                this.localOrientation = parent.Orientation / rotation;
             else
                 this.localOrientation = rotation;
         }
 
         public void SetParent(Transform parent)
         {
-            if (this.parent != null)
+            if(this.parent != null)
             {
                 this.parent.RemoveChild(this);
                 this.parent = null;
@@ -140,7 +201,7 @@ namespace WhateverEngine.Engine
         }
         public void RemoveChild(Transform who)
         {
-            if (children.Contains(who))
+            if(children.Contains(who))
             {
                 children.Remove(who);
             }
@@ -157,12 +218,13 @@ namespace WhateverEngine.Engine
         {
             if (parent != null)
             {
-                localOrientation = rotation * localOrientation;
-                Orientation = localOrientation;
+                localOrientation = rotation * (localOrientation);
+                //Orientation = localOrientation;
             }
             else
             {
                 Orientation = rotation * orientation;
+                localOrientation = Orientation;
             }
 
             if (GetOwner.GetPhysics != null)
@@ -184,21 +246,41 @@ namespace WhateverEngine.Engine
             // this method assumes that the y direction will always be 'up', so we've fixed the yaw
             // which is more useful for FPS games, etc.  For flight simulators, or other applications
             // of an unfixed yaw, simply replace Vector3.Up with (orientation * Vector3.UnitY)
+            Vector3 axis = (orientation * Vector3.UnitY);
+            Rotate(angle, GetUpVector());
+        }
+        public void YawFPS(float angle)
+        {
             Rotate(angle, Vector3.Up);
         }
         public void Pitch(float angle)
         {
-            Vector3 axis = orientation * Vector3.UnitX;
+            Vector3 axis = new Vector3(1 - 2 * (localOrientation.y * localOrientation.y + localOrientation.z * localOrientation.z),
+                    2 * (localOrientation.x * localOrientation.y + localOrientation.w * localOrientation.z),
+                    2 * (localOrientation.x * localOrientation.z - localOrientation.w * localOrientation.y));
             Rotate(angle, axis);
         }
         public void SetRotation(Quaternion newRot)
         {
             orientation = newRot;
+            
         }
         public Vector3 GetForwardVector()
         {
             Quaternion q = Orientation.Inverse();
             return q * Vector3.Forward;
+        }
+        public Vector3 GetUpVector()
+        {
+            Quaternion q;
+            if (parent != null)
+                q = localOrientation + parent.Orientation;
+            else
+                q = localOrientation;
+
+            return new Vector3(2 * (q.x * q.y - q.w * q.z),
+                    1 - 2 * (q.x * q.x + q.z * q.z),
+                    2 * (q.y * q.z + q.w * q.x));
         }
         public Vector3 GetRightVector()
         {
@@ -222,6 +304,8 @@ namespace WhateverEngine.Engine
                 if (GetOwner.GetPhysics != null)
                     GetOwner.GetPhysics.ChangePosition(position);
             }
+
+            
         }
         /// <summary>
         /// Moves the camera taking into account the orientation of the camera.
@@ -241,6 +325,46 @@ namespace WhateverEngine.Engine
 
             if (GetOwner.GetPhysics != null)
                 GetOwner.GetPhysics.ChangePosition(position);
+
+            
+        }
+        public void CalculateLocalPosition()
+        {
+            if (parent != null)
+            {
+                if(parent.GetOwner.GetCamera != null)
+                {
+                    Position = (parent.Position + ((parent.Orientation) * localPosition));
+                    Orientation = (localOrientation / parent.Orientation);
+                }
+                else
+                {
+                    if (GetOwner.GetCamera != null)
+                    {
+                        Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                        Orientation = (localOrientation * parent.Orientation);
+                    }
+                    else
+                    {
+                        Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
+                        Orientation = (localOrientation * parent.Orientation);
+                    }
+                }
+            }
+        }
+        public void UpdateChildren()
+        {
+            if (children.Count > 0)
+            {
+                foreach (Transform child in children)
+                {
+                    child.CalculateLocalPosition();
+                }
+            }
+        }
+        public void CalculateLocalRotaion()
+        {
+
         }
         public override void Start()
         {
@@ -249,32 +373,15 @@ namespace WhateverEngine.Engine
         public override void Update()
         {
             base.Update();
-            if (parent != null)
+            UpdateChildren();
+            if (movePrediction != Vector3.Zero)
             {
-                //Vector3 v = new Vector3(
-                //        (parent.orientation * Vector3.Right) * localPosition.x,
-                //        (parent.orientation * Vector3.Right) * localPosition.y,
-                //        (parent.orientation * Vector3.Right) * localPosition.z);
-
-                position = (parent.position + ((localOrientation / parent.orientation) * localPosition));
-                orientation = parent.Orientation / localOrientation;
+                Move(movePrediction * Program.DeltaTime);
             }
-            //if (movePrediction == previousPos)
-            //{
-            //    movePrediction = Vector3.Zero;
-            //}
-            //if (rotPrediction == previousRot)
-            //{
-            //    rotPrediction = Quaternion.Zero;
-            //}
-            //if (movePrediction != Vector3.Zero)
+            if (rotPrediction != Quaternion.Zero)
             {
-                Move((movePrediction) * Program.DeltaTime);
+                Rotate(rotPrediction * Program.DeltaTime);
             }
-            //if (rotPrediction != Quaternion.Zero)
-            //{
-            //    Rotate(-(rotPrediction - previousRot) * Program.DeltaTime);
-            //}
         }
     }
 }

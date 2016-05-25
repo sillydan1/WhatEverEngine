@@ -14,7 +14,7 @@ namespace WhateverEngine.Engine
         //Constructors
         public PhysicsComponent()
         {
-            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 1.8f), true);
+            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 0.9f), true);
         }
         public PhysicsComponent(PhysX.Geometry geometry)
         {
