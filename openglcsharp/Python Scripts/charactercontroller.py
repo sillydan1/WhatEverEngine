@@ -13,8 +13,6 @@ trans=Transform() # This is the attached Transform component. You can access all
 #rot=Vector3() # The raw rotation of the object (as angle axis')
 deltaTime=0.0 # Delta time. This is very useful for smooth interpolation stuff
 
-physcomp = PhysicsComponent()
-
 height = 2.0
 heightOffset = 0.0
 grav = 0.0
