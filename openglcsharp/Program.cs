@@ -128,10 +128,6 @@ namespace WhateverEngine
 
         private static void ServerScene()
         {
-            //-----------------First person controller------------------
-
-        private static void ServerScene()
-        {
 
             //-----------------First person controller------------------
             
