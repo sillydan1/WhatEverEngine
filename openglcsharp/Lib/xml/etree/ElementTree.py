@@ -1487,7 +1487,7 @@ class XMLParser(object):
     def _raiseerror(self, value):
         err = ParseError(value)
         err.code = value.code
-        err.position = value.lineno, value.offset
+        err.Position = value.lineno, value.offset
         raise err
 
     def _fixtext(self, text):

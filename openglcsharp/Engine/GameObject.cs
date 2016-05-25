@@ -41,6 +41,14 @@ namespace WhateverEngine.Engine
                 return p;
             }
         }
+        public CameraComponent GetCamera
+        {
+            get
+            {
+                CameraComponent c = GetGameComponent<CameraComponent>();
+                return c;
+            }
+        }
         //--------------------------------------------------------
         //Constructors
         public GameObject()

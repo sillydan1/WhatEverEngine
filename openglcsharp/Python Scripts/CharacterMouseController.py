@@ -21,17 +21,19 @@ def Update():
     global trans
     global physcomp
     speed = 1.0
-    jumpForce = 50
-    
-    #if (Input.GetKeyboardKeyUp[' '] is True):
-    #    physcomp.AddForce(Vector3(0,1,0) * jumpForce, 1, True)
-    
+   
+    pitch = 0.0
     yaw = 0.0
-    #if(Input.IsMouseRightButtonDown is True):
-    if(Input.GetKeyboardKey['l'] is True):
-        yaw = (-speed) * deltaTime
-    if(Input.GetKeyboardKey['j'] is True):
-        yaw = (speed) * deltaTime
+    if(Input.GetKeyboardKey['i'] is True):
+        pitch = (speed * deltaTime)
+    if(Input.GetKeyboardKey['k'] is True):
+        pitch = (-speed) * deltaTime
 
-    trans.Yaw(yaw)
+    if(Input.GetKeyboardKey['o'] is True):
+        yaw = (speed) * deltaTime
+    if(Input.GetKeyboardKey['p'] is True):
+        yaw = -speed * deltaTime
+
+    trans.Pitch(pitch) 
+    trans.YawFPS(yaw) 
 

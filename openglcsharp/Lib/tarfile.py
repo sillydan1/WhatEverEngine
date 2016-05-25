@@ -711,25 +711,25 @@ class _FileInFile(object):
         self.offset = offset
         self.size = size
         self.sparse = sparse
-        self.position = 0
+        self.Position = 0
 
     def tell(self):
         """Return the current file position.
         """
-        return self.position
+        return self.Position
 
     def seek(self, position):
         """Seek to a position in the file.
         """
-        self.position = position
+        self.Position = position
 
     def read(self, size=None):
         """Read data from the file.
         """
         if size is None:
-            size = self.size - self.position
+            size = self.size - self.Position
         else:
-            size = min(size, self.size - self.position)
+            size = min(size, self.size - self.Position)
 
         if self.sparse is None:
             return self.readnormal(size)
@@ -739,8 +739,8 @@ class _FileInFile(object):
     def readnormal(self, size):
         """Read operation for regular files.
         """
-        self.fileobj.seek(self.offset + self.position)
-        self.position += size
+        self.fileobj.seek(self.offset + self.Position)
+        self.Position += size
         return self.fileobj.read(size)
 
     def readsparse(self, size):
@@ -758,20 +758,20 @@ class _FileInFile(object):
     def readsparsesection(self, size):
         """Read a single section of a sparse file.
         """
-        section = self.sparse.find(self.position)
+        section = self.sparse.find(self.Position)
 
         if section is None:
             return ""
 
-        size = min(size, section.offset + section.size - self.position)
+        size = min(size, section.offset + section.size - self.Position)
 
         if isinstance(section, _data):
-            realpos = section.realpos + self.position - section.offset
+            realpos = section.realpos + self.Position - section.offset
             self.fileobj.seek(self.offset + realpos)
-            self.position += size
+            self.Position += size
             return self.fileobj.read(size)
         else:
-            self.position += size
+            self.Position += size
             return NUL * size
 #class _FileInFile
 
@@ -792,7 +792,7 @@ class ExFileObject(object):
         self.closed = False
         self.size = tarinfo.size
 
-        self.position = 0
+        self.Position = 0
         self.buffer = ""
 
     def read(self, size=None):
@@ -816,7 +816,7 @@ class ExFileObject(object):
         else:
             buf += self.fileobj.read(size - len(buf))
 
-        self.position += len(buf)
+        self.Position += len(buf)
         return buf
 
     def readline(self, size=-1):
@@ -847,7 +847,7 @@ class ExFileObject(object):
 
         buf = self.buffer[:pos]
         self.buffer = self.buffer[pos:]
-        self.position += len(buf)
+        self.Position += len(buf)
         return buf
 
     def readlines(self):
@@ -866,7 +866,7 @@ class ExFileObject(object):
         if self.closed:
             raise ValueError("I/O operation on closed file")
 
-        return self.position
+        return self.Position
 
     def seek(self, pos, whence=os.SEEK_SET):
         """Seek to a position in the file.
@@ -875,19 +875,19 @@ class ExFileObject(object):
             raise ValueError("I/O operation on closed file")
 
         if whence == os.SEEK_SET:
-            self.position = min(max(pos, 0), self.size)
+            self.Position = min(max(pos, 0), self.size)
         elif whence == os.SEEK_CUR:
             if pos < 0:
-                self.position = max(self.position + pos, 0)
+                self.Position = max(self.Position + pos, 0)
             else:
-                self.position = min(self.position + pos, self.size)
+                self.Position = min(self.Position + pos, self.size)
         elif whence == os.SEEK_END:
-            self.position = max(min(self.size + pos, self.size), 0)
+            self.Position = max(min(self.size + pos, self.size), 0)
         else:
             raise ValueError("Invalid argument")
 
         self.buffer = ""
-        self.fileobj.seek(self.position)
+        self.fileobj.seek(self.Position)
 
     def close(self):
         """Close the file object.
