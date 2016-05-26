@@ -66,7 +66,7 @@
   <Class Name="WhateverEngine.Engine.GameObject" BaseTypeListCollapsed="true">
     <Position X="9" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IgRAACBAACAIAAAAAAAAIAQAABAEAIAAAAAAAAAAAgA=</HashCode>
+      <HashCode>IgRBADBAACAIgAAAAAAAIAYAABAEAIAAAAAABAAAAgA=</HashCode>
       <FileName>Engine\GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -81,7 +81,7 @@
   <Class Name="WhateverEngine.Engine.NetworkTranslator" Collapsed="true">
     <Position X="13.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAEEAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\NetworkTranslator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -100,7 +100,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WhateverEngine.Engine.ObjLoader" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10.75" Y="2.5" Width="1.5" />
+    <Position X="10.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAACAAAgAAAAAAAIAAAQAAAAEAAEAAACBAAAA=</HashCode>
       <FileName>Engine\ObjLoader.cs</FileName>
@@ -115,7 +115,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="WhateverEngine.Engine.ObjObject" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WhateverEngine.Engine.ObjObject" BaseTypeListCollapsed="true">
     <Position X="15.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAIAACAAAhAAAAAAAQUAAAAQAAAAAAAAAAAAIgA=</HashCode>
@@ -124,7 +124,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WhateverEngine.Engine.SceneManager">
-    <Position X="12.5" Y="3.5" Width="1.5" />
+    <Position X="12" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AARIAAAARCAAAggAAARAAAgAAABAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Engine\SceneManager.cs</FileName>
@@ -133,7 +133,7 @@
   <Class Name="WhateverEngine.Program" Collapsed="true">
     <Position X="17.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAVIkgAADQEAAgRFQAQAAMRBYIJgBDAAIEYAFEAEAIE=</HashCode>
+      <HashCode>gAVIskAADQEAAgRFQAQAAMRBYIJgBDAAIEYAFEAEAIE=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
