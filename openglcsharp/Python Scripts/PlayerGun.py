@@ -62,7 +62,7 @@ def ShootNormal():
     #if r:
     #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
     NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 5000))
-    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 5000)
+    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position).Normalize() * 5000)
 
 def ShootSpecial():
     #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
