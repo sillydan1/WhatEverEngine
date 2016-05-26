@@ -320,13 +320,11 @@ namespace WhateverEngine.Engine
             }
             else
             {
-                Position += Orientation * by;
+                Position += Orientation.Inverse() * by;
             }
 
             if (GetOwner.GetPhysics != null)
                 GetOwner.GetPhysics.ChangePosition(position);
-
-            
         }
         public void CalculateLocalPosition()
         {
@@ -342,7 +340,7 @@ namespace WhateverEngine.Engine
                     if (GetOwner.GetCamera != null)
                     {
                         Position = (parent.Position + ((parent.Orientation.Inverse()) * localPosition));
-                        Orientation = (localOrientation * parent.Orientation);
+                        Orientation = (localOrientation * parent.Orientation).Inverse();
                     }
                     else
                     {

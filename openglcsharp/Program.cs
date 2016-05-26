@@ -20,8 +20,7 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
-        private static float netTime = 0.0f, netTimer = 0.0f;
-        private static bool isServer;
+        private static float netTime = 0.1f, netTimer = 0.0f;
         public static Random Random
         {
             get
@@ -46,8 +45,6 @@ namespace WhateverEngine
                 return height;
             }
         }
-        public static Scene scene { get; private set; }
-        public static Physics physics { get; private set; }
 
         private static float deltaTime;
         public static float DeltaTime
@@ -108,15 +105,6 @@ namespace WhateverEngine
             isServer = false;
             NetworkClass.Instance.Start(isServer); // Network stuff
 
-            if (isServer)
-            {
-                ServerScene();
-            }
-            else
-            {
-                ClientScene();
-            }
-        }
 
         private static void ServerScene()
         {
@@ -153,8 +141,8 @@ namespace WhateverEngine
 
             //-----------------First person controller------------------
 
-            GameObject refferenceGo = new GameObject(new Transform(cameraGO.Transform.Position + cameraGO.Transform.GetForwardVector() * 11));
-            refferenceGo.AddGameComponent(new Renderer(@"data\box.obj"));
+            GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 12, 0)));
+            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
 
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
@@ -210,28 +198,22 @@ namespace WhateverEngine
 
             GameObject gun = new GameObject(new Transform(new Vector3(1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
 
-            GameObject gun2 = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
-            gun2.AddGameComponent(new Renderer(@"data\rifle.obj"));
+            //-----------------Physics Game objects---------------------
 
+            GameObject ball = new GameObject(new Transform(new Vector3(0, 12, 6)));
+            ball.AddGameComponent(new PhysicsComponent());
+            ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             GameObject gunC = new GameObject(new Transform(new Vector3(1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGOC.Transform));
             gunC.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
             gunC.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
-            GameObject gun2C = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGOC.Transform));
-            gun2C.AddGameComponent(new Renderer(@"data\rifle.obj"));
-
-            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
-            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
-
-            //-----------------First person controller------------------
-
-            GameObject refferenceGo = new GameObject(new Transform(cameraGO.Transform.Position + cameraGO.Transform.GetForwardVector() * 11));
-            refferenceGo.AddGameComponent(new Renderer(@"data\box.obj"));
-
-            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
+            GameObject groundPlane = new GameObject(new Transform(Vector3.Down * 5.0f, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
+            
+            //-----------------Network stuff-------------------------
 
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
             netCube.AddGameComponent(new Renderer(@"data\box.obj"));
@@ -249,12 +231,11 @@ namespace WhateverEngine
             ball.id = 10;
 
             sceneMan.Instantiate(gun);
-            sceneMan.Instantiate(gun2);
+            sceneMan.Instantiate(ball);
             sceneMan.Instantiate(gunC);
             sceneMan.Instantiate(gun2C);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(physicsGO);
-            sceneMan.Instantiate(physicsGOC);
             sceneMan.Instantiate(netCube);
             sceneMan.Instantiate(netCube2);
             sceneMan.Instantiate(groundPlane);
@@ -311,6 +292,9 @@ namespace WhateverEngine
 
             scene.AddActor(groundPlane);
         }
+
+        public static Scene scene { get; private set; }
+        public static Physics physics { get; private set; }
 
         //EngineFunctions functions
         public static void Instantiate(GameObject newGobject)
@@ -391,7 +375,6 @@ namespace WhateverEngine
             watch.Stop();
             deltaTime = (float)watch.ElapsedTicks / System.Diagnostics.Stopwatch.Frequency;
             watch.Restart();
-            OnNetUpdate();
 
             fixedUpdateTimer += deltaTime;
             if (fixedUpdateTimer >= fixedUpdateTime)
@@ -399,6 +382,7 @@ namespace WhateverEngine
                 scene.Simulate(fixedUpdateTime);
                 scene.FetchResults(block: true);
                 fixedUpdateTimer = 0;
+                OnNetUpdate();
                 if (framCounter >= 30)
                 {
                     GC.Collect();
@@ -427,12 +411,11 @@ namespace WhateverEngine
 
         private static void OnNetUpdate()
         {
-            netTimer += deltaTime;
-            if (netTimer >= netTime)
-            {
+            //netTimer += deltaTime;
+            //if (netTimer >= netTime)
+            //{
                 sceneMan.SendNetData();
-                netTimer = 0.0f;
-            }
+            //}
         }
 
         public static ShaderProgram ShaderProg

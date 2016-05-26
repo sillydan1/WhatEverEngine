@@ -9,19 +9,9 @@ from WhateverEngine.Engine import GameObject
 from WhateverEngine.Engine import EngineFunctions
 
 trans=Transform()
-rot=Vector3()
-deltaTime=0.0
-
-tgglmvmnt = True
 
 def Update():
-    speed = 10.0
-    translation = Vector3(0.0, 0.0, 0.0)    
-    global rot
-    global deltaTime
     global trans    
-    global tgglmvmnt
-
     lookSpeed = 0.002
     # The camera's axes are apparently inverted... Don't ask why. (And don't change it in CameraComponent. Trust me. It's better to just live with it and compensate)
     if (Input.GetKeyboardKey['w'] is True):
@@ -45,6 +35,7 @@ def Update():
 
         yaw = (Input.PrevX - Input.CurX) * lookSpeed
         trans.YawFPS(yaw)
+    pitch = (Input.PrevY - Input.CurY) * lookSpeed
+    trans.Pitch(-pitch) 
 
-        pitch = (Input.PrevY - Input.CurY) * lookSpeed
-        trans.Pitch(pitch) 
+    
