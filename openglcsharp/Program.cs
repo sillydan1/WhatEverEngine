@@ -171,6 +171,7 @@ namespace WhateverEngine
             sceneMan.Instantiate(ball);
             sceneMan.Instantiate(floor);
             sceneMan.CheckAddList();
+            Vector3 v3 = new Vector3();
         }
 
         private static void ClientScene()
