@@ -20,7 +20,8 @@ namespace WhateverEngine
         private static string errorLog = "";
         private static SceneManager sceneMan;
         private static Random random;
-        private static float netTime = 0.1f, netTimer = 0.0f;
+        private static float netTime = 0.0f, netTimer = 0.0f;
+        private static bool isServer;
         public static Random Random
         {
             get
@@ -104,6 +105,15 @@ namespace WhateverEngine
             sceneMan = new SceneManager();
             isServer = false;
             NetworkClass.Instance.Start(isServer); // Network stuff
+            if (isServer)
+            {
+                ServerScene();
+            }
+            else
+            {
+                ClientScene();
+            }
+        }
 
 
         private static void ServerScene()
@@ -111,11 +121,12 @@ namespace WhateverEngine
 
             //-----------------First person controller------------------
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI,Vector3.Up)));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up)));
             cameraGO.AddGameComponent(new CameraComponent());
-            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            //cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
 
             GameObject physicsGO = new GameObject("Character", "Player", new Transform(Vector3.Zero, cameraGO.Transform));
+            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
             physicsGO.AddGameComponent(new Renderer(@"data\sphere.obj"));
             physicsGO.id = 1;
             physicsGO.NetworkStatic = true;
@@ -127,22 +138,15 @@ namespace WhateverEngine
             GameObject gun = new GameObject(new Transform(new Vector3(1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
-            GameObject gun2 = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
-            gun2.AddGameComponent(new Renderer(@"data\rifle.obj"));
-
             GameObject gunC = new GameObject(new Transform(new Vector3(1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGOC.Transform));
             gunC.AddGameComponent(new Renderer(@"data\rifle.obj"));
-
-            GameObject gun2C = new GameObject(new Transform(new Vector3(-1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGOC.Transform));
-            gun2C.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
             GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
             skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
 
             //-----------------First person controller------------------
 
-            GameObject physicsGO = new GameObject("Character", "Player", new Transform(new Vector3(0, 12, 0)));
-            physicsGO.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterController.py"));
+            
 
             GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
@@ -165,9 +169,7 @@ namespace WhateverEngine
             ball.NetworkStatic = true;
 
             sceneMan.Instantiate(gun);
-            sceneMan.Instantiate(gun2);
             sceneMan.Instantiate(gunC);
-            sceneMan.Instantiate(gun2C);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(physicsGO);
             sceneMan.Instantiate(physicsGOC);
@@ -198,7 +200,10 @@ namespace WhateverEngine
 
             GameObject gun = new GameObject(new Transform(new Vector3(1, 0, 0), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), physicsGO.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
-            gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
+            //gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
+
+            GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
+            skybox.AddGameComponent(new Renderer(@"data\skybox2.obj"));
 
             //-----------------Physics Game objects---------------------
 
@@ -212,7 +217,7 @@ namespace WhateverEngine
             GameObject groundPlane = new GameObject(new Transform(Vector3.Down * 5.0f, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
-            
+
             //-----------------Network stuff-------------------------
 
             GameObject netCube = new GameObject(new Transform(Vector3.Zero));
@@ -225,7 +230,7 @@ namespace WhateverEngine
             netCube2.id = 6;
             netCube2.NetworkStatic = true;
 
-            GameObject ball = new GameObject(new Transform(Vector3.Zero));
+            GameObject netBall = new GameObject(new Transform(Vector3.Zero));
             ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
@@ -233,7 +238,6 @@ namespace WhateverEngine
             sceneMan.Instantiate(gun);
             sceneMan.Instantiate(ball);
             sceneMan.Instantiate(gunC);
-            sceneMan.Instantiate(gun2C);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(physicsGO);
             sceneMan.Instantiate(netCube);
@@ -414,7 +418,7 @@ namespace WhateverEngine
             //netTimer += deltaTime;
             //if (netTimer >= netTime)
             //{
-                sceneMan.SendNetData();
+            sceneMan.SendNetData();
             //}
         }
 

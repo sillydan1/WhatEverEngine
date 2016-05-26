@@ -58,17 +58,16 @@ def SpawnNormalBullet():
     #except:
     print "Something went wrong when loading and spawning a gun object!"
 
-
 def ShootNormal():
     #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
     #if r:
     #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,Vector3((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100)));
+    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100))
     EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100)
 
 def ShootSpecial():
     #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
     #if r:
     #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,Vector3((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100)));
+    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(Vector3.Up * 10000)))
     EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce(Vector3.Up * 10000)

@@ -54,7 +54,7 @@ namespace WhateverEngine.Engine
             result += obj.id + "|";
             result += force.x + "|";
             result += force.y + "|";
-            result += force.z + "|";
+            result += force.z + "&";
             result = result.Replace('.', ',');
             return result;
         }
@@ -131,7 +131,7 @@ namespace WhateverEngine.Engine
                             g.GetPhysics.AddForce(v3);
                             break;
                         default:
-                            Console.WriteLine("Unknow translation type: " + splitMsg[0]);
+                            Console.WriteLine("Unknown translation type: " + splitMsg[0]);
                             break;
                     }
                 }
