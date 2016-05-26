@@ -267,7 +267,7 @@ namespace WhateverEngine.Engine
         }
         public Vector3 GetForwardVector()
         {
-            Quaternion q = Orientation.Inverse();
+            Quaternion q = Orientation;
             return q * Vector3.Forward;
         }
         public Vector3 GetUpVector()

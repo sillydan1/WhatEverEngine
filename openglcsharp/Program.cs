@@ -104,7 +104,7 @@ namespace WhateverEngine
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
             isServer = true;
-            NetworkClass.Instance.Start(isServer); // Network stuff
+            //NetworkClass.Instance.Start(isServer); // Network stuff
             if (isServer)
             {
                 ServerScene();
@@ -130,7 +130,7 @@ namespace WhateverEngine
             player2.AddGameComponent(new Renderer(@"data\sphere.obj"));
             player2.id = 2;
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 0), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             cameraGO.AddGameComponent(new CameraComponent());
 
@@ -151,8 +151,18 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
-            GameObject ball = new GameObject(new Transform(Vector3.Zero));
-            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            //GameObject netCube = new GameObject(new Transform(Vector3.Zero));
+            //netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
+            //netCube.AddGameComponent(new Renderer(@"data\box.obj"));
+            //netCube.id = 5;
+            //netCube.NetworkStatic = true;
+
+            //GameObject netCube2 = new GameObject(new Transform(Vector3.Zero));
+            //netCube2.AddGameComponent(new Renderer(@"data\box.obj"));
+            //netCube2.id = 6;
+
+            GameObject ball = new GameObject("Ball","ball",new Transform(Vector3.Up * 10));
+            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f), "Basketball"));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
             ball.NetworkStatic = true;
