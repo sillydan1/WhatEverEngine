@@ -34,6 +34,6 @@ def Update():
     if(Input.GetKeyboardKey['p'] is True):
         yaw = -speed * deltaTime
 
-    trans.Pitch(pitch) 
+    trans.Pitch(-pitch) 
     trans.YawFPS(yaw) 
 
