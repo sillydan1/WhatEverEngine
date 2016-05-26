@@ -7,43 +7,32 @@ from WhateverEngine.Engine import Renderer
 from WhateverEngine.Engine import Input
 from WhateverEngine.Engine import GameObject
 from WhateverEngine.Engine import EngineFunctions
+from WhateverEngine.Engine import WhateverRay
 
 trans=Transform()
-tgglmvmnt = True
-rot=Vector3()
-deltaTime=0.0
 
-def Update():
-    global rot
-    global deltaTime
-    global trans
-    global tgglmvmnt
-    speed = 10.0
-    translation = Vector3(0.0, 0.0, 0.0)    
- 
+def Update():  
+
+    if(Input.GetKeyboardKeyUp['r'] is True):
+        r = WhateverRay()
+        r.CastRay(trans.Position, trans.GetForwardVector(), 10.0, 1)
+        if(r.hit is True):
+            print 'rayCast hit something'
+            s = r.GetNameOfFirstHit()
+            if(s == "Basketball"):
+                ballgo = EngineFunctions.GetGameObjectWithTag("ball")
+                ballgo.GetPhysics.AddForce(Vector3(0,15.0,0))
+                print 'ball goes up!'
+        else:
+            print 'rayCast didnt hit anything'
+
+    if(Input.GetKeyboardKeyUp['t'] is True):
+        ballgo = EngineFunctions.GetGameObjectWithTag("ball")
+        ballgo.GetPhysics.AddForce(Vector3(0,15.0,0))
+        print 'ball goes up!'
+
     lookSpeed = 0.002
-    # The camera's axes are apparently inverted... Don't ask why. (And don't change it in CameraComponent. Trust me. It's better to just live with it and compensate)
-    if (Input.GetKeyboardKey['w'] is True):
-        translation -= Vector3(0.0, 0.0, speed * deltaTime)
-    if(Input.GetKeyboardKey['s'] is True):
-        translation += Vector3(0.0, 0.0, speed * deltaTime)
-    if(Input.GetKeyboardKey['q'] is True):
-        translation -= Vector3(0.0, speed * deltaTime, 0.0)
-    if(Input.GetKeyboardKey['e'] is True):
-        translation += Vector3(0.0, speed * deltaTime, 0.0)
-    if(Input.GetKeyboardKey['a'] is True):
-        translation -= Vector3(speed * deltaTime, 0.0, 0.0)
-    if(Input.GetKeyboardKey['d'] is True):
-        translation += Vector3(speed * deltaTime, 0.0, 0.0)
 
-    if(Input.GetKeyboardKeyUp[' '] is True):
-        tgglmvmnt = not tgglmvmnt
-    
-    if(tgglmvmnt):    
-        trans.MoveRelative(translation);
-
-        yaw = (Input.PrevX - Input.CurX) * lookSpeed
-        trans.YawFPS(yaw)
     pitch = (Input.PrevY - Input.CurY) * lookSpeed
     trans.Pitch(pitch) 
 

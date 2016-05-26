@@ -12,42 +12,44 @@ namespace WhateverEngine.Engine
         private bool isDynamic;
 
         //Constructors
-        public PhysicsComponent()
+        public PhysicsComponent(string name = "NO-NAME")
         {
-            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 0.9f), true);
+            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 0.9f), true, name);
         }
-        public PhysicsComponent(PhysX.Geometry geometry)
+        public PhysicsComponent(PhysX.Geometry geometry, string name = "NO-NAME")
         {
-            ConstructorMethod(geometry, 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 1.8f), true);
+            ConstructorMethod(geometry, 10.0f, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 1.8f), true, name);
         }
-        public PhysicsComponent(PhysX.Geometry geometry, float mass)
+        public PhysicsComponent(PhysX.Geometry geometry, float mass, string name = "NO-NAME")
         {
-            ConstructorMethod(geometry, mass, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 1.8f), true);
+            ConstructorMethod(geometry, mass, Program.scene.Physics.CreateMaterial(0.1f, 0.1f, 1.8f), true, name);
         }
-        public PhysicsComponent(PhysX.Geometry geometry, float mass, Material mat)
+        public PhysicsComponent(PhysX.Geometry geometry, float mass, Material mat, string name = "NO-NAME")
         {
-            ConstructorMethod(geometry, mass, mat, false);
+            ConstructorMethod(geometry, mass, mat, false, name);
         }
-        public PhysicsComponent(Material mat)
+        public PhysicsComponent(Material mat, string name = "NO-NAME")
         {
-            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, mat, true);
+            ConstructorMethod(new SphereGeometry(1.0f), 10.0f, mat, true, name);
         }
-        public PhysicsComponent(PhysX.Geometry geometry, float mass, Material mat, bool isDynamic)
+        public PhysicsComponent(PhysX.Geometry geometry, float mass, Material mat, bool isDynamic, string name = "NO-NAME")
         {
-            ConstructorMethod(geometry, mass, mat, isDynamic);
+            ConstructorMethod(geometry, mass, mat, isDynamic, name);
         }
-        private void ConstructorMethod(PhysX.Geometry geometry, float mass, Material mat, bool isDynamic)
+        private void ConstructorMethod(PhysX.Geometry geometry, float mass, Material mat, bool isDynamic, string name)
         {
             material = mat;
             
             if (isDynamic)
             {
                 rigidActor = Program.scene.Physics.CreateRigidDynamic();
+                rigidActor.Name = name;
                 ((RigidDynamic)rigidActor).SetMassAndUpdateInertia(mass);
             }
             else
             {
                 rigidActor = Program.scene.Physics.CreateRigidStatic();
+                rigidActor.Name = name;
                 rigidActor.GlobalPose = PhysX.Math.Matrix.RotationAxis(new PhysX.Math.Vector3(0, 0, 3), (float)System.Math.PI / 2);
             }
             this.isDynamic = isDynamic;

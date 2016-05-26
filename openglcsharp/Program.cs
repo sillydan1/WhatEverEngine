@@ -104,7 +104,7 @@ namespace WhateverEngine
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
             isServer = true;
-            NetworkClass.Instance.Start(isServer); // Network stuff
+            //NetworkClass.Instance.Start(isServer); // Network stuff
             if (isServer)
             {
                 ServerScene();
@@ -130,7 +130,8 @@ namespace WhateverEngine
             player2.AddGameComponent(new Renderer(@"data\sphere.obj"));
             player2.id = 2;
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
+            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 0), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
+            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             cameraGO.AddGameComponent(new CameraComponent());
 
             GameObject gun = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
@@ -160,8 +161,8 @@ namespace WhateverEngine
             //netCube2.AddGameComponent(new Renderer(@"data\box.obj"));
             //netCube2.id = 6;
 
-            GameObject ball = new GameObject(new Transform(Vector3.Zero));
-            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            GameObject ball = new GameObject("Ball","ball",new Transform(Vector3.Up * 10));
+            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f), "Basketball"));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
             ball.NetworkStatic = true;
