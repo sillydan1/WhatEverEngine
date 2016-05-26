@@ -47,6 +47,18 @@ namespace WhateverEngine.Engine
             return result;
         }
 
+        public static string NetAddForce(GameObject obj, OpenGL.Vector3 force)
+        {
+            string result = "";
+            result += "[AddForce]|";
+            result += obj.id + "|";
+            result += force.x + "|";
+            result += force.y + "|";
+            result += force.z + "|";
+            result = result.Replace('.', ',');
+            return result;
+        }
+
         public static void RecieveData(string data)
         {
             string[] allMsg = data.Split('&');
@@ -108,6 +120,15 @@ namespace WhateverEngine.Engine
                                     g.Transform.RotPrediction = OpenGL.Quaternion.Zero;
                                 }
                             }
+                            break;
+                        case "[AddForce]":
+                            if (splitMsg.Count() != 5) return;
+                            v3 = new OpenGL.Vector3(
+                                Convert.ToSingle(splitMsg[2]),
+                                Convert.ToSingle(splitMsg[3]),
+                                Convert.ToSingle(splitMsg[4]));
+                            g = EngineFunctions.GetGameObjectWithId(Convert.ToInt32(splitMsg[1]));
+                            g.GetPhysics.AddForce(v3);
                             break;
                         default:
                             Console.WriteLine("Unknow translation type: " + splitMsg[0]);

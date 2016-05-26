@@ -60,7 +60,6 @@ D:\Projects\Python\WhatEverEngine\openglcsharp\obj\Debug\whateverengine.exe
 D:\Projects\Python\WhatEverEngine\openglcsharp\obj\Debug\whateverengine.pdb
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\Blank_Code_Go_Nuts.py
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\CameraControlScript.py
-D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\DatabaseBullshit.py
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\GunSpawnerScript.py
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\KillGunScript.py
 D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\Test.py
@@ -150,3 +149,4 @@ D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin
 D:\Dokumenter\Skole\Spildatamatiker\4 Sem\Python\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
 F:\Documents\WhateverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
 D:\Datamatiker\Projects\SpecialieringOwnEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py
+D:\Projects\Python\WhatEverEngine\openglcsharp\bin\Debug\Python Scripts\CharacterMouseController.py

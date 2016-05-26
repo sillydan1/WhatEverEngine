@@ -24,27 +24,27 @@ def Update():
 
     lookSpeed = 0.002
     # The camera's axes are apparently inverted... Don't ask why. (And don't change it in CameraComponent. Trust me. It's better to just live with it and compensate)
-    #if (Input.GetKeyboardKey['w'] is True):
-    #    translation -= Vector3(0.0, 0.0, speed * deltaTime)
-    #if(Input.GetKeyboardKey['s'] is True):
-    #    translation += Vector3(0.0, 0.0, speed * deltaTime)
-    #if(Input.GetKeyboardKey['q'] is True):
-    #    translation -= Vector3(0.0, speed * deltaTime, 0.0)
-    #if(Input.GetKeyboardKey['e'] is True):
-    #    translation += Vector3(0.0, speed * deltaTime, 0.0)
-    #if(Input.GetKeyboardKey['a'] is True):
-    #    translation -= Vector3(speed * deltaTime, 0.0, 0.0)
-    #if(Input.GetKeyboardKey['d'] is True):
-    #    translation += Vector3(speed * deltaTime, 0.0, 0.0)
+    if (Input.GetKeyboardKey['w'] is True):
+        translation -= Vector3(0.0, 0.0, speed * deltaTime)
+    if(Input.GetKeyboardKey['s'] is True):
+        translation += Vector3(0.0, 0.0, speed * deltaTime)
+    if(Input.GetKeyboardKey['q'] is True):
+        translation -= Vector3(0.0, speed * deltaTime, 0.0)
+    if(Input.GetKeyboardKey['e'] is True):
+        translation += Vector3(0.0, speed * deltaTime, 0.0)
+    if(Input.GetKeyboardKey['a'] is True):
+        translation -= Vector3(speed * deltaTime, 0.0, 0.0)
+    if(Input.GetKeyboardKey['d'] is True):
+        translation += Vector3(speed * deltaTime, 0.0, 0.0)
 
     if(Input.GetKeyboardKeyUp[' '] is True):
         tgglmvmnt = not tgglmvmnt
     
     if(tgglmvmnt):    
-        #trans.MoveRelative(translation);
+        trans.MoveRelative(translation);
 
-        #yaw = (Input.PrevX - Input.CurX) * lookSpeed
-        #trans.YawFPS(yaw)
+        yaw = (Input.PrevX - Input.CurX) * lookSpeed
+        trans.YawFPS(yaw)
 
         pitch = (Input.PrevY - Input.CurY) * lookSpeed
         trans.Pitch(pitch) 
