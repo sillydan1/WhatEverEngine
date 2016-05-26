@@ -17,9 +17,9 @@ trans = Transform() # This is the attached Transform component.  You can access 
 rot = Vector3() # The raw rotation of the object (as angle axis')
 deltaTime = 0.0 # Delta time.  This is very useful for smooth interpolation stuff
 normalCD = 0 # normal cooldown
-normalCDR = 1 # normal cooldown reset
+normalCDR = 0.5 # normal cooldown reset
 specialCD = 0 # special cooldown
-specialCDR = 1 # special cooldown reset
+specialCDR = 1.5 # special cooldown reset
 
 # Start gets called when the GameObject enters the scene
 def Start():
@@ -38,15 +38,14 @@ def Update():
     gg = rot
     normalCD -= deltaTime
     specialCD -= deltaTime
-    if Input.GetKeyboardKey['c']:
-        if Input.GetKeyboardKey['y']:
-            if normalCD <= 0:
-                ShootNormal()
-                normalCD = normalCDR
-        if Input.GetKeyboardKey['u']:
-            if specialCD <= 0:
-                ShootSpecial()
-                specialCD = specialCDR
+    if Input.IsMouseLeftButtonDown:
+        if normalCD <= 0:
+            ShootNormal()
+            normalCD = normalCDR
+    if Input.IsMouseRightButtonDown:
+        if specialCD <= 0:
+            ShootSpecial()
+            specialCD = specialCDR
 
 def SpawnNormalBullet():
     global trans
@@ -62,8 +61,8 @@ def ShootNormal():
     #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
     #if r:
     #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100))
-    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 100)
+    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 5000))
+    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 5000)
 
 def ShootSpecial():
     #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
