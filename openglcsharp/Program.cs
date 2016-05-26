@@ -167,16 +167,19 @@ namespace WhateverEngine
             ball.id = 10;
             ball.NetworkStatic = true;
 
+            GameObject floor = new GameObject(new Transform(Vector3.Down));
+            floor.Transform.Scale = new Vector3(1000, 0, 1000);
+            floor.AddGameComponent(new Renderer(@"data\box.obj"));
+
             sceneMan.Instantiate(gun);
             sceneMan.Instantiate(gunC);
             sceneMan.Instantiate(skybox);
             sceneMan.Instantiate(player1);
             sceneMan.Instantiate(player2);
-            //sceneMan.Instantiate(netCube);
-            //sceneMan.Instantiate(netCube2);
             sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(cameraGO);
             sceneMan.Instantiate(ball);
+            sceneMan.Instantiate(floor);
             sceneMan.CheckAddList();
         }
 
@@ -195,6 +198,7 @@ namespace WhateverEngine
             player2.NetworkStatic = true;
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player2.Transform));
+            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
             cameraGO.AddGameComponent(new CameraComponent());
 
             GameObject gun = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), player1.Transform));
@@ -214,22 +218,14 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
-            //-----------------Network stuff-------------------------
-
-            //GameObject netCube = new GameObject(new Transform(Vector3.Zero));
-            //netCube.AddGameComponent(new Renderer(@"data\box.obj"));
-            //netCube.id = 5;
-
-            //GameObject netCube2 = new GameObject(new Transform(Vector3.Zero));
-            //netCube2.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
-            //netCube2.AddGameComponent(new Renderer(@"data\box.obj"));
-            //netCube2.id = 6;
-            //netCube2.NetworkStatic = true;
-
             GameObject ball = new GameObject(new Transform(Vector3.Zero));
             //ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
+
+            GameObject floor = new GameObject(new Transform(Vector3.Down));
+            floor.Transform.Scale = new Vector3(1000, 0, 1000);
+            floor.AddGameComponent(new Renderer(@"data\box.obj"));
 
             sceneMan.Instantiate(gun);
             sceneMan.Instantiate(gunC);
@@ -239,6 +235,7 @@ namespace WhateverEngine
             sceneMan.Instantiate(groundPlane);
             sceneMan.Instantiate(cameraGO);
             sceneMan.Instantiate(ball);
+            sceneMan.Instantiate(floor);
             sceneMan.CheckAddList();
 
         }
