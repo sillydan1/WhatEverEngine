@@ -9,6 +9,7 @@ from WhateverEngine.Engine import Renderer
 from WhateverEngine.Engine import PythonComponent
 from WhateverEngine.Engine import NetworkClass
 from WhateverEngine.Engine import NetworkTranslator
+from WhateverEngine.Engine import WhateverRay
 
 # standard stuff - these will get updated / read from the engine and applied on
 # the attached GameObject.
@@ -42,11 +43,9 @@ def Update():
     if Input.IsMouseLeftButtonDown:
         if normalCD <= 0:
             ShootNormal()
-            normalCD = normalCDR
     if Input.IsMouseRightButtonDown:
         if specialCD <= 0:
             ShootSpecial()
-            specialCD = specialCDR
 
 def SpawnNormalBullet():
     global trans
@@ -59,40 +58,26 @@ def SpawnNormalBullet():
     print "Something went wrong when loading and spawning a gun object!"
 
 def ShootNormal():
-    #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
-    #if r:
-    #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
+    global normalCD
+    global normalCDR
     ball = EngineFunctions.GetGameObjectWithId(10)
-
-    vec1 = trans.GetForwardVector()
-    vec2 = ball.Transform.Position - trans.Position
-    vec1 = vec1.Normalize()
-    vec2 = vec2.Normalize()
- ##Get the dot product
- #   dot = Vector3.Dot(vec1,vec2);
- ## Divide the dot by the product of the magnitudes of the vectors
- #   dot = dot/(math.sqrt(vec1.x * vec1.x + vec1.y * vec1.y + vec1.z * vec1.z)*math.sqrt(vec2.x * vec2.x + vec2.y * vec2.y + vec2.z * vec2.z))
- ##Get the arc cosin of the angle, you now have your angle in radians 
- #   acos = math.acos(dot)
- ##Multiply by 180/Mathf.PI to convert to degrees
- #   angle = acos*180/math.pi
- ##Congrats, you made it really hard on yourself.
- #   angle = angle * math.copysign(Vector3.Cross(vec1, vec2).y)
-    nr = ball.Transform.Position - trans.Position
-    nrf = math.sqrt(math.pow(nr.x,2) +math.pow(nr.z,2) +math.pow(nr.z,2)) * 0.1
-    print vec2
-    vec2 = Vector3(vec2.x*nrf,vec2.y*nrf,vec2.z*nrf)
-    print vec2
-    angle = Vector3.CalculateAngle(vec1,vec2)
-    print angle
-    if angle > 0:
-        if  angle < 45:
-            NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(ball.Transform.Position-trans.Position) * 1))
-            ball.GetPhysics.AddForce((ball.Transform.Position-trans.Position) * 1)
+    r = WhateverRay()
+    r.CastRay(trans.Position, trans.GetForwardVector(), 10000.0, 1)
+    if(r.hit is True):
+        s = r.GetNameOfFirstHit()
+        if(s == "Basketball"):
+                NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(ball.Transform.Position-trans.Position) * 2000))
+                ball.GetPhysics.AddForce((ball.Transform.Position-trans.Position) * 2000)
+                normalCD = normalCDR;
 
 def ShootSpecial():
-    #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
-    #if r:
-    #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(Vector3.Up * 10000)))
-    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce(Vector3.Up * 10000)
+    global specialCD
+    global specialCDR
+    r = WhateverRay()
+    r.CastRay(trans.Position, trans.GetForwardVector(), 10000.0, 1)
+    if(r.hit is True):
+        s = r.GetNameOfFirstHit()
+        if(s == "Basketball"):
+            NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(Vector3.Up * 10000)))
+            EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce(Vector3.Up * 10000)
+            specialCD = specialCDR
