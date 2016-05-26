@@ -42,14 +42,14 @@ def ApplyInput():
     translation = Vector3(0,0,0)
 
     if (Input.GetKeyboardKey['w'] is True):
-        translation -= Vector3(0.0, 0.0, moveSpeed)
-    if(Input.GetKeyboardKey['s'] is True):
         translation += Vector3(0.0, 0.0, moveSpeed)
+    if(Input.GetKeyboardKey['s'] is True):
+        translation -= Vector3(0.0, 0.0, moveSpeed)
 
     if(Input.GetKeyboardKey['a'] is True):
-        translation -= Vector3(moveSpeed, 0.0, 0.0)
+        translation += Vector3(moveSpeed, 0.0, 0.0)
     if(Input.GetKeyboardKey['d'] is True):
-        translation += Vector3(moveSpeed, 0.0, 0.0)  
+        translation -= Vector3(moveSpeed, 0.0, 0.0)  
 
     if(translation != Vector3.Zero):
         trans.MoveRelative(translation * deltaTime)
