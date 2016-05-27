@@ -1,4 +1,5 @@
 ﻿import sys
+import math
 from OpenGL import Vector3
 from WhateverEngine.Engine import Transform 
 from WhateverEngine.Engine import Input # you can import Engine specific classes like this.
@@ -8,6 +9,7 @@ from WhateverEngine.Engine import Renderer
 from WhateverEngine.Engine import PythonComponent
 from WhateverEngine.Engine import NetworkClass
 from WhateverEngine.Engine import NetworkTranslator
+from WhateverEngine.Engine import WhateverRay
 
 # standard stuff - these will get updated / read from the engine and applied on
 # the attached GameObject.
@@ -41,11 +43,9 @@ def Update():
     if Input.IsMouseLeftButtonDown:
         if normalCD <= 0:
             ShootNormal()
-            normalCD = normalCDR
     if Input.IsMouseRightButtonDown:
         if specialCD <= 0:
             ShootSpecial()
-            specialCD = specialCDR
 
 def SpawnNormalBullet():
     global trans
@@ -58,15 +58,26 @@ def SpawnNormalBullet():
     print "Something went wrong when loading and spawning a gun object!"
 
 def ShootNormal():
-    #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
-    #if r:
-    #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position) * 5000))
-    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce((EngineFunctions.GetGameObjectWithId(10).Transform.Position-trans.Position).Normalize() * 5000)
+    global normalCD
+    global normalCDR
+    ball = EngineFunctions.GetGameObjectWithId(10)
+    r = WhateverRay()
+    r.CastRay(trans.Position, trans.GetForwardVector(), 10000.0, 1)
+    if(r.hit is True):
+        s = r.GetNameOfFirstHit()
+        if(s == "Basketball"):
+                NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(ball.Transform.Position-trans.Position) * 2000))
+                ball.GetPhysics.AddForce((ball.Transform.Position-trans.Position) * 2000)
+                normalCD = normalCDR;
 
 def ShootSpecial():
-    #r = OpenGL.Ray(trans.Position, trans.Position * Vector3.Forward * 9999);
-    #if r:
-    #    r.GameObject.GetPhysics.AddForce(trans.Position, trans.Position * Vector3.Forward * 5)
-    NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(Vector3.Up * 10000)))
-    EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce(Vector3.Up * 10000)
+    global specialCD
+    global specialCDR
+    r = WhateverRay()
+    r.CastRay(trans.Position, trans.GetForwardVector(), 10000.0, 1)
+    if(r.hit is True):
+        s = r.GetNameOfFirstHit()
+        if(s == "Basketball"):
+            NetworkClass.Instance.SendData(NetworkTranslator.NetAddForce(trans.GetOwner,(Vector3.Up * 10000)))
+            EngineFunctions.GetGameObjectWithId(10).GetPhysics.AddForce(Vector3.Up * 10000)
+            specialCD = specialCDR

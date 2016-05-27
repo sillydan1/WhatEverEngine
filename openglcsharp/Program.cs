@@ -103,7 +103,7 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            isServer = true;
+            isServer = false;
             //NetworkClass.Instance.Start(isServer); // Network stuff
             if (isServer)
             {
@@ -126,20 +126,20 @@ namespace WhateverEngine
             player1.id = 1;
             player1.NetworkStatic = true;
 
-            GameObject player2 = new GameObject(new Transform(Vector3.Zero));
+            GameObject player2 = new GameObject("player2","",new Transform(Vector3.Zero));
             player2.AddGameComponent(new Renderer(@"data\sphere.obj"));
             player2.id = 2;
 
-            GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 0), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
+            GameObject cameraGO = new GameObject("cam","",new Transform(new Vector3(0, 3, 0), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player1.Transform));
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
             cameraGO.AddGameComponent(new CameraComponent());
 
-            GameObject gun = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
-            gun.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
+            GameObject gun = new GameObject("gun","",new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
             gun.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
-            GameObject gunC = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), player2.Transform));
+            GameObject gunC = new GameObject("gun","",new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), player2.Transform));
             gunC.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
             GameObject skybox = new GameObject("skybox", "SkyBox", new Transform(Vector3.Up * -10, Quaternion.Identity, new Vector3(200, 200, 200)));
@@ -147,27 +147,17 @@ namespace WhateverEngine
 
             //-----------------First person controller------------------
 
-            GameObject groundPlane = new GameObject(new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
+            GameObject groundPlane = new GameObject("gound plane","",new Transform(Vector3.Zero, Quaternion.FromAngleAxis((float)Math.PI / 2, new Vector3(0, 0, 3))));
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
-
-            //GameObject netCube = new GameObject(new Transform(Vector3.Zero));
-            //netCube.AddGameComponent(new PythonComponent(@"Python Scripts\NetCubeTest.py"));
-            //netCube.AddGameComponent(new Renderer(@"data\box.obj"));
-            //netCube.id = 5;
-            //netCube.NetworkStatic = true;
-
-            //GameObject netCube2 = new GameObject(new Transform(Vector3.Zero));
-            //netCube2.AddGameComponent(new Renderer(@"data\box.obj"));
-            //netCube2.id = 6;
-
+            
             GameObject ball = new GameObject("Ball","ball",new Transform(Vector3.Up * 10));
             ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f), "Basketball"));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
             ball.NetworkStatic = true;
 
-            GameObject floor = new GameObject(new Transform(Vector3.Down));
+            GameObject floor = new GameObject("floor","",new Transform(Vector3.Down));
             floor.Transform.Scale = new Vector3(1000, 0, 1000);
             floor.AddGameComponent(new Renderer(@"data\box.obj"));
 
@@ -181,6 +171,8 @@ namespace WhateverEngine
             sceneMan.Instantiate(ball);
             sceneMan.Instantiate(floor);
             sceneMan.CheckAddList();
+
+            WhateverRay r = new WhateverRay();
         }
 
         private static void ClientScene()
@@ -199,13 +191,13 @@ namespace WhateverEngine
 
             GameObject cameraGO = new GameObject(new Transform(new Vector3(0, 3, 10), Quaternion.FromAngleAxis((float)Math.PI, Vector3.Up), player2.Transform));
             cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\CameraControlScript.py"));
+            cameraGO.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
             cameraGO.AddGameComponent(new CameraComponent());
 
             GameObject gun = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), player1.Transform));
             gun.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
             GameObject gunC = new GameObject(new Transform(new Vector3(0.5f, -0.4f, -0.8f), Quaternion.Identity, new Vector3(0.02f, 0.02f, 0.02f), cameraGO.Transform));
-            gunC.AddGameComponent(new PythonComponent(@"Python Scripts\PlayerGun.py"));
             gunC.AddGameComponent(new PythonComponent(@"Python Scripts\CharacterMouseController.py"));
             gunC.AddGameComponent(new Renderer(@"data\rifle.obj"));
 
@@ -218,8 +210,8 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new PhysicsComponent(new PlaneGeometry(), 1.0f, scene.Physics.CreateMaterial(0.1f, 0.1f, 0.1f), false));
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
-            GameObject ball = new GameObject(new Transform(Vector3.Zero));
-            //ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f)));
+            GameObject ball = new GameObject("Ball", "ball", new Transform(Vector3.Up * 10));
+            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f), "Basketball"));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
 
