@@ -103,8 +103,8 @@ namespace WhateverEngine
         {
             //This is where we spawn all of our GameObjects and initialize our Scene Manager.
             sceneMan = new SceneManager();
-            isServer = false;
-            //NetworkClass.Instance.Start(isServer); // Network stuff
+            isServer = true;
+            NetworkClass.Instance.Start(isServer); // Network stuff
             if (isServer)
             {
                 ServerScene();
@@ -211,7 +211,7 @@ namespace WhateverEngine
             groundPlane.AddGameComponent(new Renderer(@"data\arrow.obj"));
 
             GameObject ball = new GameObject("Ball", "ball", new Transform(Vector3.Up * 10));
-            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(1.0f, 1.0f, 0.0f), "Basketball"));
+            ball.AddGameComponent(new PhysicsComponent(scene.Physics.CreateMaterial(0.0f, 0.0f, 0.0f), "Basketball"));
             ball.AddGameComponent(new Renderer(@"data\sphere.obj"));
             ball.id = 10;
 
